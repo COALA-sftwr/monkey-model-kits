@@ -1,2 +1,2 @@
-# monkey-model-kit
-The every model-kit's builder control pannel !
+# Monkey Model kits
+The model-kit builder's control panel !
