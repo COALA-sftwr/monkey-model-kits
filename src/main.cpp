@@ -2,51 +2,47 @@
 // Created by galbert on 17/06/23.
 //
 
-#include "../include/Models.hpp"
+#include "Models.hpp"
 #include <iostream>
-#include <ctime>
-#include <csignal>
 #include <cstring>
+#include <vector>
+#include <sstream>
 
 using namespace std;
 
-#define TOKENSIZE 100
-
-void StrTokenizer(char *input, char **argv)
-{
-    char *stringTokenized;
-    stringTokenized = strtok(input, " ");
-    while(stringTokenized != nullptr)
-    {
-        *argv++  = stringTokenized;
-        stringTokenized = strtok(nullptr, " ");
+vector<string> split(const string& s, char delimiter) {
+    vector<string> tokens;
+    istringstream iss(s);
+    string token;
+    
+    while (getline(iss, token, delimiter)) {
+        tokens.push_back(token);
     }
+    return tokens;
+}
 
-    *argv = nullptr;
+void help()
+{
+    cout << "-Monkey Model Kits-\n"
+            "\tCommands\n"
+            "\t  -help:\t\tShows this message.\n"
+            "\t  -open [path]:\tOpens a save file.\n"
+            "\t  -exit:\t\tExits MMK" << endl;
 }
 
 int main() {
-    char *path2;
-    char *arr [250];
-    char *Tokenized ;
-    char input[250];
-    char *argv[TOKENSIZE];
-    Collection collec;
+    string input;
+    vector<string> command;
+    Collection collection;
 
-    while(true)
-    {
-        cout<< "cwushell-> ";
-        cin.getline(input,250);
-        StrTokenizer(input, argv);
-        if (strcmp(input, "exit") == 0)
-
-        {
-            break;
-        }
-        else if (strcmp(input, "\n") == 0){
-            continue;
-        }
-        collec.collec_launcher(input);
+    cout << "Monkey Model Kits launched - input a command or \"help\"." << endl;
+    while (input != "exit") {
+        cout << "> ";
+        getline(cin, input);
+        command = split(input, ' ');
+        if (command[0] == "help")
+            help();
+        collection.collec_launcher(command);
     }
     return 0;
 }
