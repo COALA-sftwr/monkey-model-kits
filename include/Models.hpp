@@ -12,15 +12,21 @@
 
 using namespace std;
 
+const char* const GRADE[] = {"EG", "SD", "HG", "RG", "MG", "PG", "MZ", "OG", "ST"};
+
 class Models {
     public:
         enum Grade {EG, SD, HG, RG, MG, PG, MZ, OG, ST};
         enum Status {WL, BL, BD};
 
         Models();
+        void Models::generate();
         void setName(string name);
         void setGrade(string input);
         void setPrice(const string& input);
+        string getName();
+        Grade getGrade();
+        double getPrice();
         Models::Grade stGrade(string input);
 
     private:
@@ -32,17 +38,4 @@ class Models {
         double _price;
         Status _status;
 
-};
-
-class Collection {
-    private:
-        bool _isOpen = false;
-        fstream _file;
-        string _path = getenv("HOME");
-        vector<Models> _builds;
-
-    public:
-        void collec_launcher(vector<string> command);
-        void open(const string& file);
-        void add();
 };

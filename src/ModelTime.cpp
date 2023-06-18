@@ -2,7 +2,7 @@
 // Created by galbert on 17/06/23.
 //
 
-#include "../include/ModelTime.hpp"
+#include "ModelTime.hpp"
 
 void ModelTime::launch_session()
 {
