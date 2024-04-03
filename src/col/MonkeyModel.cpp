@@ -8,16 +8,6 @@
 #include "MonkeyModel.hpp"
 
 MonkeyModel::MonkeyModel() {
-    std::string input;
-
-    getUpperInput("\"What is the name of this model ?\"", input);
-    setName(input);
-    getUpperInput("What is its grade ?", input);
-    setGrade(stoe(input, gradeMap));
-    getUpperInput("What is its price ?", input);
-    setPrice(!input.empty() ? stod(input) : 0.0);
-    getUpperInput("Is it finished, work in progress or backlogged ? [WIP, BLT, BCK]", input);
-    setStatus(stoe(input, statusMap));
 }
 
 void getUpperInput(std::string string, std::string &input) {
@@ -59,6 +49,14 @@ void MonkeyModel::setStatus(Status status) {
     _status = status;
 }
 
+void MonkeyModel::addSession(MonkeySession session) {
+    _sessions.push_back(session);
+}
+
+void MonkeyModel::setSessions(std::vector<MonkeySession> sessions) {
+    _sessions = sessions;
+}
+
 // Getters
 std::string MonkeyModel::getName() {
     return _name;
@@ -76,8 +74,8 @@ Status MonkeyModel::getStatus() {
     return _status;
 }
 
-void MonkeyModel::addSession(MonkeySession session) {
-    _sessions.push_back(session);
+std::vector<MonkeySession> MonkeyModel::getSessions() {
+    return _sessions;
 }
 
 template <typename Enum> Enum stoe(const std::string& gradeString, const std::unordered_map<std::string, Enum>& enumMap)

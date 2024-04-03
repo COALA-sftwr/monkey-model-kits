@@ -28,7 +28,7 @@ private:
     std::vector<MonkeySession> _sessions;
 
 public:
-    MonkeyModel(); // TODO: make the constructor empty.
+    MonkeyModel(); //
 
     void newModel();
     // Setters
@@ -37,7 +37,7 @@ public:
     void setPrice(double price);
     void setStatus(Status status);
     void addSession(MonkeySession session);
-    void setSessions(std::vector<MonkeySession> sessions);
+    void setSessions(std::vector<MonkeySession> sessions); // TODO: implement this function to create the loading version of it.
 
     // Getters
     std::string getName();
