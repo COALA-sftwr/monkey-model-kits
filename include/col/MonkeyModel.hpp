@@ -28,7 +28,7 @@ private:
     std::vector<MonkeySession> _sessions;
 
 public:
-    MonkeyModel(); //
+    MonkeyModel();
 
     void newModel();
     // Setters
