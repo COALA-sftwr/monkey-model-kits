@@ -112,7 +112,7 @@ void MonkeyShell::saveCommand() {
 void MonkeyShell::closeCommand() {
     try {
         if (_manager.IsFileOpen()) {
-            _manager.quitFile();
+            _manager.closeFile();
             _level = "Home";
         } else
             throw std::runtime_error("No file opened.");
