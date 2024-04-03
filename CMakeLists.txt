@@ -15,5 +15,5 @@ add_executable(MMK
         src/col/MonkeyModel.cpp
         src/col/MonkeySession.cpp
         src/col/MonkeyCollection.cpp
-#        src/run/MonkeyFile.cpp
+        src/run/MonkeyFile.cpp
 )

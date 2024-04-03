@@ -30,7 +30,7 @@ public:
     // Work with files
     void createFile(std::vector<std::string> commands);
     void openFile(std::vector<std::string> commands, std::string &level, MonkeyCollection &collection);
-    void quitFile();
+    void closeFile();
 
     fs::path getDocPath();
     fs::path getFilePath();
@@ -43,15 +43,11 @@ public:
 
 
     // Functions for parsing .mkit files
-/*    void findName(std::string line, MonkeyModel model);
-    void findGrade(std::string line, MonkeyModel model);
-    void findPrice(std::string line, MonkeyModel model);
-    void findStatus(std::string line, MonkeyModel model);
-    void findSessions(std::string line, MonkeyModel model);
 
-    void findKey();
+    std::string findKey(const std::string& key, int instance);
+    MonkeyModel findModel(int model_number);
 
-    void loadFile(MonkeyCollection collection);*/
+    void loadFile(MonkeyCollection& collection);
 };
 
 fs::path getFullPath(const fs::path& documentPath, int openOrCreate, std::vector<std::string> commands);

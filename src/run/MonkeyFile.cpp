@@ -6,73 +6,53 @@
 
 #include "MonkeyManager.hpp"
 
-void MonkeyManager::findName(std::string line, MonkeyModel model) {
-    size_t pos = line.find("name:");
+/*std::vector<MonkeySession> stoms(std::string value) { // TODO: Implement this function to convert a string into an array of sessions
+    std::vector<MonkeySession> value_t;
 
-    if (pos != std::string::npos) {
-        pos += 5; // Length of "name:"
-        model.setName(line.substr(pos, line.find('"', pos + 1) - pos));
-    }
-}
 
-void MonkeyManager::findGrade(std::string line, MonkeyModel model) {
-    size_t pos = line.find("grade:");
 
-    if (pos != std::string::npos) {
-        pos += 6; // Length of "grade:"
-        model.setGrade(stoe(line.substr(pos, line.find('>', pos + 1) - pos), gradeMap));
-    }
-}
-
-void MonkeyManager::findPrice(std::string line, MonkeyModel model) {
-    size_t pos = line.find("price:");
-
-    if (pos != std::string::npos) {
-        pos += 6; // Length of "price:"
-        model.setPrice(std::stod(line.substr(pos)));
-    }
-}
-
-void MonkeyManager::findStatus(std::string line, MonkeyModel model) {
-    size_t pos = line.find("status:");
-
-    if (pos != std::string::npos) {
-        pos += 7; // Length of "status:"
-        model.setStatus(stoe(line.substr(pos, line.find('>', pos + 1) - pos), statusMap));
-    }
-}
-
-void MonkeyManager::findSessions(std::string line, MonkeyModel model) {
-    size_t pos = line.find("sessions:");
-
-    if (pos != std::string::npos) {
-        pos += 9; // Length of "sessions:"
-        std::string sessionStr = line.substr(pos, line.size() - pos);
-        std::istringstream sessionIss(sessionStr);
-        std::string session;
-        while (std::getline(sessionIss, session, '|')) {
-            MonkeySession monkey_Session;
-            size_t pos1 = session.find('>');
-            monkey_Session.setStart(stotp(session.substr(1, pos1 - 1)));
-            monkey_Session.setStop(stotp(session.substr(pos1 + 1, session.size() - pos1 - 3)));
-            model.addSession(monkey_Session);
-        }
-    }
-}
-
-/*void MonkeyManager::findKey(std::string key) {
-    std::string line;
-
-    while (std::getline(_file, line)) {
-
-    }
-}
-
-void MonkeyManager::findModel() {
-    while
+    return value_t;
 }*/
 
-void MonkeyManager::loadFile(MonkeyCollection Collection) {
+std::string MonkeyManager::findKey(const std::string &key, int instance) {
+    std::string line;
+    std::string value;
+    int foundCount = 0;
+
+    _file.seekg(0);
+
+    while (std::getline(_file, line)) {
+        // Check if the line contains the key
+        size_t pos = line.find(key);
+        if (pos != std::string::npos) {
+            if (foundCount == instance) {
+                value = line.substr(pos + key.length() + 2); // Skip key and ": "
+                value.erase(0, value.find_first_not_of(" \t\n\r\f\v\"{<")); // Remove leading and trailing whitespaces
+                value.erase(value.find_last_not_of(" \t\n\r\f\v\"}>") + 1);
+
+                return value;
+            }
+            foundCount++;
+        }
+    }
+
+    // Return empty string if key is not found or instance is not found
+    return "";
+}
+
+MonkeyModel MonkeyManager::findModel(int model_number) {
+    MonkeyModel model_t;
+
+    model_t.setName(findKey("name", model_number));
+    model_t.setGrade(stoe((findKey("grade", model_number)), gradeMap));
+    model_t.setPrice(stod(findKey("price", model_number)));
+    model_t.setStatus(stoe(findKey("status", model_number), statusMap));
+//    model_t.setSessions(stoms(findKey("sessions", model_number)));
+
+    return model_t;
+}
+
+void MonkeyManager::loadFile(MonkeyCollection& collection) {
     std::string line;
     MonkeyModel model;
     int modelCount = 0;
@@ -84,21 +64,7 @@ void MonkeyManager::loadFile(MonkeyCollection Collection) {
         }
     }
 
-    for (modelCount; modelCount > 0; modelCount--) {
-//        findModel();
-    }
-
-    while (std::getline(_file, line)) {
-        if (line.empty() || line.front() != '[' || line.back() != ']')
-            continue; // Skip lines that do not represent model entries
-
-        // Parse model fields
-        findName(line, model);
-        findGrade(line, model);
-        findPrice(line, model);
-        findStatus(line, model);
-        findSessions(line, model);
-
-        Collection.addModel(model);
+    for (int modelsAdded = 0; modelsAdded != modelCount; modelsAdded++) {
+        collection.addModel(findModel(modelsAdded));
     }
 }

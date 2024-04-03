@@ -115,7 +115,7 @@ void MonkeyManager::openFile(std::vector<std::string> commands, std::string &lev
         else if (_file.is_open()) {
             setIsFileOpen(true);
             level = commands[1];
-//            loadFile(collection);
+            loadFile(collection);
             std::cout << "File opened successfully: " << getFilePath() << std::endl;
         }
     }
@@ -125,12 +125,12 @@ void MonkeyManager::openFile(std::vector<std::string> commands, std::string &lev
     }
 }
 
-void MonkeyManager::quitFile()
+void MonkeyManager::closeFile()
 {
     _file.close();
     clearFilePath();
     setIsFileOpen(false);
-    std::cout << "File quit successfully." << std::endl;
+    std::cout << "File closed successfully." << std::endl;
 }
 
 
