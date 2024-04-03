@@ -63,14 +63,14 @@ void MonkeyManager::createKitsDirectory()
     if (!fs::is_directory(kitsPath)) {
         try {
             fs::create_directory(kitsPath);
-            std::cout << "Directory 'Kits' created successfully: " << kitsPath << std::endl;
             setDocPath(getDocPath().append(kdir));
+            std::cout << "Directory 'Kits' created successfully: " << getDocPath().string() << std::endl;
         }
         catch (const std::exception& ex) {
             std::cerr << "Error creating 'Kits' directory: " << ex.what() << std::endl;
         }
     } else {
-        std::cout << "Directory already exists" << std::endl;
+        std::cout << "Directory already exists. (" << getDocPath().string() << ")" << std::endl;
         setDocPath(getDocPath().append(kdir));
     }
 }
