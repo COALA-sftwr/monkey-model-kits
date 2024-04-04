@@ -1,7 +1,7 @@
 /*
  *  File:       MonkeyCollection.cpp
  *  Created:    Albert 03/04/2024
- *  Description: 
+ *  Description:    Functions regarding collection modification.
 */
 
 #include <iostream>

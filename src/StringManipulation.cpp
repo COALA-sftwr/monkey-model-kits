@@ -1,7 +1,7 @@
 /*
  *  File:       StringManipulation.cpp
  *  Created:    Albert 04/04/2024
- *  Description: 
+ *  Description:    File for editing strings.
 */
 
 #include <sstream>
@@ -24,5 +24,5 @@ std::string cleanString(std::string& str) {
     str.erase(0, str.find_first_not_of(charsToRemove)); // Remove leading and trailing whitespaces
     str.erase(str.find_last_not_of(charsToRemove) + 1);
 
-    return str/*.substr(start, end - start + 1)*/;
+    return str;
 }

@@ -1,7 +1,7 @@
 /*
  *  File:       MonkeyFile.cpp
  *  Created:    Albert 03/04/2024
- *  Description: 
+ *  Description:    Functions for Mkit parsing
 */
 
 #include "MonkeyManager.hpp"
@@ -15,18 +15,16 @@ std::string MonkeyManager::findKey(const std::string &key, int iteration) {
     _file.seekg(0);
 
     while (std::getline(_file, line)) {
-        // Check if the line contains the key
         size_t pos = line.find(key);
         if (pos != std::string::npos) {
             if (foundCount == iteration) {
-                value = line.substr(pos + key.length() + 2); // Skip key and ": "
+                value = line.substr(pos + key.length() + 2);
                 return cleanString(value);
             }
             foundCount++;
         }
     }
 
-    // Return empty string if key is not found or iteration is not found
     return "";
 }
 

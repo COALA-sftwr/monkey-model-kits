@@ -1,7 +1,7 @@
 /*
  *  File:       MonkeyCollection.hpp
  *  Created:    Albert 03/04/2024
- *  Description: 
+ *  Description:    Functions regarding collection modification.
 */
 
 #pragma once

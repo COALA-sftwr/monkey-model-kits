@@ -1,7 +1,7 @@
 /*
  *  File:       StringManipulation.hpp
  *  Created:    Albert 04/04/2024
- *  Description: 
+ *  Description:    File for editing strings.
 */
 
 #pragma once
