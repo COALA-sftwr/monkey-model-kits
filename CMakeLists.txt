@@ -4,6 +4,7 @@ project(MMK)
 set(CMAKE_CXX_STANDARD 26)
 
 include_directories(
+        include/
         include/col
         include/run
 )
@@ -16,4 +17,5 @@ add_executable(MMK
         src/col/MonkeySession.cpp
         src/col/MonkeyCollection.cpp
         src/run/MonkeyFile.cpp
+        src/StringManipulation.cpp
 )

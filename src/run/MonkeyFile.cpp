@@ -5,14 +5,7 @@
 */
 
 #include "MonkeyManager.hpp"
-
-/*std::vector<MonkeySession> stoms(std::string value) { // TODO: Implement this function to convert a string into an array of sessions
-    std::vector<MonkeySession> value_t;
-
-
-
-    return value_t;
-}*/
+#include "StringManipulation.hpp"
 
 std::string MonkeyManager::findKey(const std::string &key, int instance) {
     std::string line;
@@ -27,10 +20,7 @@ std::string MonkeyManager::findKey(const std::string &key, int instance) {
         if (pos != std::string::npos) {
             if (foundCount == instance) {
                 value = line.substr(pos + key.length() + 2); // Skip key and ": "
-                value.erase(0, value.find_first_not_of(" \t\n\r\f\v\"{<")); // Remove leading and trailing whitespaces
-                value.erase(value.find_last_not_of(" \t\n\r\f\v\"}>") + 1);
-
-                return value;
+                return cleanString(value);
             }
             foundCount++;
         }

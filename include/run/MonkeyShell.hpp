@@ -30,7 +30,6 @@ public:
 
     void start();
 
-    void split(const std::string& s, char delimiter);
     void processCommand();
 
     bool isExit();

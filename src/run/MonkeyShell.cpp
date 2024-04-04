@@ -4,9 +4,9 @@
  *  Description: Functions for the main shell
 */
 
-#include <sstream>
 #include <iostream>
 #include "MonkeyShell.hpp"
+#include "StringManipulation.hpp"
 
 MonkeyShell::MonkeyShell() {
     _exitFlag = false;
@@ -32,19 +32,10 @@ void MonkeyShell::start() {
     while (!isExit()) {
         std::cout << "Kits@" << _level << "> ";
         getline(std::cin, input);
-        split(input, ' ');
+        _commands = tokenize(input, ' ');
 
         processCommand();
     }
-}
-
-void MonkeyShell::split(const std::string &s, char delimiter) {
-    std::stringstream ss(s);
-    std::string token;
-
-    while (getline(ss, token, delimiter))
-        if (!token.empty())
-            _commands.push_back(token);
 }
 
 void MonkeyShell::processCommand() {
