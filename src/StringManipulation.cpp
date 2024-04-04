@@ -14,7 +14,7 @@ std::vector<std::string> tokenize(const std::string &s, char delimiter) {
 
     while (getline(ss, token, delimiter))
         if (!token.empty())
-            value_t.push_back(token);
+            value_t.push_back(cleanString(token));
     return value_t;
 }
 
