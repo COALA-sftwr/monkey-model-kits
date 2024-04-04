@@ -29,3 +29,15 @@ std::ostream &operator<<(std::ostream &stream, const MonkeyCollection &collectio
 void MonkeyCollection::addModel(MonkeyModel model) {
     _models.push_back(model);
 }
+
+void MonkeyCollection::setTimezone(std::string givenTimeZone) {
+    _timeZone = givenTimeZone;
+}
+
+Collection MonkeyCollection::getModels() {
+    return _models;
+}
+
+std::string MonkeyCollection::getTimeZone() {
+    return _timeZone;
+}

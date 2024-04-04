@@ -9,15 +9,21 @@
 #include <vector>
 #include "MonkeyModel.hpp"
 
+
 using Collection = std::vector<MonkeyModel>;
 
 class MonkeyCollection {
     private:
         Collection _models;
+        std::string _timeZone;
     public:
         void load(); // TODO: Implement the loading of existing collections from a file.
         void newModel();
         void addModel(MonkeyModel model);
+        void setTimezone(std::string givenTimeZone);
+
+        Collection getModels();
+        std::string getTimeZone();
 
         friend std::ostream& operator<<(std::ostream& stream, const MonkeyCollection& collection);
 };

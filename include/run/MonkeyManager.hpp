@@ -41,13 +41,14 @@ public:
     void setFilePath(fs::path filePath);
     void setIsFileOpen(bool newState);
 
+    // Mkit functions
 
-    // Functions for parsing .mkit files (MonkeyFile.cpp)
-
-    std::string findKey(const std::string& key, int instance);
+    std::string findKey(const std::string& key, int iteration);
     MonkeyModel findModel(int model_number);
 
     void loadFile(MonkeyCollection& collection);
+
+    void setTimeZones(MonkeyCollection& collection);
 };
 
 fs::path getFullPath(const fs::path& documentPath, int openOrCreate, std::vector<std::string> commands);

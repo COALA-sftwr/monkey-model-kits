@@ -5,34 +5,75 @@
 */
 
 #pragma once
+
+#include <unordered_map>
 #include <chrono>
 
-using timePoint = std::chrono::system_clock::time_point;
+using TimePoint = std::chrono::system_clock::time_point;
 using intS = std::chrono::duration<int>;
 
 class MonkeySession {
 private:
-    timePoint _startDate;
-    timePoint _stopDate;
+    TimePoint _startDate;
+    TimePoint _stopDate;
+    std::string _startString;
+    std::string _stopString;
     intS _duration;
+    std::string _timeZone;
 public:
     MonkeySession();
-    MonkeySession(const timePoint& start, const timePoint& end); // TODO: add those constructors to be able to add already existing sessions.
+    MonkeySession(const TimePoint& start, const TimePoint& end);
+    MonkeySession(intS duration);
+    MonkeySession(std::vector<TimePoint> timePoints);
 
     // TODO: Implement pauseTime eventually
     void setStart();
-    void setStart(timePoint givenTime);
+    void setStart(TimePoint givenTime);
+    void setString(TimePoint givenTime, std::string& string);
     void setStop();
-    void setStop(timePoint givenTime);
+    void setStop(TimePoint givenTime);
     void setDuration();
+    void setTimeZone(std::string givenTimeZone);
     void pauseTime(); // Won't be used rn, will be used when pause is implemented.
 
-    timePoint getStart();
-    timePoint getStop();
+    TimePoint getStart();
+    TimePoint getStop();
     intS getDuration();
 
 
     friend std::ostream& operator<<(std::ostream& stream, const MonkeySession& session);
 };
 
-timePoint stotp(const std::string& timeStr);
+TimePoint stotp(const std::string& timeStr);
+std::vector<TimePoint> stotps_v(const std::string& tString);
+intS stomd(const std::string& timeStr);
+std::vector<MonkeySession> stoms_v(std::string value);
+
+
+static const std::unordered_map<std::string, int> tzMap = {{"UTC-12", -12},
+                                                           {"UTC-11",-11},
+                                                           {"UTC-10",-10},
+                                                           {"UTC-9",-9},
+                                                           {"UTC-8",-8},
+                                                           {"UTC-7",-7},
+                                                           {"UTC-6",-6},
+                                                           {"UTC-5",-5},
+                                                           {"UTC-4",-4},
+                                                           {"UTC-3",-3},
+                                                           {"UTC-2",-2},
+                                                           {"UTC-1",-1},
+                                                           {"UTC",0},
+                                                           {"UTC+1",1},
+                                                           {"UTC+2",2},
+                                                           {"UTC+3",3},
+                                                           {"UTC+4",4},
+                                                           {"UTC+5",5},
+                                                           {"UTC+6",6},
+                                                           {"UTC+7",7},
+                                                           {"UTC+8",8},
+                                                           {"UTC+9",9},
+                                                           {"UTC+10",10},
+                                                           {"UTC+11",11},
+                                                           {"UTC+12",12},
+                                                           {"UTC+13",13},
+                                                           {"UTC+14",14}};
