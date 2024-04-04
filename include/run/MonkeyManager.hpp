@@ -42,7 +42,7 @@ public:
     void setIsFileOpen(bool newState);
 
 
-    // Functions for parsing .mkit files
+    // Functions for parsing .mkit files (MonkeyFile.cpp)
 
     std::string findKey(const std::string& key, int instance);
     MonkeyModel findModel(int model_number);
@@ -51,3 +51,4 @@ public:
 };
 
 fs::path getFullPath(const fs::path& documentPath, int openOrCreate, std::vector<std::string> commands);
+bool isFileEmpty(std::fstream &filename);

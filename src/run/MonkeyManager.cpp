@@ -7,22 +7,6 @@
 #include <iostream>
 #include "MonkeyManager.hpp"
 
-fs::path getFullPath(const fs::path& docPath, int openOrCreate, std::vector<std::string> commands)
-{
-    std::string name;
-    fs::path fullPath;
-
-    if (commands.size() == 1) {
-        std::cout << "Enter the name of the file to " << (openOrCreate == 0 ? "open" : "create") << " in the Documents directory: ";
-        std::getline(std::cin, name);
-    } else
-        name = commands[1];
-    fullPath = docPath / name.append(".mkit");
-
-    //std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');  // Clearing the cin buffer of the '\n' so we dont get 2 prompts exiting the createFile function.
-    return fullPath;
-}
-
 
 // Constructor
 
@@ -113,6 +97,8 @@ void MonkeyManager::openFile(std::vector<std::string> commands, std::string &lev
         if (!fs::exists(_filePath))
             throw std::runtime_error("File does not exist.");
         else if (_file.is_open()) {
+            if (isFileEmpty(_file))
+                throw std::runtime_error("File is empty.");
             setIsFileOpen(true);
             level = commands[1];
             loadFile(collection);
@@ -172,4 +158,26 @@ void MonkeyManager::setIsFileOpen(bool newState)
 void MonkeyManager::clearFilePath()
 {
     _filePath.clear();
+}
+
+// Other functions
+
+fs::path getFullPath(const fs::path& docPath, int openOrCreate, std::vector<std::string> commands)
+{
+    std::string name;
+    fs::path fullPath;
+
+    if (commands.size() == 1) {
+        std::cout << "Enter the name of the file to " << (openOrCreate == 0 ? "open" : "create") << " in the Documents directory: ";
+        std::getline(std::cin, name);
+    } else
+        name = commands[1];
+    fullPath = docPath / name.append(".mkit");
+
+    //std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');  // Clearing the cin buffer of the '\n' so we dont get 2 prompts exiting the createFile function.
+    return fullPath;
+}
+
+bool isFileEmpty(std::fstream &filename) {
+    return filename.peek() == std::ifstream::traits_type::eof();
 }
