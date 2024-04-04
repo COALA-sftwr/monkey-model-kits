@@ -156,8 +156,9 @@ std::vector<MonkeySession> stoms_v(std::string value) {
 
     for (std::string instance : strings) {
         if (instance.at(0) == '_')
-            value_t.push_back(MonkeySession(stomd(instance)));
-        value_t.push_back(MonkeySession(stotps_v(instance)));
+            value_t.push_back(MonkeySession(stomd(instance.erase(0, 1))));
+        else
+            value_t.push_back(MonkeySession(stotps_v(instance)));
     }
 
     return value_t;
