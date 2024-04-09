@@ -78,11 +78,38 @@ std::vector<MonkeySession> MonkeyModel::getSessions() {
     return _sessions;
 }
 
-template <typename Enum> Enum stoe(const std::string& gradeString, const std::unordered_map<std::string, Enum>& enumMap)
+std::ostream &operator<<(std::ostream &stream, const MonkeyModel &model) {
+    stream << "Name: " << model._name << std::endl
+           << "Grade: " << etos(gradeMap, model._grade) << std::endl
+           << "Price: " << model._price << std::endl
+           << "Status: " << etos(statusMap, model._status) << std::endl
+           << "Sessions: " << std::endl;
+
+    for (const auto& session : model._sessions) {
+        stream << session << std::endl;
+    }
+
+    return stream;
+}
+
+
+template <typename Enum>
+Enum stoe(const std::string& gradeString, const std::unordered_map<std::string, Enum>& enumMap)
 {
     auto it = enumMap.find(gradeString);
     if (it != enumMap.end())
         return it->second;
     else
         throw std::invalid_argument("Invalid enum string representation");
+}
+
+template <typename Enum>
+std::string etos(const std::unordered_map<std::string, Enum>& enumMap, Enum value)
+{
+    for (const auto& pair : enumMap) {
+        if (pair.second == value) {
+            return pair.first;
+        }
+    }
+    return "Unknown";
 }

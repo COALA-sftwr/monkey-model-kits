@@ -13,10 +13,10 @@
 #include "MonkeySession.hpp"
 
 enum Grade { EG, SD, HG, RG, MG, PG, MS, OG, ST }; // [Entry, Super Deformed, High, Real, Master, Perfect, Mega Size, Other, Stand] Grade
-enum Status { WIP, BLT, BCK };                     // Work In Progress, Built, Backlogged
+enum Status { BCK, WIP, BLT };                     // Backlogged, Work In Progress, Built
 
 static const std::unordered_map<std::string, Grade> gradeMap = {{"EG", EG},{"SD", SD},{"HG", HG},{"RG", RG},{"MG", MG},{"PG", PG},{"MS", MS},{"OG", OG},{"ST", ST}};
-static const std::unordered_map<std::string, Status> statusMap = {{"WIP", WIP}, {"BLT", BLT}, {"BCK", BCK}};
+static const std::unordered_map<std::string, Status> statusMap = { {"BCK", BCK}, {"WIP", WIP}, {"BLT", BLT}};
 
 class MonkeyModel
 {
@@ -47,8 +47,10 @@ public:
     std::vector<MonkeySession> getSessions();
 
     void newSession();
+
+    friend std::ostream& operator<<(std::ostream& stream, const MonkeyModel& model);
 };
 
 template <typename Enum> Enum stoe(const std::string& gradeString, const std::unordered_map<std::string, Enum>& enumMap);
-std::string to_string(std::unordered_map<std::string, Grade> enumMap, const std::string& grade);
+template <typename Enum> std::string etos(const std::unordered_map<std::string, Enum>& enumMap, Enum value);
 void getUpperInput(std::string string, std::string &input);
