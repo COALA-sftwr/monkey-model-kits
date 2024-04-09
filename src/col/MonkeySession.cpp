@@ -88,9 +88,10 @@ intS MonkeySession::getDuration() {
 std::ostream& operator<<(std::ostream& stream, const MonkeySession& session) {
     std::string unknown = "No known date.";
 
-    stream << "Start date: " << (session._startString.empty() ? session._startString : unknown) << std::endl
-           << "Stop date: " << (session._stopString.empty() ? session._stopString : unknown) << std::endl
-    << "Duration : " << session._duration << std::endl;
+    stream << "\tStart date: " << (!session._startString.empty() ? session._startString : unknown) << std::endl
+           << "\tStop date: " << (!session._stopString.empty() ? session._stopString : unknown) << std::endl
+    << "\tDuration : " << session._duration << std::endl
+    << "-----";
     return stream;
 }
 
