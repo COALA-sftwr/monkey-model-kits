@@ -21,7 +21,6 @@ std::ostream &operator<<(std::ostream &stream, const MonkeyCollection &collectio
         models++;
         stream << models << " : " << model.getName() << "\t";
     }
-    stream << std::endl;
 
     return stream;
 }
@@ -40,4 +39,13 @@ Collection MonkeyCollection::getModels() {
 
 std::string MonkeyCollection::getTimeZone() {
     return _timeZone;
+}
+
+Collection& MonkeyCollection::getModelsAdr() {
+    return _models;
+}
+
+void MonkeyCollection::clear() {
+    _models.clear();
+    _timeZone.clear();
 }

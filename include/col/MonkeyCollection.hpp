@@ -21,8 +21,10 @@ class MonkeyCollection {
         void newModel();
         void addModel(MonkeyModel model);
         void setTimezone(std::string givenTimeZone);
+        void clear();
 
         Collection getModels();
+        Collection& getModelsAdr();
         std::string getTimeZone();
 
         friend std::ostream& operator<<(std::ostream& stream, const MonkeyCollection& collection);
