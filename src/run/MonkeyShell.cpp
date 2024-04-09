@@ -12,7 +12,7 @@ MonkeyShell::MonkeyShell() {
     _exitFlag = false;
     _level = "Home";
 
-    commandMap["help"] = []() { helpCommand(); }; // Prints help message
+    commandMap["help"] = [this]() { helpCommand(); }; // Prints help message
     commandMap["quit"] = [this]() { quitCommand(); }; // Quits program
 
     commandMap["create"] = [this]() { createCommand(); }; // Creates a file
