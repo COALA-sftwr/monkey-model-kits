@@ -100,8 +100,8 @@ void MonkeyManager::openFile(std::vector<std::string> commands, std::string &lev
             if (isFileEmpty(_file))
                 throw std::runtime_error("File is empty.");
             setIsFileOpen(true);
-            level = commands[1];
             loadFile(collection);
+            level = commands[1];
             std::cout << "File opened successfully: " << getFilePath() << std::endl;
         }
     }
@@ -174,7 +174,6 @@ fs::path getFullPath(const fs::path& docPath, int openOrCreate, std::vector<std:
         name = commands[1];
     fullPath = docPath / name.append(".mkit");
 
-    //std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');  // Clearing the cin buffer of the '\n' so we dont get 2 prompts exiting the createFile function.
     return fullPath;
 }
 
