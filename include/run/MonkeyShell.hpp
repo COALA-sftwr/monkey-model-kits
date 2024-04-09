@@ -23,6 +23,7 @@ private:
     std::map<std::string, std::function<void()>> commandMap;
     MonkeyManager _manager;
     MonkeyCollection _collection;
+    MonkeyModel* _selectedModel = nullptr;
     std::string _level;
 
 public:
@@ -37,14 +38,16 @@ public:
 
     // Functions matching available commands
 
-    static void helpCommand();
+    void helpCommand();
+    void quitCommand();
+
     void createCommand();
     void openCommand();
     void saveCommand();
     void closeCommand();
-    void quitCommand();
+
     void listCommand();
     void newCommand();
-    void editCommand();
-    void deleteCommand();
+    void selectCommand();
+    void showCommand();
 };

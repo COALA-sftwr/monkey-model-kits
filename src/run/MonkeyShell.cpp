@@ -12,18 +12,22 @@ MonkeyShell::MonkeyShell() {
     _exitFlag = false;
     _level = "Home";
 
-    commandMap["help"] = []() { helpCommand(); };
+    commandMap["help"] = []() { helpCommand(); }; // Prints help message
+    commandMap["quit"] = [this]() { quitCommand(); }; // Quits program
 
-    commandMap["create"] = [this]() { createCommand(); };
-    commandMap["open"] = [this]() { openCommand(); };
-    commandMap["save"] = [this]() { saveCommand(); };
-    commandMap["close"] = [this]() {closeCommand(); };
-    commandMap["quit"] = [this]() { quitCommand(); };
+    commandMap["create"] = [this]() { createCommand(); }; // Creates a file
+    commandMap["open"] = [this]() { openCommand(); }; // Opens a file
+    commandMap["save"] = [this]() { saveCommand(); }; // Saves data to file
+    commandMap["close"] = [this]() {closeCommand(); }; // Closes file
+//    commandMap["delete"] = [this]() { deleteCommand(); }; // Deletes a file
 
-    commandMap["list"] = [this]() {listCommand(); };
-    commandMap["new"] = [this]() { newCommand(); };
-//    commandMap["edit"] = [this]() { editCommand(); };
-//    commandMap["delete"] = [this]() { deleteCommand(); };
+    commandMap["list"] = [this]() {listCommand(); }; // Lists loaded collection
+    commandMap["new"] = [this]() { newCommand(); }; // Creates a new model
+    commandMap["select"] = [this]() { selectCommand(); }; // Selects a model to work on
+    commandMap["show"] = [this]() { showCommand(); }; // Shows selected model
+//    commandMap["start"] = [this]() { startCommand(); }; // Starts timer
+//    commandMap["stop"] = [this]() { stopCommand(); }; // Stops timer
+//    commandMap[] = [this]() { Command(); };
 }
 
 void MonkeyShell::start() {
@@ -72,6 +76,12 @@ void MonkeyShell::helpCommand() {
               << std::endl;
 }
 
+void MonkeyShell::quitCommand() {
+    if (_manager.IsFileOpen())
+        closeCommand();
+    setExit(true);
+}
+
 void MonkeyShell::createCommand() {
     try {
         if (_commands.size() > 1) {
@@ -103,6 +113,8 @@ void MonkeyShell::saveCommand() {
 void MonkeyShell::closeCommand() {
     try {
         if (_manager.IsFileOpen()) {
+            _collection.clear();
+            _selectedModel = nullptr;
             _manager.closeFile();
             _level = "Home";
         } else
@@ -112,16 +124,33 @@ void MonkeyShell::closeCommand() {
     }
 }
 
-void MonkeyShell::quitCommand() {
-    if (_manager.IsFileOpen())
-        closeCommand();
-    setExit(true);
-}
-
 void MonkeyShell::listCommand() {
     std::cout << _collection << std::endl;
 }
 
 void MonkeyShell::newCommand() {
     _collection.newModel();
+    _selectedModel = &_collection.getModelsAdr().back();
+}
+
+void MonkeyShell::selectCommand() {
+    std::string modelNumberString;
+    int modelNumber;
+
+    if (_commands.size() == 2)
+        modelNumber = std::stoi(_commands[1]) - 1;
+    else {
+        std::cout << "Which model do you want to work on ?" << std::endl << _collection << std::endl;
+        std::getline(std::cin, modelNumberString);
+        modelNumber = std::stoi(modelNumberString) - 1;
+    }
+    _selectedModel = &_collection.getModelsAdr().at(modelNumber);
+    std::cout << "You selected: " << _selectedModel->getName() << "." << std::endl;
+}
+
+void MonkeyShell::showCommand() {
+    if (_selectedModel != nullptr)
+        std::cout << *_selectedModel << std::endl;
+    else
+        std::cout << "No model selected." << std::endl;
 }
