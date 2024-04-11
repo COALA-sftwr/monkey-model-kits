@@ -26,6 +26,7 @@ private:
     double _price;
     Status _status;
     std::vector<MonkeySession> _sessions;
+    bool _swOn;
 
 public:
     MonkeyModel();
@@ -36,10 +37,8 @@ public:
     void setGrade(Grade grade);
     void setPrice(double price);
     void setStatus(Status status);
-    void addSession(MonkeySession session);
     void setSessions(std::vector<MonkeySession> sessions);
-    void startSession();
-    void stopSession();
+    void setSWStatus(bool newState);
 
     // Getters
     std::string getName();
@@ -48,7 +47,10 @@ public:
     Status getStatus();
     std::vector<MonkeySession> getSessions();
 
-    void newSession();
+    bool isSWOn();
+
+    void startSession();
+    void stopSession();
 
     friend std::ostream& operator<<(std::ostream& stream, const MonkeyModel& model);
 };

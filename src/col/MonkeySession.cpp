@@ -40,7 +40,8 @@ void MonkeySession::setStart() {
 }
 
 void MonkeySession::setStart(TimePoint givenTime) {
-    _startDate = givenTime;
+    _startDate = std::chrono::round<std::chrono::seconds>(givenTime);
+    setString(_startDate, _startString);
 }
 
 void MonkeySession::setStop() {
@@ -50,7 +51,8 @@ void MonkeySession::setStop() {
 }
 
 void MonkeySession::setStop(TimePoint givenTime) {
-    _stopDate = givenTime;
+    _stopDate = std::chrono::round<std::chrono::seconds>(givenTime);
+    setString(_stopDate, _stopString);
     setDuration();
 }
 
@@ -99,6 +101,7 @@ std::ostream& operator<<(std::ostream& stream, const MonkeySession& session) {
            << "-----";
     return stream;
 }
+
 
 
 // String to time-types functions

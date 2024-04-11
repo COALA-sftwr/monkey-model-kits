@@ -169,9 +169,25 @@ void MonkeyShell::showCommand() {
 }
 
 void MonkeyShell::startCommand() {
-    _selectedModel->startSession();
+    try {
+        if (!_selectedModel->isSWOn())
+            _selectedModel->startSession();
+        else
+            throw std::runtime_error("StopWatch already running.");
+    } catch (std::exception &e)
+    {
+        std::cout << "Could not start StopWatch: " << e.what() << std::endl;
+    }
 }
 
 void MonkeyShell::stopCommand() {
-    _selectedModel->stopSession();
+    try {
+        if (_selectedModel->isSWOn())
+            _selectedModel->stopSession();
+        else
+            throw std::runtime_error("No running StopWatch.");
+    } catch (std::exception &e)
+    {
+        std::cout << "Could not stop StopWatch: " << e.what() << std::endl;
+    }
 }

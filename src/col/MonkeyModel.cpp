@@ -8,15 +8,7 @@
 #include "MonkeyModel.hpp"
 
 MonkeyModel::MonkeyModel() {
-}
-
-void getUpperInput(std::string string, std::string &input) {
-    std::cout << string << std::endl;
-    getline(std::cin, input);
-
-    for (char& c : input) {
-        c = std::toupper(c);
-    }
+    setSWStatus(false);
 }
 
 void MonkeyModel::newModel() {
@@ -49,12 +41,12 @@ void MonkeyModel::setStatus(Status status) {
     _status = status;
 }
 
-void MonkeyModel::addSession(MonkeySession session) {
-    _sessions.push_back(session);
-}
-
 void MonkeyModel::setSessions(std::vector<MonkeySession> sessions) {
     _sessions = sessions;
+}
+
+void MonkeyModel::setSWStatus(bool newState) {
+    _swOn = newState;
 }
 
 // Getters
@@ -78,6 +70,22 @@ std::vector<MonkeySession> MonkeyModel::getSessions() {
     return _sessions;
 }
 
+bool MonkeyModel::isSWOn() {
+    return _swOn;
+}
+
+// Others
+void MonkeyModel::startSession() {
+    _sessions.push_back(MonkeySession());
+    _sessions.back().setStart();
+    setSWStatus(true);
+}
+
+void MonkeyModel::stopSession() {
+    _sessions.back().setStop();
+    setSWStatus(false);
+}
+
 std::ostream &operator<<(std::ostream &stream, const MonkeyModel &model) {
     stream << "Name: " << model._name << std::endl
            << "Grade: " << etos(gradeMap, model._grade) << std::endl
@@ -95,16 +103,6 @@ std::ostream &operator<<(std::ostream &stream, const MonkeyModel &model) {
     }
     return stream;
 }
-
-void MonkeyModel::startSession() {
-    _sessions.push_back(MonkeySession());
-    _sessions.back().setStart();
-}
-
-void MonkeyModel::stopSession() {
-    _sessions.back().setStop();
-}
-
 
 template <typename Enum>
 Enum stoe(const std::string& gradeString, const std::unordered_map<std::string, Enum>& enumMap)
@@ -125,4 +123,13 @@ std::string etos(const std::unordered_map<std::string, Enum>& enumMap, Enum valu
         }
     }
     return "Unknown";
+}
+
+void getUpperInput(std::string string, std::string &input) {
+    std::cout << string << std::endl;
+    getline(std::cin, input);
+
+    for (char& c : input) {
+        c = std::toupper(c);
+    }
 }
