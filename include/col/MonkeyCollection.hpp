@@ -17,7 +17,6 @@ class MonkeyCollection {
         Collection _models;
         std::string _timeZone;
     public:
-        void load(); // TODO: Implement the loading of existing collections from a file.
         void newModel();
         void addModel(MonkeyModel model);
         void setTimezone(std::string givenTimeZone);

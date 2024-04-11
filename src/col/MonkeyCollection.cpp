@@ -16,10 +16,16 @@ void MonkeyCollection::newModel() {
 
 std::ostream &operator<<(std::ostream &stream, const MonkeyCollection &collection) {
     int models = 0;
+    int space = 0;
 
     for (MonkeyModel model : collection._models) {
         models++;
-        stream << models << " : " << model.getName() << "\t";
+        stream << models << ": " << model.getName() << "\t";
+        if (space == 4) {
+            space = 0;
+            std::cout << std::endl;
+        } else
+            space++;
     }
 
     return stream;
