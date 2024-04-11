@@ -83,12 +83,16 @@ std::ostream &operator<<(std::ostream &stream, const MonkeyModel &model) {
            << "Grade: " << etos(gradeMap, model._grade) << std::endl
            << "Price: " << model._price << std::endl
            << "Status: " << etos(statusMap, model._status) << std::endl
-           << "Sessions: " << std::endl;
+           << "Sessions: ";
 
-    for (const auto& session : model._sessions) {
-        stream << session << std::endl;
+    if (model._sessions.empty())
+        stream << "No sessions on this model." << std::endl;
+    else {
+        stream << std::endl;
+        for (const auto &session: model._sessions) {
+            stream << session << std::endl;
+        }
     }
-
     return stream;
 }
 
