@@ -25,8 +25,9 @@ MonkeyShell::MonkeyShell() {
     commandMap["new"] = [this]() { newCommand(); }; // Creates a new model
     commandMap["select"] = [this]() { selectCommand(); }; // Selects a model to work on
     commandMap["show"] = [this]() { showCommand(); }; // Shows selected model
-//    commandMap["start"] = [this]() { startCommand(); }; // Starts timer
-//    commandMap["stop"] = [this]() { stopCommand(); }; // Stops timer
+
+    commandMap["start"] = [this]() { startCommand(); }; // Starts timer
+    commandMap["stop"] = [this]() { stopCommand(); }; // Stops timer
 //    commandMap[] = [this]() { Command(); };
 }
 
@@ -125,7 +126,10 @@ void MonkeyShell::closeCommand() {
 }
 
 void MonkeyShell::listCommand() {
-    std::cout << _collection << std::endl;
+    if (_collection.getModels().empty())
+        std::cout << "No collection loaded." << std::endl;
+    else
+        std::cout << _collection << std::endl;
 }
 
 void MonkeyShell::newCommand() {
@@ -144,8 +148,17 @@ void MonkeyShell::selectCommand() {
         std::getline(std::cin, modelNumberString);
         modelNumber = std::stoi(modelNumberString) - 1;
     }
-    _selectedModel = &_collection.getModelsAdr().at(modelNumber);
-    std::cout << "You selected: " << _selectedModel->getName() << "." << std::endl;
+    try {
+        if (modelNumber < _collection.getModelsAdr().size()) {
+            _selectedModel = &_collection.getModelsAdr().at(modelNumber);
+            std::cout << "You selected: " << _selectedModel->getName() << "." << std::endl;
+        }
+        else {
+            throw std::out_of_range("No corresponding model.");
+        }
+    } catch (std::exception &e) {
+        std::cerr << "Could not select a model: " << e.what() << std::endl;
+    }
 }
 
 void MonkeyShell::showCommand() {
@@ -153,4 +166,12 @@ void MonkeyShell::showCommand() {
         std::cout << *_selectedModel << std::endl;
     else
         std::cout << "No model selected." << std::endl;
+}
+
+void MonkeyShell::startCommand() {
+    _selectedModel->startSession();
+}
+
+void MonkeyShell::stopCommand() {
+    _selectedModel->stopSession();
 }

@@ -29,12 +29,16 @@ public:
     // TODO: Implement pauseTime eventually
     void setStart();
     void setStart(TimePoint givenTime);
-    void setString(TimePoint givenTime, std::string& string);
+
     void setStop();
     void setStop(TimePoint givenTime);
+
     void setDuration();
+
+    void setString(TimePoint givenTime, std::string& string);
     void setTimeZone(std::string givenTimeZone);
     void pauseTime(); // Won't be used rn, will be used when pause is implemented.
+
 
     TimePoint getStart();
     TimePoint getStop();

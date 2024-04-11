@@ -50,4 +50,6 @@ public:
     void newCommand();
     void selectCommand();
     void showCommand();
+    void startCommand();
+    void stopCommand();
 };

@@ -92,6 +92,15 @@ std::ostream &operator<<(std::ostream &stream, const MonkeyModel &model) {
     return stream;
 }
 
+void MonkeyModel::startSession() {
+    _sessions.push_back(MonkeySession());
+    _sessions.back().setStart();
+}
+
+void MonkeyModel::stopSession() {
+    _sessions.back().setStop();
+}
+
 
 template <typename Enum>
 Enum stoe(const std::string& gradeString, const std::unordered_map<std::string, Enum>& enumMap)

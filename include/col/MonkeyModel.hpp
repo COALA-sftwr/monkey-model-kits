@@ -37,7 +37,9 @@ public:
     void setPrice(double price);
     void setStatus(Status status);
     void addSession(MonkeySession session);
-    void setSessions(std::vector<MonkeySession> sessions); // TODO: implement this function to create the loading version of it.
+    void setSessions(std::vector<MonkeySession> sessions);
+    void startSession();
+    void stopSession();
 
     // Getters
     std::string getName();

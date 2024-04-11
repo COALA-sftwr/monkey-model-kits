@@ -8,7 +8,7 @@
 #include "StringManipulation.hpp"
 
 MonkeySession::MonkeySession() {
-
+    _duration = std::chrono::duration<int>(0);
 }
 
 MonkeySession::MonkeySession(const TimePoint &start, const TimePoint &end) {
@@ -36,6 +36,7 @@ MonkeySession::MonkeySession(intS duration) {
 // Setters
 void MonkeySession::setStart() {
     _startDate = std::chrono::system_clock::now();
+    setString(_startDate, _startString);
 }
 
 void MonkeySession::setStart(TimePoint givenTime) {
@@ -44,6 +45,7 @@ void MonkeySession::setStart(TimePoint givenTime) {
 
 void MonkeySession::setStop() {
     _stopDate = std::chrono::system_clock::now();
+    setString(_stopDate, _stopString);
     setDuration();
 }
 
@@ -54,7 +56,8 @@ void MonkeySession::setStop(TimePoint givenTime) {
 
 void MonkeySession::setDuration() {
     auto durationInSeconds = std::chrono::duration_cast<std::chrono::seconds>(getStop() - getStart());
-    _duration = std::chrono::duration<int>(durationInSeconds);
+    // Round the duration to the nearest whole second
+    _duration = std::chrono::duration<int>(durationInSeconds + std::chrono::seconds(1)/2);
 }
 
 void MonkeySession::setString(TimePoint givenTime, std::string& string) {
@@ -88,10 +91,14 @@ intS MonkeySession::getDuration() {
 std::ostream& operator<<(std::ostream& stream, const MonkeySession& session) {
     std::string unknown = "No known date.";
 
+    auto hours = std::chrono::duration_cast<std::chrono::hours>(session._duration);
+    auto minutes = std::chrono::duration_cast<std::chrono::minutes>(session._duration) - hours;
+    auto seconds = std::chrono::duration_cast<std::chrono::seconds>(session._duration) - hours - minutes;
+
     stream << "\tStart date: " << (!session._startString.empty() ? session._startString : unknown) << std::endl
            << "\tStop date: " << (!session._stopString.empty() ? session._stopString : unknown) << std::endl
-    << "\tDuration : " << session._duration << std::endl
-    << "-----";
+           << "\tDuration : " << hours << ":" << minutes << ":" << seconds << std::endl
+           << "-----";
     return stream;
 }
 
