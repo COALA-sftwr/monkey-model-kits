@@ -4,7 +4,7 @@ The model-kit builder's control panel !
 ## What ?
 Have you ever wondered how much time you spent on your collection ?<br>
 Or how much money you spent buying model kits (We would prefer not knowing too...)<br>
-Well, we CAN answer those questions you've never wanted an answer to !
+Well, I CAN answer those questions you've never wanted an answer to !
 
 This software allows you to log all your models, be it work in progress ones, those already sitting on a shelf, or desperately waiting for the day you'll get them out of the box...
 
@@ -20,12 +20,10 @@ Now you can input your command to tell MMK what to do.<br>
 You have several options at this point:
 * Creating a file
 * Opening a file
-* Deleting a file
 * Displaying the help message
 
 MMK for now can only open .mkit files since I haven't yet decided of a standard to handle .csv's.<br>
-
-When opening or creating a file, the file name is not case-sensitive so writing "open test" will open the same file as "open TEsT" on windows.
+When opening or creating a file, on windows the file name won't be case sensitive: meaning "test" and "TEsT" are the same files; but watch out: on linux files are case sensitive.
 ### Creating a file
 You simply have to write "create [file name]", MMK will then create a file in the default folder.
 
