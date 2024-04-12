@@ -26,5 +26,8 @@ class MonkeyCollection {
         Collection& getModelsAdr();
         std::string getTimeZone();
 
+        int count();
+        std::string save();
+
         friend std::ostream& operator<<(std::ostream& stream, const MonkeyCollection& collection);
 };

@@ -52,6 +52,8 @@ public:
     void startSession();
     void stopSession();
 
+    std::string saveSessions();
+
     friend std::ostream& operator<<(std::ostream& stream, const MonkeyModel& model);
 };
 

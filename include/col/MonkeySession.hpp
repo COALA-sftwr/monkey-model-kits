@@ -41,7 +41,9 @@ public:
 
 
     TimePoint getStart();
+    std::string getStartString();
     TimePoint getStop();
+    std::string getStopString();
     intS getDuration();
 
 

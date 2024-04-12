@@ -49,6 +49,8 @@ public:
     void loadFile(MonkeyCollection& collection);
 
     void setTimeZones(MonkeyCollection& collection);
+
+    void saveFile(MonkeyCollection &collection);
 };
 
 fs::path getFullPath(const fs::path& documentPath, int openOrCreate, std::vector<std::string> commands);

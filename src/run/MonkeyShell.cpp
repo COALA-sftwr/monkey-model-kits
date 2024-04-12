@@ -108,7 +108,7 @@ void MonkeyShell::openCommand() {
 }
 
 void MonkeyShell::saveCommand() {
-//    _manager.saveFile();
+    _manager.saveFile(_collection);
 }
 
 void MonkeyShell::closeCommand() {

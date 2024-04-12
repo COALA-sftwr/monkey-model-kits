@@ -97,10 +97,11 @@ void MonkeyManager::openFile(std::vector<std::string> commands, std::string &lev
         if (!fs::exists(_filePath))
             throw std::runtime_error("File does not exist.");
         else if (_file.is_open()) {
-            if (isFileEmpty(_file))
-                throw std::runtime_error("File is empty.");
+            if (!isFileEmpty(_file))
+                loadFile(collection);
+            else
+                std::cout << "File is empty." << std::endl;
             setIsFileOpen(true);
-            loadFile(collection);
             level = commands[1];
             std::cout << "File opened successfully: " << getFilePath() << std::endl;
         }
@@ -119,6 +120,26 @@ void MonkeyManager::closeFile()
     std::cout << "File closed successfully." << std::endl;
 }
 
+void MonkeyManager::clearFilePath()
+{
+    _filePath.clear();
+}
+
+void MonkeyManager::saveFile(MonkeyCollection& collection) {
+    // Clear the file content before writing
+    _file.close();
+    _file.open(_filePath, std::ios::out | std::ios::trunc); // Open in truncation mode to clear file
+
+    // Check if the file opened successfully
+    if (!_file.is_open()) {
+        std::cerr << "Error opening file for writing: " << _filePath << std::endl;
+        return;
+    }
+
+    // Write the collection content to the file
+    _file << "(" << collection.save() << ")" << std::endl;
+    std::cout << "File saved successfully: " << _filePath << std::endl;
+}
 
 // Getters
 
@@ -132,11 +153,11 @@ fs::path MonkeyManager::getFilePath()
     return _filePath;
 }
 
-
 bool MonkeyManager::IsFileOpen()
 {
     return _fileOpen;
 }
+
 
 // Setters
 
@@ -155,10 +176,6 @@ void MonkeyManager::setIsFileOpen(bool newState)
     _fileOpen = newState;
 }
 
-void MonkeyManager::clearFilePath()
-{
-    _filePath.clear();
-}
 
 // Other functions
 

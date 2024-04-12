@@ -102,6 +102,14 @@ std::ostream& operator<<(std::ostream& stream, const MonkeySession& session) {
     return stream;
 }
 
+std::string MonkeySession::getStartString() {
+    return _startString;
+}
+
+std::string MonkeySession::getStopString() {
+    return _stopString;
+}
+
 
 
 // String to time-types functions
@@ -109,19 +117,20 @@ std::ostream& operator<<(std::ostream& stream, const MonkeySession& session) {
 TimePoint stotp(const std::string& timeStr) {
     std::tm tm = {};
     std::istringstream ss(timeStr);
+    char dot;
+    char colon;
+    char hyphen;
 
     // Parse date part
-    char dot;
     ss >> tm.tm_year >> dot >> tm.tm_mon >> dot >> tm.tm_mday;
     tm.tm_year -= 1900; // Years since 1900
     tm.tm_mon -= 1;     // Months since January
 
     // Parse time part
-    char hyphen;
-    ss >> hyphen >> tm.tm_hour >> dot >> tm.tm_min >> dot >> tm.tm_sec;
+    ss >> hyphen >> tm.tm_hour >> colon >> tm.tm_min >> colon >> tm.tm_sec;
 
     // Check if parsing was successful
-    if (ss.fail() || dot != '.' || hyphen != '-') {
+    if (ss.fail() || dot != '.' || hyphen != '-' || colon != ':') {
         throw std::runtime_error("Failed to parse time string");
     }
 

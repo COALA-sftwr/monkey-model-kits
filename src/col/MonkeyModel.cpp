@@ -104,6 +104,28 @@ std::ostream &operator<<(std::ostream &stream, const MonkeyModel &model) {
     return stream;
 }
 
+std::string MonkeyModel::saveSessions() {
+    std::stringstream value_ss;
+    std::vector<MonkeySession> vsess = getSessions();
+
+    value_ss << "{ ";
+    for (auto session = vsess.begin() ; session != vsess.end(); session++) {
+        if (session->getStartString().empty() || session->getStopString().empty()) {
+            auto hours = std::chrono::duration_cast<std::chrono::hours>(session->getDuration());
+            auto minutes = std::chrono::duration_cast<std::chrono::minutes>(session->getDuration()) - hours;
+            auto seconds = std::chrono::duration_cast<std::chrono::seconds>(session->getDuration()) - hours - minutes;
+            value_ss << "_" << hours.count() << ":" << minutes.count() << ":" << seconds.count();
+        } else {
+            value_ss << session->getStartString() << " > " << session->getStopString();
+        }
+        if (std::next(session) != vsess.end())
+            value_ss << " | ";
+    }
+    value_ss << " }";
+
+    return value_ss.str();
+}
+
 template <typename Enum>
 Enum stoe(const std::string& gradeString, const std::unordered_map<std::string, Enum>& enumMap)
 {
