@@ -12,23 +12,23 @@ MonkeyShell::MonkeyShell() {
     _exitFlag = false;
     _level = "Home";
 
-    commandMap["help"] = [this]() { helpCommand(); }; // Prints help message
+    commandMap["help"] = [this]() { helpCommand(); }; // Prints help message // TODO: make so that all separate commands are available only in their section
     commandMap["quit"] = [this]() { quitCommand(); }; // Quits program
 
     commandMap["create"] = [this]() { createCommand(); }; // Creates a file
     commandMap["open"] = [this]() { openCommand(); }; // Opens a file
     commandMap["save"] = [this]() { saveCommand(); }; // Saves data to file
     commandMap["close"] = [this]() {closeCommand(); }; // Closes file
-//    commandMap["delete"] = [this]() { deleteCommand(); }; // Deletes a file
+//    commandMap["delete"] = [this]() { deleteCommand(); }; // Deletes a file // TODO: Delte files
 
     commandMap["list"] = [this]() {listCommand(); }; // Lists loaded collection
     commandMap["new"] = [this]() { newCommand(); }; // Creates a new model
-    commandMap["select"] = [this]() { selectCommand(); }; // Selects a model to work on
+    commandMap["select"] = [this]() { selectCommand(); }; // Selects a model to work on // TODO: Add command to edit the values of the model
     commandMap["show"] = [this]() { showCommand(); }; // Shows selected model
 
     commandMap["start"] = [this]() { startCommand(); }; // Starts timer
     commandMap["stop"] = [this]() { stopCommand(); }; // Stops timer
-//    commandMap[] = [this]() { Command(); };
+//    commandMap[] = [this]() { Command(); }; Command template.
 }
 
 void MonkeyShell::start() {

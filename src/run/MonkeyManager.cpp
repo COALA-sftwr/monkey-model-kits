@@ -44,9 +44,9 @@ void MonkeyManager::createKitsDirectory()
     // Append "Kits" to the Documents directory path
     fs::path kitsPath = getDocPath() / kdir;
 
-    if (!fs::is_directory(kitsPath)) {
+    if (!is_directory(kitsPath)) {
         try {
-            fs::create_directory(kitsPath);
+            create_directory(kitsPath);
             setDocPath(getDocPath().append(kdir));
             std::cout << "Directory 'Kits' created successfully: " << getDocPath().string() << std::endl;
         }
@@ -54,8 +54,8 @@ void MonkeyManager::createKitsDirectory()
             std::cerr << "Error creating 'Kits' directory: " << ex.what() << std::endl;
         }
     } else {
-        std::cout << "Directory already exists. (" << getDocPath().string() << ")" << std::endl;
         setDocPath(getDocPath().append(kdir));
+        std::cout << "Directory already exists. (" << getDocPath().string() << ")" << std::endl;
     }
 }
 
@@ -137,7 +137,7 @@ void MonkeyManager::saveFile(MonkeyCollection& collection) {
     }
 
     // Write the collection content to the file
-    _file << "(" << collection.save() << ")" << std::endl;
+    _file << "(" << std::endl << collection.save() << ")" << std::endl;
     std::cout << "File saved successfully: " << _filePath << std::endl;
 }
 
