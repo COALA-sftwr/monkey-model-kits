@@ -71,7 +71,7 @@ std::string MonkeyCollection::save() {
         file_s << "      " << "sessions: " << model.saveSessions() << std::endl;
         file_s << "    " << "]" << std::endl;
     }
-    std::cout << file_s.str() << std::endl;
+    //std::cout << file_s.str() << std::endl;
     return file_s.str();
 }
 

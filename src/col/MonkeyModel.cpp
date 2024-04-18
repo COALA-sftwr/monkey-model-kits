@@ -79,6 +79,7 @@ void MonkeyModel::startSession() {
     _sessions.push_back(MonkeySession());
     _sessions.back().setStart();
     setSWStatus(true);
+    setStatus(WIP);
 }
 
 void MonkeyModel::stopSession() {

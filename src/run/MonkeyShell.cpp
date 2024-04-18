@@ -28,6 +28,9 @@ MonkeyShell::MonkeyShell() {
 
     commandMap["start"] = [this]() { startCommand(); }; // Starts timer
     commandMap["stop"] = [this]() { stopCommand(); }; // Stops timer
+
+    commandMap["finish"] = [this]() { finishCommand(); }; // Finishes model
+    commandMap["backlog"] = [this]() { backlogCommand(); }; // Finishes model
 //    commandMap[] = [this]() { Command(); }; Command template.
 }
 
@@ -190,4 +193,12 @@ void MonkeyShell::stopCommand() {
     {
         std::cout << "Could not stop StopWatch: " << e.what() << std::endl;
     }
+}
+
+void MonkeyShell::finishCommand() {
+    _selectedModel->setStatus(BLT);
+}
+
+void MonkeyShell::backlogCommand() {
+    _selectedModel->setStatus(BCK);
 }

@@ -52,4 +52,6 @@ public:
     void showCommand();
     void startCommand();
     void stopCommand();
+    void finishCommand();
+    void backlogCommand();
 };
