@@ -69,13 +69,23 @@ void MonkeyShell::setExit(bool state) {
 void MonkeyShell::helpCommand() {
     std::cout << "-Monkey Model Kits-\n"
                  "\tCommands\n"
-                 "\t\t-help:\t\tShows this message.\n"
+                 "\t\t-help:\t\t\tShows this message.\n"
                  "\t\t-create\t[profile]:\tCreates the file related to the given profile. If none is given, will be requested\n"
                  "\t\t-open\t[profile]:\tOpens the file related to the given profile. If none is given, will be requested.\n"
-                 "\t\t-list:\tLists all loaded models.\n"
-                 "\t\t-new:\tCreates a new model to the collection.\n"
-                 "\t\t-save:\tSaves the open file.\n"
-                 "\t\t-close:\tCloses the open file without exiting program.\n"
+                 "\t\t-save:\t\t\tSaves collection changes to the open file.\n"
+                 "\t\t-close:\t\t\tCloses the open file without exiting program.\n\n"
+
+                 "\t\t-list:\t\t\tLists all loaded models.\n"
+                 "\t\t-new:\t\t\tCreates a new model to the collection.\n\n"
+                 "\t\t-select [model id]:\tSelects a model to edit. If no model id given, will show the list of models to select.\n"
+                 "\t\t-show [model id]:\tShows infos of a model you select. If no model id given, will show the list of models to select.\n\n"
+
+                 "\t\t-start:\t\t\tStarts the timer of a new session on the selected model.\n"
+                 "\t\t-stop:\t\t\tStops the timer of the session.\n\n"
+
+                 "\t\t-finish:\t\tSets the model state to finished.\n"
+                 "\t\t-backlog:\t\tSets the model state to backlogged.\n\n"
+
                  "\t\t-quit:\t\tExits MMK"
               << std::endl;
 }

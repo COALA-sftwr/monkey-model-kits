@@ -1,5 +1,7 @@
 # Monkey Model Kits
-The model-kit builder's control panel !
+<img src="res/ico/mike.png" width="128" alt="Mike (Mihai)">
+
+**The model-kit builder's control panel !**
 
 ## What ?
 Have you ever wondered how much time you spent on your collection ?<br>
