@@ -7,6 +7,8 @@
 #include <iostream>
 #include "MonkeyModel.hpp"
 
+#include <sstream>
+
 MonkeyModel::MonkeyModel() {
     setSWStatus(false);
 }

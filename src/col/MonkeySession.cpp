@@ -5,6 +5,7 @@
 */
 
 #include "MonkeySession.hpp"
+#include <iomanip>
 #include "StringManipulation.hpp"
 
 MonkeySession::MonkeySession() {
@@ -91,9 +92,9 @@ intS MonkeySession::getDuration() {
 std::ostream& operator<<(std::ostream& stream, const MonkeySession& session) {
     std::string unknown = "No known date.";
 
-    auto hours = std::chrono::duration_cast<std::chrono::hours>(session._duration);
-    auto minutes = std::chrono::duration_cast<std::chrono::minutes>(session._duration) - hours;
-    auto seconds = std::chrono::duration_cast<std::chrono::seconds>(session._duration) - hours - minutes;
+    auto hours = std::chrono::duration_cast<std::chrono::hours>(session._duration).count();
+    auto minutes = std::chrono::duration_cast<std::chrono::minutes>(session._duration).count() % 60;
+    auto seconds = std::chrono::duration_cast<std::chrono::seconds>(session._duration).count() % 60;
 
     stream << "\tStart date: " << (!session._startString.empty() ? session._startString : unknown) << std::endl
            << "\tStop date: " << (!session._stopString.empty() ? session._stopString : unknown) << std::endl

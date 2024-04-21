@@ -8,6 +8,8 @@
 
 #include <unordered_map>
 #include <chrono>
+#include <string>
+#include <vector>
 
 using TimePoint = std::chrono::system_clock::time_point;
 using intS = std::chrono::duration<int>;

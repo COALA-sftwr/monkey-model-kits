@@ -7,6 +7,8 @@
 #include <iostream>
 #include "MonkeyCollection.hpp"
 
+#include <sstream>
+
 void MonkeyCollection::newModel() {
     MonkeyModel model_t;
 
