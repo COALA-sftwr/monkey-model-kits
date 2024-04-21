@@ -9,7 +9,6 @@
 #include <string>
 #include <map>
 #include <vector>
-#include <unordered_map>
 #include <functional>
 #include "MonkeyManager.hpp"
 #include "MonkeyCollection.hpp"
@@ -49,6 +48,7 @@ public:
     void listCommand();
     void newCommand();
     void selectCommand();
+    void showUnselected();
     void showCommand();
     void startCommand();
     void stopCommand();

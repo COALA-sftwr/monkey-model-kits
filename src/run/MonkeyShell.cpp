@@ -141,12 +141,12 @@ void MonkeyShell::newCommand() {
 }
 
 void MonkeyShell::selectCommand() {
-    std::string modelNumberString;
     int modelNumber;
 
     if (_commands.size() == 2)
         modelNumber = std::stoi(_commands[1]) - 1;
     else {
+        std::string modelNumberString;
         std::cout << "Which model do you want to work on ?" << std::endl << _collection << std::endl;
         std::getline(std::cin, modelNumberString);
         modelNumber = std::stoi(modelNumberString) - 1;
@@ -164,11 +164,32 @@ void MonkeyShell::selectCommand() {
     }
 }
 
+void MonkeyShell::showUnselected() {
+    int temp_i;
+
+    if (_commands.size() == 2)
+        temp_i = std::stoi(_commands.at(1));
+    else {
+        std::string temp_s;
+        std::cout << "No model selected, chose one to show: (0 to quit)" << std::endl;
+        listCommand();
+        std::getline(std::cin, temp_s);
+        temp_i = std::stoi(temp_s);
+    }
+    switch (temp_i) {
+        case 0:
+            break;
+        default :
+            std::cout << _collection.getModelsAdr().at(temp_i - 1) << std::endl;
+    }
+}
+
 void MonkeyShell::showCommand() {
     if (_selectedModel != nullptr)
         std::cout << *_selectedModel << std::endl;
-    else
-        std::cout << "No model selected." << std::endl;
+    else {
+        showUnselected();
+    }
 }
 
 void MonkeyShell::startCommand() {
