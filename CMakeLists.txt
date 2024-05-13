@@ -1,59 +1,69 @@
-cmake_minimum_required(VERSION 3.15)
+cmake_minimum_required(VERSION 3.28)
 
 project(MonkeyModelKit LANGUAGES CXX)
 
 # Find the Qt libraries
-
 set(CMAKE_PREFIX_PATH "C:/Qt/6.6.0/mingw_64")
-find_package(Qt6 COMPONENTS Widgets REQUIRED)
 
-# Set the source files for your application
+set(CMAKE_AUTOMOC ON)
+set(CMAKE_AUTORCC ON)
+set(CMAKE_AUTOUIC ON)
+
+set(CMAKE_AUTOUIC_SEARCH_PATHS ${CMAKE_CURRENT_LIST_DIR}/gui)
+
+find_package(Qt6 COMPONENTS
+        Core
+        Gui
+        Widgets
+        REQUIRED)
+
 set(SOURCES
         src/main.cpp
+        src/StringManipulation.cpp
+
         src/run/MonkeyShell.cpp
         src/run/MonkeyManager.cpp
+        src/run/MonkeyFile.cpp
+
+        src/gui/MonkeyWindow.cpp
+
         src/col/MonkeyModel.cpp
         src/col/MonkeySession.cpp
         src/col/MonkeyCollection.cpp
-        src/run/MonkeyFile.cpp
-        src/StringManipulation.cpp
-        # Add more source files as needed
 )
 
-#[[# Set the header files for your application
 set(HEADERS
-        include/
-        include/col
-        include/run
-        # Add more header files as needed
-)]]
+        include/StringManipulation.hpp
 
-include_directories(
-        include/
-        include/col
-        include/run
+        include/run/MonkeyFile.hpp
+        include/run/MonkeyManager.hpp
+        include/run/MonkeyShell.hpp
+
+        include/gui/MonkeyWindow.hpp
+
+        include/col/MonkeyCollection.hpp
+        include/col/MonkeyModel.hpp
+        include/col/MonkeySession.hpp
 )
 
-# Set the user interface files (if any)
 set(UI_FILES
+        gui/MonkeyWindow.ui
         # Add more UI files as needed
 )
 
-# Set up the translation files
-set(TS_FILES
-        # Add translation files if needed
-)
+#[[set(TS_FILES
+# Add translation files if needed
+)]]
 
-# Generate header files from UI files
-qt6_wrap_ui(UI_HEADERS ${UI_FILES})
-
-# Add the executable target
-add_executable(MonkeyModelKit WIN32
+qt_add_executable(MonkeyModelKit WIN32
         ${SOURCES}
         ${HEADERS}
         ${UI_FILES}
-        ${UI_HEADERS}
-        ${QM_FILES}
+#        ${TS_FILES}
+)
+
+target_include_directories(MonkeyModelKit
+        PRIVATE include include/col include/run include/gui gui/
 )
 
 # Link the Qt libraries to the executable
