@@ -87,10 +87,8 @@ void MonkeyManager::createFile(std::vector<std::string> commands)
     clearFilePath();
 }
 
-void MonkeyManager::openFile(std::vector<std::string> commands, std::string &level, MonkeyCollection &collection)
+void MonkeyManager::openFile(std::filesystem::path _filePath, MonkeyCollection &collection)
 {
-    _filePath = getFullPath(getDocPath(), 0, commands);
-
     _file.open(_filePath);
 
     try {
@@ -102,8 +100,7 @@ void MonkeyManager::openFile(std::vector<std::string> commands, std::string &lev
             else
                 std::cout << "File is empty." << std::endl;
             setIsFileOpen(true);
-            level = commands[1];
-            std::cout << "File opened successfully: " << getFilePath() << std::endl;
+            std::cout << "File opened successfully: " << _filePath << std::endl;
         }
     }
     catch (const std::exception& ex) {

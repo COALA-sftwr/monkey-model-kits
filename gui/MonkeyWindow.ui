@@ -1,34 +1,641 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
-    <author/>
-    <comment/>
-    <exportmacro/>
-    <class>MonkeyWindow</class>
-    <widget class="QMainWindow" name="MonkeyWindow">
-        <property name="geometry">
-            <rect>
-                <x>0</x>
-                <y>0</y>
-                <width>400</width>
-                <height>300</height>
-            </rect>
+ <class>MonkeyWindow</class>
+ <widget class="QMainWindow" name="MonkeyWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>800</width>
+    <height>600</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>MonkeyWindow</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <property name="sizePolicy">
+    <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+     <horstretch>0</horstretch>
+     <verstretch>0</verstretch>
+    </sizepolicy>
+   </property>
+   <property name="autoFillBackground">
+    <bool>false</bool>
+   </property>
+   <layout class="QHBoxLayout" name="horizontalLayout">
+    <item>
+     <layout class="QVBoxLayout" name="verticalLayout">
+      <item>
+       <widget class="QTabWidget" name="tabWidget">
+        <property name="layoutDirection">
+         <enum>Qt::LeftToRight</enum>
         </property>
-        <property name="windowTitle">
-            <string>MonkeyWindow</string>
+        <property name="tabPosition">
+         <enum>QTabWidget::West</enum>
         </property>
-        <widget class="QWidget" name="centralwidget"/>
-        <widget class="QMenuBar" name="menubar">
-            <property name="geometry">
-                <rect>
-                    <x>0</x>
-                    <y>0</y>
-                    <width>400</width>
-                    <height>17</height>
-                </rect>
-            </property>
+        <property name="currentIndex">
+         <number>0</number>
+        </property>
+        <widget class="QWidget" name="Home">
+         <attribute name="title">
+          <string>Accueil</string>
+         </attribute>
+         <widget class="QLineEdit" name="searchBar">
+          <property name="geometry">
+           <rect>
+            <x>150</x>
+            <y>20</y>
+            <width>431</width>
+            <height>21</height>
+           </rect>
+          </property>
+          <property name="placeholderText">
+           <string>Search model kit</string>
+          </property>
+          <property name="clearButtonEnabled">
+           <bool>false</bool>
+          </property>
+         </widget>
+         <widget class="QLabel" name="lastModelLabel">
+          <property name="geometry">
+           <rect>
+            <x>30</x>
+            <y>60</y>
+            <width>191</width>
+            <height>16</height>
+           </rect>
+          </property>
+          <property name="font">
+           <font>
+            <pointsize>12</pointsize>
+           </font>
+          </property>
+          <property name="text">
+           <string>Dernière maquette:</string>
+          </property>
+         </widget>
+         <widget class="QWidget" name="horizontalLayoutWidget_5">
+          <property name="geometry">
+           <rect>
+            <x>30</x>
+            <y>260</y>
+            <width>691</width>
+            <height>281</height>
+           </rect>
+          </property>
+          <layout class="QHBoxLayout" name="favModels">
+           <item>
+            <layout class="QVBoxLayout" name="favModel1">
+             <item>
+              <widget class="QLabel" name="nameLabel">
+               <property name="enabled">
+                <bool>true</bool>
+               </property>
+               <property name="maximumSize">
+                <size>
+                 <width>16777215</width>
+                 <height>20</height>
+                </size>
+               </property>
+               <property name="text">
+                <string>Nom</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <layout class="QHBoxLayout" name="horizontalLayout_2" stretch="0,0,0,0,0">
+               <property name="sizeConstraint">
+                <enum>QLayout::SetMinAndMaxSize</enum>
+               </property>
+               <item>
+                <widget class="QLabel" name="gradeLabel">
+                 <property name="maximumSize">
+                  <size>
+                   <width>16777215</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                 <property name="text">
+                  <string>Grade</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QLabel" name="sessionsLabel">
+                 <property name="maximumSize">
+                  <size>
+                   <width>16777215</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                 <property name="text">
+                  <string>Sessions</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QLabel" name="priceLabel">
+                 <property name="maximumSize">
+                  <size>
+                   <width>16777215</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                 <property name="text">
+                  <string>Prix</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QLabel" name="emptyLabel">
+                 <property name="maximumSize">
+                  <size>
+                   <width>16777215</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                 <property name="text">
+                  <string/>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QLabel" name="timeLabel">
+                 <property name="maximumSize">
+                  <size>
+                   <width>16777215</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                 <property name="text">
+                  <string>Temps</string>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </item>
+             <item>
+              <layout class="QVBoxLayout" name="lsessions">
+               <item>
+                <layout class="QHBoxLayout" name="lsession1">
+                 <item>
+                  <widget class="QLabel" name="dateLabel">
+                   <property name="text">
+                    <string>date</string>
+                   </property>
+                   <property name="alignment">
+                    <set>Qt::AlignCenter</set>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QLabel" name="durationLabel">
+                   <property name="text">
+                    <string>durée</string>
+                   </property>
+                   <property name="alignment">
+                    <set>Qt::AlignCenter</set>
+                   </property>
+                  </widget>
+                 </item>
+                </layout>
+               </item>
+               <item>
+                <layout class="QHBoxLayout" name="lsession2">
+                 <item>
+                  <widget class="QLabel" name="dateLabel_2">
+                   <property name="text">
+                    <string>date</string>
+                   </property>
+                   <property name="alignment">
+                    <set>Qt::AlignCenter</set>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QLabel" name="durationLabel_2">
+                   <property name="text">
+                    <string>durée</string>
+                   </property>
+                   <property name="alignment">
+                    <set>Qt::AlignCenter</set>
+                   </property>
+                  </widget>
+                 </item>
+                </layout>
+               </item>
+               <item>
+                <layout class="QHBoxLayout" name="lsession3">
+                 <item>
+                  <widget class="QLabel" name="dateLabel_3">
+                   <property name="text">
+                    <string>date</string>
+                   </property>
+                   <property name="alignment">
+                    <set>Qt::AlignCenter</set>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QLabel" name="durationLabel_3">
+                   <property name="text">
+                    <string>durée</string>
+                   </property>
+                   <property name="alignment">
+                    <set>Qt::AlignCenter</set>
+                   </property>
+                  </widget>
+                 </item>
+                </layout>
+               </item>
+              </layout>
+             </item>
+            </layout>
+           </item>
+           <item>
+            <layout class="QVBoxLayout" name="favModel1_2">
+             <item>
+              <widget class="QLabel" name="nameLabel_2">
+               <property name="enabled">
+                <bool>true</bool>
+               </property>
+               <property name="maximumSize">
+                <size>
+                 <width>16777215</width>
+                 <height>20</height>
+                </size>
+               </property>
+               <property name="text">
+                <string>Nom</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <layout class="QHBoxLayout" name="horizontalLayout_3">
+               <item>
+                <widget class="QLabel" name="gradeLabel_2">
+                 <property name="text">
+                  <string>Grade</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QLabel" name="sessionsLabel_2">
+                 <property name="text">
+                  <string>Sessions</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QLabel" name="priceLabel_2">
+                 <property name="text">
+                  <string>Prix</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QLabel" name="emptyLabel_2">
+                 <property name="text">
+                  <string/>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QLabel" name="timeLabel_2">
+                 <property name="text">
+                  <string>Temps</string>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </item>
+             <item>
+              <layout class="QVBoxLayout" name="lsessions_2">
+               <item>
+                <layout class="QHBoxLayout" name="lsession1_2">
+                 <item>
+                  <widget class="QLabel" name="dateLabel_4">
+                   <property name="text">
+                    <string>date</string>
+                   </property>
+                   <property name="alignment">
+                    <set>Qt::AlignCenter</set>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QLabel" name="durationLabel_4">
+                   <property name="text">
+                    <string>durée</string>
+                   </property>
+                   <property name="alignment">
+                    <set>Qt::AlignCenter</set>
+                   </property>
+                  </widget>
+                 </item>
+                </layout>
+               </item>
+               <item>
+                <layout class="QHBoxLayout" name="lsession2_2">
+                 <item>
+                  <widget class="QLabel" name="dateLabel_5">
+                   <property name="text">
+                    <string>date</string>
+                   </property>
+                   <property name="alignment">
+                    <set>Qt::AlignCenter</set>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QLabel" name="durationLabel_5">
+                   <property name="text">
+                    <string>durée</string>
+                   </property>
+                   <property name="alignment">
+                    <set>Qt::AlignCenter</set>
+                   </property>
+                  </widget>
+                 </item>
+                </layout>
+               </item>
+               <item>
+                <layout class="QHBoxLayout" name="lsession3_2">
+                 <item>
+                  <widget class="QLabel" name="dateLabel_6">
+                   <property name="text">
+                    <string>date</string>
+                   </property>
+                   <property name="alignment">
+                    <set>Qt::AlignCenter</set>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QLabel" name="durationLabel_6">
+                   <property name="text">
+                    <string>durée</string>
+                   </property>
+                   <property name="alignment">
+                    <set>Qt::AlignCenter</set>
+                   </property>
+                  </widget>
+                 </item>
+                </layout>
+               </item>
+              </layout>
+             </item>
+            </layout>
+           </item>
+           <item>
+            <layout class="QVBoxLayout" name="favModel1_3">
+             <item>
+              <widget class="QLabel" name="nameLabel_3">
+               <property name="enabled">
+                <bool>true</bool>
+               </property>
+               <property name="maximumSize">
+                <size>
+                 <width>16777215</width>
+                 <height>20</height>
+                </size>
+               </property>
+               <property name="text">
+                <string>Nom</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <layout class="QHBoxLayout" name="horizontalLayout_4">
+               <item>
+                <widget class="QLabel" name="gradeLabel_3">
+                 <property name="text">
+                  <string>Grade</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QLabel" name="sessionsLabel_3">
+                 <property name="text">
+                  <string>Sessions</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QLabel" name="priceLabel_3">
+                 <property name="text">
+                  <string>Prix</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QLabel" name="emptyLabel_3">
+                 <property name="text">
+                  <string/>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QLabel" name="timeLabel_3">
+                 <property name="text">
+                  <string>Temps</string>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </item>
+             <item>
+              <layout class="QVBoxLayout" name="lsessions_3">
+               <item>
+                <layout class="QHBoxLayout" name="lsession1_3">
+                 <item>
+                  <widget class="QLabel" name="dateLabel_7">
+                   <property name="text">
+                    <string>date</string>
+                   </property>
+                   <property name="alignment">
+                    <set>Qt::AlignCenter</set>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QLabel" name="durationLabel_7">
+                   <property name="text">
+                    <string>durée</string>
+                   </property>
+                   <property name="alignment">
+                    <set>Qt::AlignCenter</set>
+                   </property>
+                  </widget>
+                 </item>
+                </layout>
+               </item>
+               <item>
+                <layout class="QHBoxLayout" name="lsession2_3">
+                 <item>
+                  <widget class="QLabel" name="dateLabel_8">
+                   <property name="text">
+                    <string>date</string>
+                   </property>
+                   <property name="alignment">
+                    <set>Qt::AlignCenter</set>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QLabel" name="durationLabel_8">
+                   <property name="text">
+                    <string>durée</string>
+                   </property>
+                   <property name="alignment">
+                    <set>Qt::AlignCenter</set>
+                   </property>
+                  </widget>
+                 </item>
+                </layout>
+               </item>
+               <item>
+                <layout class="QHBoxLayout" name="lsession3_3">
+                 <item>
+                  <widget class="QLabel" name="dateLabel_9">
+                   <property name="text">
+                    <string>date</string>
+                   </property>
+                   <property name="alignment">
+                    <set>Qt::AlignCenter</set>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QLabel" name="durationLabel_9">
+                   <property name="text">
+                    <string>durée</string>
+                   </property>
+                   <property name="alignment">
+                    <set>Qt::AlignCenter</set>
+                   </property>
+                  </widget>
+                 </item>
+                </layout>
+               </item>
+              </layout>
+             </item>
+            </layout>
+           </item>
+          </layout>
+         </widget>
+         <widget class="QWidget" name="horizontalLayoutWidget_6">
+          <property name="geometry">
+           <rect>
+            <x>30</x>
+            <y>90</y>
+            <width>691</width>
+            <height>80</height>
+           </rect>
+          </property>
+          <layout class="QHBoxLayout" name="lastModel">
+           <item>
+            <widget class="QLabel" name="lastNameLabel">
+             <property name="text">
+              <string>Nom</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QLabel" name="lastGradeLabel">
+             <property name="text">
+              <string>Grade</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QLabel" name="lastSessionsLabel">
+             <property name="text">
+              <string>Sessions</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QLabel" name="lastSimeLabel">
+             <property name="text">
+              <string>Temps</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QPushButton" name="pushButton">
+             <property name="text">
+              <string>start</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </widget>
         </widget>
-        <widget class="QStatusBar" name="statusbar"/>
-    </widget>
-    <pixmapfunction/>
-    <connections/>
+        <widget class="QWidget" name="Collec">
+         <attribute name="title">
+          <string>Collection</string>
+         </attribute>
+        </widget>
+        <widget class="QWidget" name="Chrono">
+         <attribute name="title">
+          <string>Chronomètre</string>
+         </attribute>
+        </widget>
+        <widget class="QWidget" name="Stats">
+         <attribute name="title">
+          <string>Statistiques</string>
+         </attribute>
+        </widget>
+       </widget>
+      </item>
+     </layout>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>800</width>
+     <height>22</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="menuFiles">
+    <property name="title">
+     <string>Fichiers</string>
+    </property>
+    <addaction name="actionNouveau"/>
+    <addaction name="actionOuvrir"/>
+    <addaction name="separator"/>
+    <addaction name="actionSauvegarder"/>
+    <addaction name="actionSauvegarder_sous"/>
+   </widget>
+   <addaction name="menuFiles"/>
+  </widget>
+  <action name="actionOuvrir">
+   <property name="text">
+    <string>Ouvrir ...</string>
+   </property>
+  </action>
+  <action name="actionSauvegarder">
+   <property name="text">
+    <string>Sauvegarder</string>
+   </property>
+  </action>
+  <action name="actionNouveau">
+   <property name="text">
+    <string>Nouveau</string>
+   </property>
+  </action>
+  <action name="actionSauvegarder_sous">
+   <property name="text">
+    <string>Sauvegarder sous...</string>
+   </property>
+  </action>
+ </widget>
+ <resources/>
+ <connections/>
 </ui>

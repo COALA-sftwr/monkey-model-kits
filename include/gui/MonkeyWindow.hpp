@@ -7,19 +7,41 @@
 #pragma once
 
 #include <QMainWindow>
+#include <QAction>
+#include <QMenu>
+
+#include "MonkeyCollection.hpp"
+#include "MonkeyManager.hpp"
+#include "mModelWidget.hpp"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MonkeyWindow; }
 QT_END_NAMESPACE
 
 class MonkeyWindow : public QMainWindow {
-Q_OBJECT
+    Q_OBJECT
+
+private:
+    Ui::MonkeyWindow *_ui;
+    MonkeyCollection _collection;
+    MonkeyManager _manager;
+    mModelWidget* monkeyWidget;
 
 public:
     explicit MonkeyWindow(QWidget *parent = nullptr);
     ~MonkeyWindow() override;
 
-private:
-    Ui::MonkeyWindow *ui;
+    // File handling functions.
+    void openFile();
+    void loadFile();
+
+    // Tab loading functions.
+    void loadHome();
+    void loadCollection();
+    void loadChronometer();
+    void loadStatistics();
+
+    // Home Loading functions.
+    void loadLastModel();
 };
 

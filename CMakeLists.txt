@@ -21,7 +21,7 @@ set(SOURCES
         src/main.cpp
         src/StringManipulation.cpp
 
-        src/run/MonkeyShell.cpp
+#        src/run/MonkeyShell.cpp
         src/run/MonkeyManager.cpp
         src/run/MonkeyFile.cpp
 

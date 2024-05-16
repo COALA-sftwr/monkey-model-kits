@@ -77,6 +77,16 @@ std::string MonkeyCollection::save() {
     return file_s.str();
 }
 
+MonkeyModel *MonkeyCollection::findLastModel() {
+    MonkeyModel *tempModel = &_models[0];
+
+    for (int iterator = _models.size(); iterator != 0; iterator--) {
+        if (tempModel->getSessions().end() < _models[iterator].getSessions().end())
+            tempModel = &_models[iterator];
+    }
+    return tempModel;
+}
+
 int MonkeyCollection::count() {
     return _models.size();
 }

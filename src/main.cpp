@@ -25,6 +25,7 @@ int main(int argc, char *argv[])
     }
 
     // window.show();
+    mwindow.setWindowTitle("Monkey ModelKits");
     mwindow.show();
     return app.exec();
 }
