@@ -47,6 +47,7 @@ public:
     TimePoint getStop();
     std::string getStopString();
     intS getDuration();
+    std::string getDurationString();
 
 
     friend std::ostream& operator<<(std::ostream& stream, const MonkeySession& session);

@@ -72,6 +72,30 @@ std::vector<MonkeySession> MonkeyModel::getSessions() {
     return _sessions;
 }
 
+MonkeySession *MonkeyModel::getLastSession() {
+    MonkeySession *tempSession = nullptr;
+
+    if (!_sessions.empty()) {
+        tempSession = &_sessions.at(0);
+        for (auto session : _sessions) {
+            if (!session.getStopString().empty() && tempSession->getStopString().empty() ||
+                !session.getStopString().empty() && !tempSession->getStopString().empty() && session.getStop() > tempSession->getStop())
+                tempSession = &session;
+        }
+    }
+
+    return tempSession;
+}
+
+int MonkeyModel::getNSessions() {
+    int sessionNumber = 0;
+
+    for (auto session : _sessions) {
+        sessionNumber ++;
+    }
+    return sessionNumber;
+}
+
 bool MonkeyModel::isSWOn() {
     return _swOn;
 }
@@ -127,6 +151,15 @@ std::string MonkeyModel::saveSessions() {
     value_ss << " }";
 
     return value_ss.str();
+}
+
+int MonkeyModel::getTime() {
+    int time = 0;
+
+    for (auto session : _sessions) {
+        time += session.getDuration().count();
+    }
+    return time;
 }
 
 template <typename Enum>

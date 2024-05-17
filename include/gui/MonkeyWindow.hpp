@@ -12,7 +12,6 @@
 
 #include "MonkeyCollection.hpp"
 #include "MonkeyManager.hpp"
-#include "mModelWidget.hpp"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MonkeyWindow; }
@@ -25,7 +24,6 @@ private:
     Ui::MonkeyWindow *_ui;
     MonkeyCollection _collection;
     MonkeyManager _manager;
-    mModelWidget* monkeyWidget;
 
 public:
     explicit MonkeyWindow(QWidget *parent = nullptr);
@@ -37,6 +35,9 @@ public:
 
     // Tab loading functions.
     void loadHome();
+
+    void updateTimeLabel(MonkeySession *session);
+
     void loadCollection();
     void loadChronometer();
     void loadStatistics();

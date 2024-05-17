@@ -7,6 +7,7 @@
 #pragma once
 
 
+#include <qstring.h>
 #include <unordered_map>
 #include <string>
 #include <vector>
@@ -46,13 +47,18 @@ public:
     double getPrice();
     Status getStatus();
     std::vector<MonkeySession> getSessions();
+    MonkeySession *getLastSession();
+    int getNSessions();
+    int getTime();
 
     bool isSWOn();
 
     void startSession();
+
     void stopSession();
 
     std::string saveSessions();
+
 
     friend std::ostream& operator<<(std::ostream& stream, const MonkeyModel& model);
 };

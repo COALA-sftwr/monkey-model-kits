@@ -6,6 +6,9 @@
 
 #include "MonkeySession.hpp"
 #include <iomanip>
+#include <iostream>
+#include <QString>
+
 #include "StringManipulation.hpp"
 
 MonkeySession::MonkeySession() {
@@ -87,6 +90,17 @@ TimePoint MonkeySession::getStop() {
 
 intS MonkeySession::getDuration() {
     return _duration;
+}
+
+std::string MonkeySession::getDurationString() {
+    std::string durationString = "";
+
+    int hours = _duration.count() / 3600;
+    int minutes = (_duration.count() % 3600) / 60;
+    int seconds = _duration.count() % 60;
+
+    durationString.append(std::to_string(hours)).append("h").append(std::to_string(minutes)).append("min").append(std::to_string(seconds)).append("s");
+    return durationString;
 }
 
 std::ostream& operator<<(std::ostream& stream, const MonkeySession& session) {

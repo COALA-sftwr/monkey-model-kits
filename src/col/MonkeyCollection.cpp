@@ -78,11 +78,14 @@ std::string MonkeyCollection::save() {
 }
 
 MonkeyModel *MonkeyCollection::findLastModel() {
-    MonkeyModel *tempModel = &_models[0];
+    MonkeyModel *tempModel = &_models.at(0);
+    MonkeySession *tempSession = tempModel->getLastSession();
 
-    for (int iterator = _models.size(); iterator != 0; iterator--) {
-        if (tempModel->getSessions().end() < _models[iterator].getSessions().end())
-            tempModel = &_models[iterator];
+    for (auto& model : _models) {
+        MonkeySession *tempModelSession = model.getLastSession();
+        if (tempSession == nullptr && tempModelSession != nullptr ||
+            tempSession != nullptr && tempModelSession != nullptr && tempSession->getStop() < tempModelSession->getStop())
+            tempModel = &model;
     }
     return tempModel;
 }

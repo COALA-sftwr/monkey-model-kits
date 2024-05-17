@@ -6,12 +6,15 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>800</width>
+    <width>790</width>
     <height>600</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>MonkeyWindow</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">background-color: rgb(44, 44, 44); border: none; padding: 0;</string>
   </property>
   <widget class="QWidget" name="centralwidget">
    <property name="sizePolicy">
@@ -28,14 +31,45 @@
      <layout class="QVBoxLayout" name="verticalLayout">
       <item>
        <widget class="QTabWidget" name="tabWidget">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
         <property name="layoutDirection">
          <enum>Qt::LeftToRight</enum>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QTabWidget {
+    color: rgb(44, 44, 44);
+    border-color: rgb(67, 67, 67);
+}
+
+QTabWidget::pane { 
+    border: none; 
+    padding: 0; 
+}
+
+QTabBar::tab { 
+	background-color: rgb(77, 77, 77);
+}
+
+QTabBar::tab:selected, QTabBar::tab:hover {
+	background-color: rgb(83, 83, 83);
+}</string>
         </property>
         <property name="tabPosition">
          <enum>QTabWidget::West</enum>
         </property>
         <property name="currentIndex">
          <number>0</number>
+        </property>
+        <property name="usesScrollButtons">
+         <bool>false</bool>
+        </property>
+        <property name="tabBarAutoHide">
+         <bool>false</bool>
         </property>
         <widget class="QWidget" name="Home">
          <attribute name="title">
@@ -49,6 +83,11 @@
             <width>431</width>
             <height>21</height>
            </rect>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">background-color: rgb(255, 255, 255);
+border-radius: 5px;
+padding: 5px;</string>
           </property>
           <property name="placeholderText">
            <string>Search model kit</string>
@@ -71,118 +110,71 @@
             <pointsize>12</pointsize>
            </font>
           </property>
+          <property name="styleSheet">
+           <string notr="true">color: rgb(255, 255, 255);</string>
+          </property>
           <property name="text">
            <string>Dernière maquette:</string>
           </property>
          </widget>
-         <widget class="QWidget" name="horizontalLayoutWidget_5">
+         <widget class="QFrame" name="favModelFrame">
+          <property name="enabled">
+           <bool>true</bool>
+          </property>
           <property name="geometry">
            <rect>
             <x>30</x>
             <y>260</y>
-            <width>691</width>
-            <height>281</height>
+            <width>700</width>
+            <height>280</height>
            </rect>
           </property>
           <layout class="QHBoxLayout" name="favModels">
            <item>
-            <layout class="QVBoxLayout" name="favModel1">
-             <item>
-              <widget class="QLabel" name="nameLabel">
-               <property name="enabled">
-                <bool>true</bool>
-               </property>
-               <property name="maximumSize">
-                <size>
-                 <width>16777215</width>
-                 <height>20</height>
-                </size>
-               </property>
-               <property name="text">
-                <string>Nom</string>
-               </property>
-              </widget>
-             </item>
-             <item>
-              <layout class="QHBoxLayout" name="horizontalLayout_2" stretch="0,0,0,0,0">
-               <property name="sizeConstraint">
-                <enum>QLayout::SetMinAndMaxSize</enum>
-               </property>
-               <item>
-                <widget class="QLabel" name="gradeLabel">
-                 <property name="maximumSize">
-                  <size>
-                   <width>16777215</width>
-                   <height>20</height>
-                  </size>
-                 </property>
-                 <property name="text">
-                  <string>Grade</string>
-                 </property>
-                </widget>
-               </item>
-               <item>
-                <widget class="QLabel" name="sessionsLabel">
-                 <property name="maximumSize">
-                  <size>
-                   <width>16777215</width>
-                   <height>20</height>
-                  </size>
-                 </property>
-                 <property name="text">
-                  <string>Sessions</string>
-                 </property>
-                </widget>
-               </item>
-               <item>
-                <widget class="QLabel" name="priceLabel">
-                 <property name="maximumSize">
-                  <size>
-                   <width>16777215</width>
-                   <height>20</height>
-                  </size>
-                 </property>
-                 <property name="text">
-                  <string>Prix</string>
-                 </property>
-                </widget>
-               </item>
-               <item>
-                <widget class="QLabel" name="emptyLabel">
-                 <property name="maximumSize">
-                  <size>
-                   <width>16777215</width>
-                   <height>20</height>
-                  </size>
-                 </property>
-                 <property name="text">
-                  <string/>
-                 </property>
-                </widget>
-               </item>
-               <item>
-                <widget class="QLabel" name="timeLabel">
-                 <property name="maximumSize">
-                  <size>
-                   <width>16777215</width>
-                   <height>20</height>
-                  </size>
-                 </property>
-                 <property name="text">
-                  <string>Temps</string>
-                 </property>
-                </widget>
-               </item>
-              </layout>
-             </item>
-             <item>
-              <layout class="QVBoxLayout" name="lsessions">
-               <item>
-                <layout class="QHBoxLayout" name="lsession1">
+            <widget class="QFrame" name="modelFrame">
+             <property name="styleSheet">
+              <string notr="true">background-color: rgb(139, 139, 139);
+border-radius: 10px;</string>
+             </property>
+             <layout class="QVBoxLayout" name="favModel1">
+              <item>
+               <widget class="QLabel" name="favoriteNameLabel">
+                <property name="enabled">
+                 <bool>true</bool>
+                </property>
+                <property name="maximumSize">
+                 <size>
+                  <width>16777215</width>
+                  <height>20</height>
+                 </size>
+                </property>
+                <property name="styleSheet">
+                 <string notr="true">margin-left: 8px; color: rgb(255,255,255);</string>
+                </property>
+                <property name="text">
+                 <string>Nom</string>
+                </property>
+                <property name="margin">
+                 <number>0</number>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QFrame" name="modelDetailsFrame">
+                <property name="maximumSize">
+                 <size>
+                  <width>16777215</width>
+                  <height>30</height>
+                 </size>
+                </property>
+                <layout class="QHBoxLayout" name="modelDetails1">
                  <item>
-                  <widget class="QLabel" name="dateLabel">
+                  <widget class="QLabel" name="gradeLabel">
+                   <property name="styleSheet">
+                    <string notr="true">color: rgb(196, 243, 79);</string>
+                   </property>
                    <property name="text">
-                    <string>date</string>
+                    <string>Grade</string>
                    </property>
                    <property name="alignment">
                     <set>Qt::AlignCenter</set>
@@ -190,9 +182,54 @@
                   </widget>
                  </item>
                  <item>
-                  <widget class="QLabel" name="durationLabel">
+                  <widget class="QLabel" name="sessionsLabel">
+                   <property name="styleSheet">
+                    <string notr="true">color: rgb(196, 243, 79);</string>
+                   </property>
                    <property name="text">
-                    <string>durée</string>
+                    <string>Sessions</string>
+                   </property>
+                   <property name="alignment">
+                    <set>Qt::AlignCenter</set>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QLabel" name="priceLabel">
+                   <property name="styleSheet">
+                    <string notr="true">color: rgb(196, 243, 79);</string>
+                   </property>
+                   <property name="text">
+                    <string>Prix</string>
+                   </property>
+                   <property name="alignment">
+                    <set>Qt::AlignCenter</set>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <spacer name="modelSpacer">
+                   <property name="orientation">
+                    <enum>Qt::Horizontal</enum>
+                   </property>
+                   <property name="sizeType">
+                    <enum>QSizePolicy::Fixed</enum>
+                   </property>
+                   <property name="sizeHint" stdset="0">
+                    <size>
+                     <width>10</width>
+                     <height>0</height>
+                    </size>
+                   </property>
+                  </spacer>
+                 </item>
+                 <item>
+                  <widget class="QLabel" name="timeLabel">
+                   <property name="styleSheet">
+                    <string notr="true">color: rgb(196, 243, 79);</string>
+                   </property>
+                   <property name="text">
+                    <string>Temps</string>
                    </property>
                    <property name="alignment">
                     <set>Qt::AlignCenter</set>
@@ -200,259 +237,202 @@
                   </widget>
                  </item>
                 </layout>
-               </item>
-               <item>
-                <layout class="QHBoxLayout" name="lsession2">
-                 <item>
-                  <widget class="QLabel" name="dateLabel_2">
-                   <property name="text">
-                    <string>date</string>
-                   </property>
-                   <property name="alignment">
-                    <set>Qt::AlignCenter</set>
-                   </property>
-                  </widget>
-                 </item>
-                 <item>
-                  <widget class="QLabel" name="durationLabel_2">
-                   <property name="text">
-                    <string>durée</string>
-                   </property>
-                   <property name="alignment">
-                    <set>Qt::AlignCenter</set>
-                   </property>
-                  </widget>
-                 </item>
-                </layout>
-               </item>
-               <item>
-                <layout class="QHBoxLayout" name="lsession3">
-                 <item>
-                  <widget class="QLabel" name="dateLabel_3">
-                   <property name="text">
-                    <string>date</string>
-                   </property>
-                   <property name="alignment">
-                    <set>Qt::AlignCenter</set>
-                   </property>
-                  </widget>
-                 </item>
-                 <item>
-                  <widget class="QLabel" name="durationLabel_3">
-                   <property name="text">
-                    <string>durée</string>
-                   </property>
-                   <property name="alignment">
-                    <set>Qt::AlignCenter</set>
-                   </property>
-                  </widget>
-                 </item>
-                </layout>
-               </item>
-              </layout>
-             </item>
-            </layout>
+               </widget>
+              </item>
+              <item>
+               <layout class="QVBoxLayout" name="lSessions">
+                <item>
+                 <widget class="QFrame" name="lsession_1_1">
+                  <property name="maximumSize">
+                   <size>
+                    <width>16777215</width>
+                    <height>30</height>
+                   </size>
+                  </property>
+                  <property name="styleSheet">
+                   <string notr="true">background-color: rgb(124, 124, 124);
+border-radius: 10px;</string>
+                  </property>
+                  <layout class="QHBoxLayout" name="lsession1_2">
+                   <item>
+                    <widget class="QLabel" name="dateLabel_1_1">
+                     <property name="styleSheet">
+                      <string notr="true">color: rgb(255,255,255);</string>
+                     </property>
+                     <property name="text">
+                      <string>date</string>
+                     </property>
+                     <property name="alignment">
+                      <set>Qt::AlignCenter</set>
+                     </property>
+                    </widget>
+                   </item>
+                   <item>
+                    <widget class="QLabel" name="durationLabel">
+                     <property name="styleSheet">
+                      <string notr="true">color: rgb(255,255,255);</string>
+                     </property>
+                     <property name="text">
+                      <string>durée</string>
+                     </property>
+                     <property name="alignment">
+                      <set>Qt::AlignCenter</set>
+                     </property>
+                    </widget>
+                   </item>
+                  </layout>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QFrame" name="lsession_1_2">
+                  <property name="maximumSize">
+                   <size>
+                    <width>16777215</width>
+                    <height>30</height>
+                   </size>
+                  </property>
+                  <property name="styleSheet">
+                   <string notr="true">background-color: rgb(124, 124, 124);
+border-radius: 10px;</string>
+                  </property>
+                  <layout class="QHBoxLayout" name="lsession1_4">
+                   <item>
+                    <widget class="QLabel" name="dateLabel_1_2">
+                     <property name="styleSheet">
+                      <string notr="true">color: rgb(255,255,255);</string>
+                     </property>
+                     <property name="text">
+                      <string>date</string>
+                     </property>
+                     <property name="alignment">
+                      <set>Qt::AlignCenter</set>
+                     </property>
+                    </widget>
+                   </item>
+                   <item>
+                    <widget class="QLabel" name="durationLabel_2">
+                     <property name="styleSheet">
+                      <string notr="true">color: rgb(255,255,255);</string>
+                     </property>
+                     <property name="text">
+                      <string>durée</string>
+                     </property>
+                     <property name="alignment">
+                      <set>Qt::AlignCenter</set>
+                     </property>
+                    </widget>
+                   </item>
+                  </layout>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QFrame" name="lsession_1_3">
+                  <property name="maximumSize">
+                   <size>
+                    <width>16777215</width>
+                    <height>30</height>
+                   </size>
+                  </property>
+                  <property name="styleSheet">
+                   <string notr="true">background-color: rgb(124, 124, 124);
+border-radius: 10px;</string>
+                  </property>
+                  <layout class="QHBoxLayout" name="lsession1_7">
+                   <item>
+                    <widget class="QLabel" name="dateLabel_1_3">
+                     <property name="styleSheet">
+                      <string notr="true">color: rgb(255,255,255);</string>
+                     </property>
+                     <property name="text">
+                      <string>date</string>
+                     </property>
+                     <property name="alignment">
+                      <set>Qt::AlignCenter</set>
+                     </property>
+                    </widget>
+                   </item>
+                   <item>
+                    <widget class="QLabel" name="durationLabel_3">
+                     <property name="styleSheet">
+                      <string notr="true">color: rgb(255,255,255);</string>
+                     </property>
+                     <property name="text">
+                      <string>durée</string>
+                     </property>
+                     <property name="alignment">
+                      <set>Qt::AlignCenter</set>
+                     </property>
+                    </widget>
+                   </item>
+                  </layout>
+                 </widget>
+                </item>
+               </layout>
+              </item>
+             </layout>
+            </widget>
            </item>
            <item>
-            <layout class="QVBoxLayout" name="favModel1_2">
-             <item>
-              <widget class="QLabel" name="nameLabel_2">
-               <property name="enabled">
-                <bool>true</bool>
-               </property>
-               <property name="maximumSize">
-                <size>
-                 <width>16777215</width>
-                 <height>20</height>
-                </size>
-               </property>
-               <property name="text">
-                <string>Nom</string>
-               </property>
-              </widget>
-             </item>
-             <item>
-              <layout class="QHBoxLayout" name="horizontalLayout_3">
-               <item>
-                <widget class="QLabel" name="gradeLabel_2">
-                 <property name="text">
-                  <string>Grade</string>
-                 </property>
-                </widget>
-               </item>
-               <item>
-                <widget class="QLabel" name="sessionsLabel_2">
-                 <property name="text">
-                  <string>Sessions</string>
-                 </property>
-                </widget>
-               </item>
-               <item>
-                <widget class="QLabel" name="priceLabel_2">
-                 <property name="text">
-                  <string>Prix</string>
-                 </property>
-                </widget>
-               </item>
-               <item>
-                <widget class="QLabel" name="emptyLabel_2">
-                 <property name="text">
-                  <string/>
-                 </property>
-                </widget>
-               </item>
-               <item>
-                <widget class="QLabel" name="timeLabel_2">
-                 <property name="text">
-                  <string>Temps</string>
-                 </property>
-                </widget>
-               </item>
-              </layout>
-             </item>
-             <item>
-              <layout class="QVBoxLayout" name="lsessions_2">
-               <item>
-                <layout class="QHBoxLayout" name="lsession1_2">
-                 <item>
-                  <widget class="QLabel" name="dateLabel_4">
-                   <property name="text">
-                    <string>date</string>
-                   </property>
-                   <property name="alignment">
-                    <set>Qt::AlignCenter</set>
-                   </property>
-                  </widget>
-                 </item>
-                 <item>
-                  <widget class="QLabel" name="durationLabel_4">
-                   <property name="text">
-                    <string>durée</string>
-                   </property>
-                   <property name="alignment">
-                    <set>Qt::AlignCenter</set>
-                   </property>
-                  </widget>
-                 </item>
-                </layout>
-               </item>
-               <item>
-                <layout class="QHBoxLayout" name="lsession2_2">
-                 <item>
-                  <widget class="QLabel" name="dateLabel_5">
-                   <property name="text">
-                    <string>date</string>
-                   </property>
-                   <property name="alignment">
-                    <set>Qt::AlignCenter</set>
-                   </property>
-                  </widget>
-                 </item>
-                 <item>
-                  <widget class="QLabel" name="durationLabel_5">
-                   <property name="text">
-                    <string>durée</string>
-                   </property>
-                   <property name="alignment">
-                    <set>Qt::AlignCenter</set>
-                   </property>
-                  </widget>
-                 </item>
-                </layout>
-               </item>
-               <item>
-                <layout class="QHBoxLayout" name="lsession3_2">
-                 <item>
-                  <widget class="QLabel" name="dateLabel_6">
-                   <property name="text">
-                    <string>date</string>
-                   </property>
-                   <property name="alignment">
-                    <set>Qt::AlignCenter</set>
-                   </property>
-                  </widget>
-                 </item>
-                 <item>
-                  <widget class="QLabel" name="durationLabel_6">
-                   <property name="text">
-                    <string>durée</string>
-                   </property>
-                   <property name="alignment">
-                    <set>Qt::AlignCenter</set>
-                   </property>
-                  </widget>
-                 </item>
-                </layout>
-               </item>
-              </layout>
-             </item>
-            </layout>
+            <spacer name="horizontalSpacer_5">
+             <property name="orientation">
+              <enum>Qt::Horizontal</enum>
+             </property>
+             <property name="sizeType">
+              <enum>QSizePolicy::Fixed</enum>
+             </property>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>13</width>
+               <height>13</height>
+              </size>
+             </property>
+            </spacer>
            </item>
            <item>
-            <layout class="QVBoxLayout" name="favModel1_3">
-             <item>
-              <widget class="QLabel" name="nameLabel_3">
-               <property name="enabled">
-                <bool>true</bool>
-               </property>
-               <property name="maximumSize">
-                <size>
-                 <width>16777215</width>
-                 <height>20</height>
-                </size>
-               </property>
-               <property name="text">
-                <string>Nom</string>
-               </property>
-              </widget>
-             </item>
-             <item>
-              <layout class="QHBoxLayout" name="horizontalLayout_4">
-               <item>
-                <widget class="QLabel" name="gradeLabel_3">
-                 <property name="text">
-                  <string>Grade</string>
-                 </property>
-                </widget>
-               </item>
-               <item>
-                <widget class="QLabel" name="sessionsLabel_3">
-                 <property name="text">
-                  <string>Sessions</string>
-                 </property>
-                </widget>
-               </item>
-               <item>
-                <widget class="QLabel" name="priceLabel_3">
-                 <property name="text">
-                  <string>Prix</string>
-                 </property>
-                </widget>
-               </item>
-               <item>
-                <widget class="QLabel" name="emptyLabel_3">
-                 <property name="text">
-                  <string/>
-                 </property>
-                </widget>
-               </item>
-               <item>
-                <widget class="QLabel" name="timeLabel_3">
-                 <property name="text">
-                  <string>Temps</string>
-                 </property>
-                </widget>
-               </item>
-              </layout>
-             </item>
-             <item>
-              <layout class="QVBoxLayout" name="lsessions_3">
-               <item>
-                <layout class="QHBoxLayout" name="lsession1_3">
+            <widget class="QFrame" name="modelFrame2">
+             <property name="styleSheet">
+              <string notr="true">background-color: rgb(139, 139, 139);
+border-radius: 10px;</string>
+             </property>
+             <layout class="QVBoxLayout" name="favModel1_2">
+              <item>
+               <widget class="QLabel" name="nameLabel_5">
+                <property name="enabled">
+                 <bool>true</bool>
+                </property>
+                <property name="maximumSize">
+                 <size>
+                  <width>16777215</width>
+                  <height>20</height>
+                 </size>
+                </property>
+                <property name="styleSheet">
+                 <string notr="true">margin-left: 8px; color: rgb(255,255,255);</string>
+                </property>
+                <property name="text">
+                 <string>Nom</string>
+                </property>
+                <property name="margin">
+                 <number>0</number>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QFrame" name="modelDetailsFrame_2">
+                <property name="maximumSize">
+                 <size>
+                  <width>16777215</width>
+                  <height>30</height>
+                 </size>
+                </property>
+                <layout class="QHBoxLayout" name="modelDetails1_2">
                  <item>
-                  <widget class="QLabel" name="dateLabel_7">
+                  <widget class="QLabel" name="gradeLabel_5">
+                   <property name="styleSheet">
+                    <string notr="true">color: rgb(196, 243, 79);</string>
+                   </property>
                    <property name="text">
-                    <string>date</string>
+                    <string>Grade</string>
                    </property>
                    <property name="alignment">
                     <set>Qt::AlignCenter</set>
@@ -460,23 +440,12 @@
                   </widget>
                  </item>
                  <item>
-                  <widget class="QLabel" name="durationLabel_7">
-                   <property name="text">
-                    <string>durée</string>
+                  <widget class="QLabel" name="sessionsLabel_5">
+                   <property name="styleSheet">
+                    <string notr="true">color: rgb(196, 243, 79);</string>
                    </property>
-                   <property name="alignment">
-                    <set>Qt::AlignCenter</set>
-                   </property>
-                  </widget>
-                 </item>
-                </layout>
-               </item>
-               <item>
-                <layout class="QHBoxLayout" name="lsession2_3">
-                 <item>
-                  <widget class="QLabel" name="dateLabel_8">
                    <property name="text">
-                    <string>date</string>
+                    <string>Sessions</string>
                    </property>
                    <property name="alignment">
                     <set>Qt::AlignCenter</set>
@@ -484,23 +453,12 @@
                   </widget>
                  </item>
                  <item>
-                  <widget class="QLabel" name="durationLabel_8">
-                   <property name="text">
-                    <string>durée</string>
+                  <widget class="QLabel" name="priceLabel_5">
+                   <property name="styleSheet">
+                    <string notr="true">color: rgb(196, 243, 79);</string>
                    </property>
-                   <property name="alignment">
-                    <set>Qt::AlignCenter</set>
-                   </property>
-                  </widget>
-                 </item>
-                </layout>
-               </item>
-               <item>
-                <layout class="QHBoxLayout" name="lsession3_3">
-                 <item>
-                  <widget class="QLabel" name="dateLabel_9">
                    <property name="text">
-                    <string>date</string>
+                    <string>Prix</string>
                    </property>
                    <property name="alignment">
                     <set>Qt::AlignCenter</set>
@@ -508,9 +466,28 @@
                   </widget>
                  </item>
                  <item>
-                  <widget class="QLabel" name="durationLabel_9">
+                  <spacer name="horizontalSpacer_7">
+                   <property name="orientation">
+                    <enum>Qt::Horizontal</enum>
+                   </property>
+                   <property name="sizeType">
+                    <enum>QSizePolicy::Fixed</enum>
+                   </property>
+                   <property name="sizeHint" stdset="0">
+                    <size>
+                     <width>10</width>
+                     <height>0</height>
+                    </size>
+                   </property>
+                  </spacer>
+                 </item>
+                 <item>
+                  <widget class="QLabel" name="timeLabel_5">
+                   <property name="styleSheet">
+                    <string notr="true">color: rgb(196, 243, 79);</string>
+                   </property>
                    <property name="text">
-                    <string>durée</string>
+                    <string>Temps</string>
                    </property>
                    <property name="alignment">
                     <set>Qt::AlignCenter</set>
@@ -518,59 +495,559 @@
                   </widget>
                  </item>
                 </layout>
-               </item>
-              </layout>
-             </item>
-            </layout>
+               </widget>
+              </item>
+              <item>
+               <layout class="QVBoxLayout" name="lSessions_2">
+                <item>
+                 <widget class="QFrame" name="lsession_2_1">
+                  <property name="maximumSize">
+                   <size>
+                    <width>16777215</width>
+                    <height>30</height>
+                   </size>
+                  </property>
+                  <property name="styleSheet">
+                   <string notr="true">background-color: rgb(124, 124, 124);
+border-radius: 10px;</string>
+                  </property>
+                  <layout class="QHBoxLayout" name="lsession1_5">
+                   <item>
+                    <widget class="QLabel" name="dateLabel_2_1">
+                     <property name="styleSheet">
+                      <string notr="true">color: rgb(255,255,255);</string>
+                     </property>
+                     <property name="text">
+                      <string>date</string>
+                     </property>
+                     <property name="alignment">
+                      <set>Qt::AlignCenter</set>
+                     </property>
+                    </widget>
+                   </item>
+                   <item>
+                    <widget class="QLabel" name="durationLabel_4">
+                     <property name="styleSheet">
+                      <string notr="true">color: rgb(255,255,255);</string>
+                     </property>
+                     <property name="text">
+                      <string>durée</string>
+                     </property>
+                     <property name="alignment">
+                      <set>Qt::AlignCenter</set>
+                     </property>
+                    </widget>
+                   </item>
+                  </layout>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QFrame" name="lsession_2_2">
+                  <property name="maximumSize">
+                   <size>
+                    <width>16777215</width>
+                    <height>30</height>
+                   </size>
+                  </property>
+                  <property name="styleSheet">
+                   <string notr="true">background-color: rgb(124, 124, 124);
+border-radius: 10px;</string>
+                  </property>
+                  <layout class="QHBoxLayout" name="lsession1_6">
+                   <item>
+                    <widget class="QLabel" name="dateLabel_2_2">
+                     <property name="styleSheet">
+                      <string notr="true">color: rgb(255,255,255);</string>
+                     </property>
+                     <property name="text">
+                      <string>date</string>
+                     </property>
+                     <property name="alignment">
+                      <set>Qt::AlignCenter</set>
+                     </property>
+                    </widget>
+                   </item>
+                   <item>
+                    <widget class="QLabel" name="durationLabel_5">
+                     <property name="styleSheet">
+                      <string notr="true">color: rgb(255,255,255);</string>
+                     </property>
+                     <property name="text">
+                      <string>durée</string>
+                     </property>
+                     <property name="alignment">
+                      <set>Qt::AlignCenter</set>
+                     </property>
+                    </widget>
+                   </item>
+                  </layout>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QFrame" name="lsession_2_3">
+                  <property name="maximumSize">
+                   <size>
+                    <width>16777215</width>
+                    <height>30</height>
+                   </size>
+                  </property>
+                  <property name="styleSheet">
+                   <string notr="true">background-color: rgb(124, 124, 124);
+border-radius: 10px;</string>
+                  </property>
+                  <layout class="QHBoxLayout" name="lsession1_8">
+                   <item>
+                    <widget class="QLabel" name="dateLabel_2_3">
+                     <property name="styleSheet">
+                      <string notr="true">color: rgb(255,255,255);</string>
+                     </property>
+                     <property name="text">
+                      <string>date</string>
+                     </property>
+                     <property name="alignment">
+                      <set>Qt::AlignCenter</set>
+                     </property>
+                    </widget>
+                   </item>
+                   <item>
+                    <widget class="QLabel" name="durationLabel_6">
+                     <property name="styleSheet">
+                      <string notr="true">color: rgb(255,255,255);</string>
+                     </property>
+                     <property name="text">
+                      <string>durée</string>
+                     </property>
+                     <property name="alignment">
+                      <set>Qt::AlignCenter</set>
+                     </property>
+                    </widget>
+                   </item>
+                  </layout>
+                 </widget>
+                </item>
+               </layout>
+              </item>
+             </layout>
+            </widget>
+           </item>
+           <item>
+            <spacer name="horizontalSpacer_6">
+             <property name="orientation">
+              <enum>Qt::Horizontal</enum>
+             </property>
+             <property name="sizeType">
+              <enum>QSizePolicy::Fixed</enum>
+             </property>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>13</width>
+               <height>13</height>
+              </size>
+             </property>
+            </spacer>
+           </item>
+           <item>
+            <widget class="QFrame" name="modelFrame3">
+             <property name="enabled">
+              <bool>true</bool>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">background-color: rgb(139, 139, 139);
+border-radius: 10px;</string>
+             </property>
+             <layout class="QVBoxLayout" name="favModel1_3">
+              <item>
+               <widget class="QLabel" name="nameLabel_6">
+                <property name="enabled">
+                 <bool>true</bool>
+                </property>
+                <property name="maximumSize">
+                 <size>
+                  <width>16777215</width>
+                  <height>20</height>
+                 </size>
+                </property>
+                <property name="styleSheet">
+                 <string notr="true">margin-left: 8px; color: rgb(255,255,255);</string>
+                </property>
+                <property name="text">
+                 <string>Nom</string>
+                </property>
+                <property name="margin">
+                 <number>0</number>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QFrame" name="modelDetailsFrame_3">
+                <property name="maximumSize">
+                 <size>
+                  <width>16777215</width>
+                  <height>30</height>
+                 </size>
+                </property>
+                <layout class="QHBoxLayout" name="modelDetails1_3">
+                 <item>
+                  <widget class="QLabel" name="gradeLabel_6">
+                   <property name="styleSheet">
+                    <string notr="true">color: rgb(196, 243, 79);</string>
+                   </property>
+                   <property name="text">
+                    <string>Grade</string>
+                   </property>
+                   <property name="alignment">
+                    <set>Qt::AlignCenter</set>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QLabel" name="sessionsLabel_6">
+                   <property name="styleSheet">
+                    <string notr="true">color: rgb(196, 243, 79);</string>
+                   </property>
+                   <property name="text">
+                    <string>Sessions</string>
+                   </property>
+                   <property name="alignment">
+                    <set>Qt::AlignCenter</set>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QLabel" name="priceLabel_6">
+                   <property name="styleSheet">
+                    <string notr="true">color: rgb(196, 243, 79);</string>
+                   </property>
+                   <property name="text">
+                    <string>Prix</string>
+                   </property>
+                   <property name="alignment">
+                    <set>Qt::AlignCenter</set>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <spacer name="horizontalSpacer_8">
+                   <property name="orientation">
+                    <enum>Qt::Horizontal</enum>
+                   </property>
+                   <property name="sizeType">
+                    <enum>QSizePolicy::Fixed</enum>
+                   </property>
+                   <property name="sizeHint" stdset="0">
+                    <size>
+                     <width>10</width>
+                     <height>0</height>
+                    </size>
+                   </property>
+                  </spacer>
+                 </item>
+                 <item>
+                  <widget class="QLabel" name="timeLabel_6">
+                   <property name="styleSheet">
+                    <string notr="true">color: rgb(196, 243, 79);</string>
+                   </property>
+                   <property name="text">
+                    <string>Temps</string>
+                   </property>
+                   <property name="alignment">
+                    <set>Qt::AlignCenter</set>
+                   </property>
+                  </widget>
+                 </item>
+                </layout>
+               </widget>
+              </item>
+              <item>
+               <layout class="QVBoxLayout" name="lSessions_3">
+                <item>
+                 <widget class="QFrame" name="lsession_3_1">
+                  <property name="maximumSize">
+                   <size>
+                    <width>16777215</width>
+                    <height>30</height>
+                   </size>
+                  </property>
+                  <property name="styleSheet">
+                   <string notr="true">background-color: rgb(124, 124, 124);
+border-radius: 10px;</string>
+                  </property>
+                  <layout class="QHBoxLayout" name="lsession1_10">
+                   <item>
+                    <widget class="QLabel" name="dateLabel_3_1">
+                     <property name="styleSheet">
+                      <string notr="true">color: rgb(255,255,255);</string>
+                     </property>
+                     <property name="text">
+                      <string>date</string>
+                     </property>
+                     <property name="alignment">
+                      <set>Qt::AlignCenter</set>
+                     </property>
+                    </widget>
+                   </item>
+                   <item>
+                    <widget class="QLabel" name="durationLabel_7">
+                     <property name="styleSheet">
+                      <string notr="true">color: rgb(255,255,255);</string>
+                     </property>
+                     <property name="text">
+                      <string>durée</string>
+                     </property>
+                     <property name="alignment">
+                      <set>Qt::AlignCenter</set>
+                     </property>
+                    </widget>
+                   </item>
+                  </layout>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QFrame" name="lsession_3_2">
+                  <property name="maximumSize">
+                   <size>
+                    <width>16777215</width>
+                    <height>30</height>
+                   </size>
+                  </property>
+                  <property name="styleSheet">
+                   <string notr="true">background-color: rgb(124, 124, 124);
+border-radius: 10px;</string>
+                  </property>
+                  <layout class="QHBoxLayout" name="lsession1_11">
+                   <item>
+                    <widget class="QLabel" name="dateLabel_3_2">
+                     <property name="styleSheet">
+                      <string notr="true">color: rgb(255,255,255);</string>
+                     </property>
+                     <property name="text">
+                      <string>date</string>
+                     </property>
+                     <property name="alignment">
+                      <set>Qt::AlignCenter</set>
+                     </property>
+                    </widget>
+                   </item>
+                   <item>
+                    <widget class="QLabel" name="durationLabel_8">
+                     <property name="styleSheet">
+                      <string notr="true">color: rgb(255,255,255);</string>
+                     </property>
+                     <property name="text">
+                      <string>durée</string>
+                     </property>
+                     <property name="alignment">
+                      <set>Qt::AlignCenter</set>
+                     </property>
+                    </widget>
+                   </item>
+                  </layout>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QFrame" name="lsession_3_3">
+                  <property name="maximumSize">
+                   <size>
+                    <width>16777215</width>
+                    <height>30</height>
+                   </size>
+                  </property>
+                  <property name="styleSheet">
+                   <string notr="true">background-color: rgb(124, 124, 124);
+border-radius: 10px;</string>
+                  </property>
+                  <layout class="QHBoxLayout" name="lsession1_12">
+                   <item>
+                    <widget class="QLabel" name="dateLabel_3_3">
+                     <property name="styleSheet">
+                      <string notr="true">color: rgb(255,255,255);</string>
+                     </property>
+                     <property name="text">
+                      <string>date</string>
+                     </property>
+                     <property name="alignment">
+                      <set>Qt::AlignCenter</set>
+                     </property>
+                    </widget>
+                   </item>
+                   <item>
+                    <widget class="QLabel" name="durationLabel_9">
+                     <property name="styleSheet">
+                      <string notr="true">color: rgb(255,255,255);</string>
+                     </property>
+                     <property name="text">
+                      <string>durée</string>
+                     </property>
+                     <property name="alignment">
+                      <set>Qt::AlignCenter</set>
+                     </property>
+                    </widget>
+                   </item>
+                  </layout>
+                 </widget>
+                </item>
+               </layout>
+              </item>
+             </layout>
+            </widget>
            </item>
           </layout>
          </widget>
-         <widget class="QWidget" name="horizontalLayoutWidget_6">
+         <widget class="QFrame" name="lastModelFrame">
           <property name="geometry">
            <rect>
             <x>30</x>
             <y>90</y>
-            <width>691</width>
+            <width>700</width>
             <height>80</height>
            </rect>
           </property>
+          <property name="styleSheet">
+           <string notr="true">background-color: rgb(139, 139, 139);
+border-radius: 10px;</string>
+          </property>
           <layout class="QHBoxLayout" name="lastModel">
            <item>
+            <spacer name="horizontalSpacer_2">
+             <property name="orientation">
+              <enum>Qt::Horizontal</enum>
+             </property>
+             <property name="sizeType">
+              <enum>QSizePolicy::Fixed</enum>
+             </property>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>20</width>
+               <height>20</height>
+              </size>
+             </property>
+            </spacer>
+           </item>
+           <item>
             <widget class="QLabel" name="lastNameLabel">
+             <property name="styleSheet">
+              <string notr="true">color: rgb(255, 255, 255);</string>
+             </property>
              <property name="text">
               <string>Nom</string>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignCenter</set>
              </property>
             </widget>
            </item>
            <item>
             <widget class="QLabel" name="lastGradeLabel">
+             <property name="styleSheet">
+              <string notr="true">color: rgb(255, 255, 255);</string>
+             </property>
              <property name="text">
               <string>Grade</string>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignCenter</set>
              </property>
             </widget>
            </item>
            <item>
             <widget class="QLabel" name="lastSessionsLabel">
+             <property name="styleSheet">
+              <string notr="true">color: rgb(255, 255, 255);</string>
+             </property>
              <property name="text">
               <string>Sessions</string>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignCenter</set>
              </property>
             </widget>
            </item>
            <item>
-            <widget class="QLabel" name="lastSimeLabel">
+            <widget class="QLabel" name="lastTimeLabel">
+             <property name="styleSheet">
+              <string notr="true">color: rgb(255, 255, 255);</string>
+             </property>
              <property name="text">
               <string>Temps</string>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignCenter</set>
              </property>
             </widget>
            </item>
            <item>
             <widget class="QPushButton" name="pushButton">
+             <property name="maximumSize">
+              <size>
+               <width>32</width>
+               <height>32</height>
+              </size>
+             </property>
+             <property name="font">
+              <font>
+               <bold>true</bold>
+               <kerning>true</kerning>
+              </font>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">color: rgb(196, 243, 79);
+background-color: rgb(102, 102, 102);
+border-color: rgb(42, 42, 42);
+border-radius: 5px;
+</string>
+             </property>
              <property name="text">
               <string>start</string>
              </property>
+             <property name="default">
+              <bool>false</bool>
+             </property>
+             <property name="flat">
+              <bool>false</bool>
+             </property>
             </widget>
            </item>
+           <item>
+            <spacer name="horizontalSpacer">
+             <property name="orientation">
+              <enum>Qt::Horizontal</enum>
+             </property>
+             <property name="sizeType">
+              <enum>QSizePolicy::Fixed</enum>
+             </property>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>20</width>
+               <height>20</height>
+              </size>
+             </property>
+            </spacer>
+           </item>
           </layout>
+         </widget>
+         <widget class="QLabel" name="favoriteModelsLabel">
+          <property name="enabled">
+           <bool>true</bool>
+          </property>
+          <property name="geometry">
+           <rect>
+            <x>30</x>
+            <y>220</y>
+            <width>191</width>
+            <height>16</height>
+           </rect>
+          </property>
+          <property name="font">
+           <font>
+            <pointsize>12</pointsize>
+           </font>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">color: rgb(255, 255, 255);</string>
+          </property>
+          <property name="text">
+           <string>Maquettes favorites:</string>
+          </property>
          </widget>
         </widget>
         <widget class="QWidget" name="Collec">
@@ -599,11 +1076,74 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>800</width>
-     <height>22</height>
+     <width>790</width>
+     <height>19</height>
     </rect>
    </property>
+   <property name="styleSheet">
+    <string notr="true">QMenuBar {
+    background-color: rgb(77, 77, 77);
+    spacing: 3px;
+}
+
+QMenuBar::item {
+    padding: 1px 4px;
+    background: transparent;
+    border-radius: 4px;
+}
+
+QMenuBar::item:selected { /* when selected using mouse or keyboard */
+    background: #a8a8a8;
+}
+
+QMenuBar::item:pressed {
+    background: #888888;
+}</string>
+   </property>
+   <property name="nativeMenuBar">
+    <bool>false</bool>
+   </property>
    <widget class="QMenu" name="menuFiles">
+    <property name="styleSheet">
+     <string notr="true">QMenu {
+	background-color: rgb(83, 83, 83);
+	border-color: rgb(83, 83, 83);
+	margin: 2px; /* some spacing around the menu */
+}
+
+QMenu::item {
+    padding: 2px 25px 2px 20px;
+    border: 1px solid transparent; /* reserve space for selection border */
+}
+
+QMenu::item:selected {
+    border-color: rgb(196,243,79);
+    background: rgba(100, 100, 100, 150);
+	border-radius: 10px;
+}
+
+QMenu::icon:checked { /* appearance of a 'checked' icon */
+    background: gray;
+    border: 1px inset gray;
+    position: absolute;
+    top: 1px;
+    right: 1px;
+    bottom: 1px;
+    left: 1px;
+}
+
+QMenu::separator {
+    height: 2px;
+    background: rgb(196,243,79);
+    margin-left: 10px;
+    margin-right: 5px;
+}
+
+QMenu::indicator {
+    width: 13px;
+    height: 13px;
+}</string>
+    </property>
     <property name="title">
      <string>Fichiers</string>
     </property>
