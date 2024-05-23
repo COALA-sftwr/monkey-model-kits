@@ -29,6 +29,7 @@ public:
     MonkeyShell();
 
     void start();
+    void preload(char *str);
 
     void processCommand();
 

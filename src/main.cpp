@@ -11,6 +11,9 @@
 int main() {
     MonkeyShell shell;
 
+    if (__argc == 2) {
+        shell.preload(__argv[1]);
+    }
     shell.start();
 
     return 0;
