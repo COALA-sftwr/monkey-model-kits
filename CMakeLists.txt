@@ -25,25 +25,25 @@ set(SOURCES
         src/run/MonkeyManager.cpp
         src/run/MonkeyFile.cpp
 
-        src/gui/MonkeyWindow.cpp
-
-        src/col/MonkeyModel.cpp
         src/col/MonkeySession.cpp
+        src/col/MonkeyModel.cpp
         src/col/MonkeyCollection.cpp
+
+        src/gui/MonkeyWindow.cpp
 )
 
 set(HEADERS
         include/StringManipulation.hpp
 
-        include/run/MonkeyFile.hpp
-        include/run/MonkeyManager.hpp
         include/run/MonkeyShell.hpp
-
-        include/gui/MonkeyWindow.hpp
+        include/run/MonkeyManager.hpp
+        include/run/MonkeyFile.hpp
 
         include/col/MonkeyCollection.hpp
-        include/col/MonkeyModel.hpp
         include/col/MonkeySession.hpp
+        include/col/MonkeyModel.hpp
+
+        include/gui/MonkeyWindow.hpp
 )
 
 set(UI_FILES
