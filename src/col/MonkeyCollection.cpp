@@ -78,16 +78,16 @@ std::string MonkeyCollection::save() {
 }
 
 MonkeyModel *MonkeyCollection::findLastModel() {
-    MonkeyModel *tempModel = &_models.at(0);
-    MonkeySession *tempSession = tempModel->getLastSession();
+    MonkeyModel *modelOutLoop = &_models.at(0);
 
-    for (auto& model : _models) {
-        MonkeySession *tempModelSession = model.getLastSession();
-        if (tempSession == nullptr && tempModelSession != nullptr ||
-            tempSession != nullptr && tempModelSession != nullptr && tempSession->getStop() < tempModelSession->getStop())
-            tempModel = &model;
+    for (auto& modelInLoop : _models) {
+        MonkeySession *modelOLSession = modelOutLoop->getLastSession();
+        MonkeySession *modelILSession = modelInLoop.getLastSession();
+        if (modelOLSession == nullptr && modelILSession != nullptr ||
+            modelOLSession != nullptr && modelILSession != nullptr && modelOLSession->getStop() < modelILSession->getStop())
+            modelOutLoop = &modelInLoop;
     }
-    return tempModel;
+    return modelOutLoop;
 }
 
 int MonkeyCollection::count() {

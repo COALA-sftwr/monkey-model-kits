@@ -75,15 +75,8 @@ std::vector<MonkeySession> MonkeyModel::getSessions() {
 MonkeySession *MonkeyModel::getLastSession() {
     MonkeySession *tempSession = nullptr;
 
-    if (!_sessions.empty()) {
-        tempSession = &_sessions.at(0);
-        for (auto session : _sessions) {
-            if (!session.getStopString().empty() && tempSession->getStopString().empty() ||
-                !session.getStopString().empty() && !tempSession->getStopString().empty() && session.getStop() > tempSession->getStop())
-                tempSession = &session;
-        }
-    }
-
+    if (_sessions.size() > 0)
+        tempSession = &_sessions.back();
     return tempSession;
 }
 

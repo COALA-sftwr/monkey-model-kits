@@ -48,6 +48,7 @@ public:
     Status getStatus();
     std::vector<MonkeySession> getSessions();
     MonkeySession *getLastSession();
+    MonkeySession *getLastSessions();
     int getNSessions();
     int getTime();
 
