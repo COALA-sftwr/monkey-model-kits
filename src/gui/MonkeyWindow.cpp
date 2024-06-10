@@ -14,7 +14,7 @@
 MonkeyWindow::MonkeyWindow(QWidget *parent) :
     QMainWindow(parent), _ui(new Ui::MonkeyWindow) {
     _ui->setupUi(this);
-    _ui->tabWidget->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Preferred);
+    // _ui->tabWidget->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Preferred);
 
     connect(_ui->actionOuvrir, &QAction::triggered, this, &MonkeyWindow::openFile);
 }
