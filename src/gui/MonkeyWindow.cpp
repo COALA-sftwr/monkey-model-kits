@@ -14,7 +14,10 @@
 MonkeyWindow::MonkeyWindow(QWidget *parent) :
     QMainWindow(parent), _ui(new Ui::MonkeyWindow) {
     _ui->setupUi(this);
-    // _ui->tabWidget->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Preferred);
+    _ui->stackedWidget->setCurrentIndex(0);
+    _ui->pageLabel->hide();
+
+    loadButtons();
 
     connect(_ui->actionOuvrir, &QAction::triggered, this, &MonkeyWindow::openFile);
 }
@@ -64,4 +67,12 @@ void MonkeyWindow::openFile() {
     std::filesystem::path filePath = fileName.toStdString();
     _manager.openFile(filePath, _collection);
     loadFile();
+}
+
+void MonkeyWindow::loadButtons()
+{
+    connect(_ui->HomeButton, &QPushButton::clicked, this, [=]() {_ui->stackedWidget->setCurrentIndex(0); _ui->pageLabel->hide();});
+    connect(_ui->CollectionButton, &QPushButton::clicked, this, [=]() {_ui->stackedWidget->setCurrentIndex(1); _ui->pageLabel->setText("Collection"); _ui->pageLabel->show();});
+    connect(_ui->StopWatchButton, &QPushButton::clicked, this, [=]() {_ui->stackedWidget->setCurrentIndex(2); _ui->pageLabel->setText("Chronomètre"); _ui->pageLabel->show();});
+    connect(_ui->StatisticsButton, &QPushButton::clicked, this, [=]() {_ui->stackedWidget->setCurrentIndex(3); _ui->pageLabel->setText("Statistiques"); _ui->pageLabel->show();});
 }

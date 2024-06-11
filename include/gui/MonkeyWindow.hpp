@@ -31,6 +31,8 @@ public:
 
     // File handling functions.
     void openFile();
+    void loadButtons();
+    void onSwitchWidgetButtonClicked(int buttonIndex);
     void loadFile();
 
     // Tab loading functions.
