@@ -181,7 +181,7 @@ max-height: 200px;</string>
      </widget>
     </item>
     <item>
-     <layout class="QVBoxLayout" name="verticalLayout_6">
+     <layout class="QVBoxLayout" name="pagesLayout">
       <item alignment="Qt::AlignHCenter|Qt::AlignVCenter">
        <widget class="QLabel" name="pageLabel">
         <property name="enabled">
@@ -234,21 +234,12 @@ placeholder-text-color: rgba(100, 100, 100, 128);</string>
             </property>
            </widget>
           </item>
-          <item>
-           <spacer name="verticalSpacer_2">
-            <property name="orientation">
-             <enum>Qt::Vertical</enum>
+          <item alignment="Qt::AlignLeft">
+           <widget class="QLabel" name="lastSessionLabel">
+            <property name="text">
+             <string>Dernière session</string>
             </property>
-            <property name="sizeType">
-             <enum>QSizePolicy::Fixed</enum>
-            </property>
-            <property name="sizeHint" stdset="0">
-             <size>
-              <width>20</width>
-              <height>15</height>
-             </size>
-            </property>
-           </spacer>
+           </widget>
           </item>
           <item alignment="Qt::AlignHCenter|Qt::AlignVCenter">
            <widget class="QFrame" name="lastModelFrame">
@@ -408,20 +399,26 @@ height: 40px;</string>
            </widget>
           </item>
           <item>
-           <spacer name="verticalSpacer">
-            <property name="orientation">
-             <enum>Qt::Vertical</enum>
+           <widget class="QLabel" name="favoriteLabel">
+            <property name="text">
+             <string>Maquettes favorites</string>
             </property>
-            <property name="sizeType">
-             <enum>QSizePolicy::Expanding</enum>
-            </property>
-            <property name="sizeHint" stdset="0">
+           </widget>
+          </item>
+          <item>
+           <widget class="QWidget" name="favoritesWidget" native="true">
+            <property name="minimumSize">
              <size>
-              <width>20</width>
+              <width>0</width>
               <height>400</height>
              </size>
             </property>
-           </spacer>
+            <layout class="QHBoxLayout" name="horizontalLayout_3">
+             <item>
+              <layout class="QHBoxLayout" name="favoritesLayout"/>
+             </item>
+            </layout>
+           </widget>
           </item>
          </layout>
         </widget>
@@ -429,7 +426,134 @@ height: 40px;</string>
          <layout class="QVBoxLayout" name="verticalLayout_7"/>
         </widget>
         <widget class="QWidget" name="StopWatchPage">
-         <layout class="QVBoxLayout" name="verticalLayout_9"/>
+         <layout class="QVBoxLayout" name="verticalLayout_9">
+          <item alignment="Qt::AlignHCenter|Qt::AlignVCenter">
+           <widget class="QLabel" name="selectedModelLabel">
+            <property name="maximumSize">
+             <size>
+              <width>16777215</width>
+              <height>24</height>
+             </size>
+            </property>
+            <property name="text">
+             <string>Name</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <layout class="QHBoxLayout" name="stopWatchLayout">
+            <item>
+             <widget class="QLCDNumber" name="lcdNumber">
+              <property name="mode">
+               <enum>QLCDNumber::Dec</enum>
+              </property>
+              <property name="segmentStyle">
+               <enum>QLCDNumber::Flat</enum>
+              </property>
+             </widget>
+            </item>
+            <item alignment="Qt::AlignHCenter">
+             <widget class="QLabel" name="label">
+              <property name="font">
+               <font>
+                <pointsize>28</pointsize>
+                <bold>true</bold>
+               </font>
+              </property>
+              <property name="text">
+               <string>:</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLCDNumber" name="lcdNumber_2">
+              <property name="maximumSize">
+               <size>
+                <width>258</width>
+                <height>16777215</height>
+               </size>
+              </property>
+              <property name="frameShape">
+               <enum>QFrame::Box</enum>
+              </property>
+              <property name="smallDecimalPoint">
+               <bool>false</bool>
+              </property>
+              <property name="segmentStyle">
+               <enum>QLCDNumber::Flat</enum>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item>
+           <layout class="QHBoxLayout" name="horizontalLayout_2">
+            <item>
+             <widget class="QPushButton" name="startWatch">
+              <property name="minimumSize">
+               <size>
+                <width>64</width>
+                <height>64</height>
+               </size>
+              </property>
+              <property name="maximumSize">
+               <size>
+                <width>64</width>
+                <height>64</height>
+               </size>
+              </property>
+              <property name="styleSheet">
+               <string notr="true">color: rgb(196, 243, 79);
+background-color: rgb(102, 102, 102);
+border-color: rgb(42, 42, 42);
+border-radius: 5px;</string>
+              </property>
+              <property name="text">
+               <string>Start</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QPushButton" name="stopWatch">
+              <property name="minimumSize">
+               <size>
+                <width>64</width>
+                <height>64</height>
+               </size>
+              </property>
+              <property name="maximumSize">
+               <size>
+                <width>64</width>
+                <height>64</height>
+               </size>
+              </property>
+              <property name="styleSheet">
+               <string notr="true">color: rgb(196, 243, 79);
+background-color: rgb(102, 102, 102);
+border-color: rgb(42, 42, 42);
+border-radius: 5px;</string>
+              </property>
+              <property name="text">
+               <string>Stop</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item>
+           <spacer name="verticalSpacer_3">
+            <property name="orientation">
+             <enum>Qt::Vertical</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>20</width>
+              <height>40</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+         </layout>
         </widget>
         <widget class="QWidget" name="StatisticsPage">
          <layout class="QVBoxLayout" name="verticalLayout_10"/>
@@ -446,7 +570,7 @@ height: 40px;</string>
      <x>0</x>
      <y>0</y>
      <width>800</width>
-     <height>22</height>
+     <height>18</height>
     </rect>
    </property>
    <property name="styleSheet">
