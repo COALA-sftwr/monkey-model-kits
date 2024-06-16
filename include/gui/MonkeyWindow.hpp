@@ -24,6 +24,7 @@ private:
     Ui::MonkeyWindow *_ui;
     MonkeyCollection _collection;
     MonkeyManager _manager;
+    MonkeyModel* _selectedModel = nullptr;
 
 public:
     explicit MonkeyWindow(QWidget *parent = nullptr);
@@ -34,14 +35,16 @@ public:
     void loadButtons();
     void onSwitchWidgetButtonClicked(int buttonIndex);
     void loadFile();
+    void saveFile();
 
+    void loadFavorites();
     // Tab loading functions.
     void loadHome();
 
     void updateTimeLabel(MonkeySession *session);
 
     void loadCollection();
-    void loadChronometer();
+    void loadStopWatch();
     void loadStatistics();
 
     // Home Loading functions.

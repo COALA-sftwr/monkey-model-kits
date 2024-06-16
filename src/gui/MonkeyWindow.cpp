@@ -9,6 +9,7 @@
 #include "MonkeyWindow.hpp"
 
 #include "MonkeyManager.hpp"
+#include "MonkeyWItem.hpp"
 #include "ui_MonkeyWindow.h"
 
 MonkeyWindow::MonkeyWindow(QWidget *parent) :
@@ -20,6 +21,7 @@ MonkeyWindow::MonkeyWindow(QWidget *parent) :
     loadButtons();
 
     connect(_ui->actionOuvrir, &QAction::triggered, this, &MonkeyWindow::openFile);
+    connect(_ui->actionSauvegarder, &QAction::triggered, this, &MonkeyWindow::saveFile);
 }
 
 MonkeyWindow::~MonkeyWindow() {
@@ -29,12 +31,26 @@ MonkeyWindow::~MonkeyWindow() {
 void MonkeyWindow::loadFile() {
     loadHome();
     // loadCollection();
-    // loadChronometer();
+    loadStopWatch();
     // loadStatistics();
+}
+
+void MonkeyWindow::saveFile()
+{
+    _manager.saveFile(_collection);
+}
+
+void MonkeyWindow::loadFavorites()
+{
+    for (int i = 0; i != 3; i++)
+    {
+        _ui->favoritesLayout->addWidget(new MonkeyWidgetItem());
+    }
 }
 
 void MonkeyWindow::loadHome() {
     loadLastModel();
+    loadFavorites();
 }
 
 void MonkeyWindow::updateTimeLabel(MonkeySession *session) {
@@ -48,6 +64,12 @@ void MonkeyWindow::updateTimeLabel(MonkeySession *session) {
     _ui->lastTimeLabel->setText(QString("%1:%2:%3").arg(hours, 2, 10, QChar('0'))
                                        .arg(minutes, 2, 10, QChar('0'))
                                        .arg(secs, 2, 10, QChar('0')));
+}
+
+void MonkeyWindow::loadStopWatch()
+{
+    connect(_ui->startWatch, &QPushButton::clicked, this, [this] {_selectedModel->startSession();});
+    connect(_ui->stopWatch, &QPushButton::clicked, this, [this] {_selectedModel->stopSession();});
 }
 
 void MonkeyWindow::loadLastModel() {
