@@ -1,13 +1,12 @@
 /*
- *  File:       MonkeyWindow.cpp
- *  Created:    Albert 05/05/2024
- *  Description:
+ *  File:           MonkeyWindow.cpp
+ *  Created:        Albert 05/05/2024
+ *  Description:    File for the Window of the app
 */
 // You may need to build the project (run Qt uic code generator) to get "ui_MonkeyWindow.h" resolved
 
 #include <QFileDialog>
 #include "MonkeyWindow.hpp"
-
 #include "MonkeyManager.hpp"
 #include "MonkeyWItem.hpp"
 #include "ui_MonkeyWindow.h"
@@ -16,7 +15,8 @@ MonkeyWindow::MonkeyWindow(QWidget *parent) :
     QMainWindow(parent), _ui(new Ui::MonkeyWindow) {
     _ui->setupUi(this);
     _ui->stackedWidget->setCurrentIndex(0);
-    _ui->pageLabel->hide();
+    // _ui->pageLabel->hide();
+    _ui->modelSearch->hide();
 
     loadButtons();
 

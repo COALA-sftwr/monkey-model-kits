@@ -6,7 +6,7 @@
 
 // You may need to build the project (run Qt uic code generator) to get "ui_MonkeyWItem.h" resolved
 
-#include "../../include/gui/MonkeyWItem.hpp"
+#include "gui/MonkeyWItem.hpp"
 #include "ui_MonkeyWItem.h"
 
 

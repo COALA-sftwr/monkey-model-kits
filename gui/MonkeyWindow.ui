@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>800</width>
-    <height>600</height>
+    <height>650</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -28,7 +28,7 @@
    </property>
    <layout class="QHBoxLayout" name="horizontalLayout">
     <item alignment="Qt::AlignTop">
-     <widget class="QWidget" name="widget" native="true">
+     <widget class="QWidget" name="pageSelector" native="true">
       <property name="enabled">
        <bool>true</bool>
       </property>
@@ -180,6 +180,31 @@ max-height: 200px;</string>
       </layout>
      </widget>
     </item>
+    <item alignment="Qt::AlignTop">
+     <widget class="Line" name="line">
+      <property name="minimumSize">
+       <size>
+        <width>0</width>
+        <height>250</height>
+       </size>
+      </property>
+      <property name="maximumSize">
+       <size>
+        <width>10</width>
+        <height>250</height>
+       </size>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">background-color: rgb(54, 54, 54);</string>
+      </property>
+      <property name="frameShadow">
+       <enum>QFrame::Plain</enum>
+      </property>
+      <property name="orientation">
+       <enum>Qt::Vertical</enum>
+      </property>
+     </widget>
+    </item>
     <item>
      <layout class="QVBoxLayout" name="pagesLayout">
       <item alignment="Qt::AlignHCenter|Qt::AlignVCenter">
@@ -195,12 +220,12 @@ max-height: 200px;</string>
       <item>
        <widget class="QStackedWidget" name="stackedWidget">
         <property name="currentIndex">
-         <number>0</number>
+         <number>1</number>
         </property>
         <widget class="QWidget" name="HomePage">
          <layout class="QVBoxLayout" name="verticalLayout_3">
           <item alignment="Qt::AlignHCenter|Qt::AlignVCenter">
-           <widget class="QLineEdit" name="ModelSearch">
+           <widget class="QLineEdit" name="modelSearch">
             <property name="sizePolicy">
              <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
               <horstretch>0</horstretch>
@@ -263,7 +288,7 @@ width: 600px;</string>
             </property>
             <layout class="QHBoxLayout" name="lastModel">
              <item>
-              <spacer name="horizontalSpacer_2">
+              <spacer name="leftSpacer">
                <property name="orientation">
                 <enum>Qt::Horizontal</enum>
                </property>
@@ -341,7 +366,7 @@ width: 600px;</string>
               </widget>
              </item>
              <item>
-              <widget class="QPushButton" name="pushButton_5">
+              <widget class="QPushButton" name="startButton">
                <property name="minimumSize">
                 <size>
                  <width>48</width>
@@ -380,7 +405,7 @@ height: 40px;</string>
               </widget>
              </item>
              <item>
-              <spacer name="horizontalSpacer">
+              <spacer name="rightSpacer">
                <property name="orientation">
                 <enum>Qt::Horizontal</enum>
                </property>
@@ -423,7 +448,11 @@ height: 40px;</string>
          </layout>
         </widget>
         <widget class="QWidget" name="CollectionPage">
-         <layout class="QVBoxLayout" name="verticalLayout_7"/>
+         <layout class="QVBoxLayout" name="verticalLayout_7">
+          <item>
+           <layout class="QGridLayout" name="gridLayout"/>
+          </item>
+         </layout>
         </widget>
         <widget class="QWidget" name="StopWatchPage">
          <layout class="QVBoxLayout" name="verticalLayout_9">
@@ -443,7 +472,13 @@ height: 40px;</string>
           <item>
            <layout class="QHBoxLayout" name="stopWatchLayout">
             <item>
-             <widget class="QLCDNumber" name="lcdNumber">
+             <widget class="QLCDNumber" name="hoursLCD">
+              <property name="frameShape">
+               <enum>QFrame::NoFrame</enum>
+              </property>
+              <property name="frameShadow">
+               <enum>QFrame::Plain</enum>
+              </property>
               <property name="mode">
                <enum>QLCDNumber::Dec</enum>
               </property>
@@ -453,12 +488,15 @@ height: 40px;</string>
              </widget>
             </item>
             <item alignment="Qt::AlignHCenter">
-             <widget class="QLabel" name="label">
+             <widget class="QLabel" name="hmPoints">
               <property name="font">
                <font>
                 <pointsize>28</pointsize>
                 <bold>true</bold>
                </font>
+              </property>
+              <property name="frameShape">
+               <enum>QFrame::Box</enum>
               </property>
               <property name="text">
                <string>:</string>
@@ -466,7 +504,7 @@ height: 40px;</string>
              </widget>
             </item>
             <item>
-             <widget class="QLCDNumber" name="lcdNumber_2">
+             <widget class="QLCDNumber" name="minutesLCD">
               <property name="maximumSize">
                <size>
                 <width>258</width>
@@ -474,7 +512,42 @@ height: 40px;</string>
                </size>
               </property>
               <property name="frameShape">
+               <enum>QFrame::NoFrame</enum>
+              </property>
+              <property name="frameShadow">
+               <enum>QFrame::Plain</enum>
+              </property>
+              <property name="smallDecimalPoint">
+               <bool>false</bool>
+              </property>
+              <property name="segmentStyle">
+               <enum>QLCDNumber::Flat</enum>
+              </property>
+             </widget>
+            </item>
+            <item alignment="Qt::AlignHCenter|Qt::AlignVCenter">
+             <widget class="QLabel" name="msPoints">
+              <property name="font">
+               <font>
+                <pointsize>28</pointsize>
+                <bold>true</bold>
+               </font>
+              </property>
+              <property name="frameShape">
                <enum>QFrame::Box</enum>
+              </property>
+              <property name="text">
+               <string>:</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLCDNumber" name="secondsLCD">
+              <property name="frameShape">
+               <enum>QFrame::NoFrame</enum>
+              </property>
+              <property name="frameShadow">
+               <enum>QFrame::Raised</enum>
               </property>
               <property name="smallDecimalPoint">
                <bool>false</bool>
@@ -487,7 +560,7 @@ height: 40px;</string>
            </layout>
           </item>
           <item>
-           <layout class="QHBoxLayout" name="horizontalLayout_2">
+           <layout class="QHBoxLayout" name="buttonsLayout">
             <item>
              <widget class="QPushButton" name="startWatch">
               <property name="minimumSize">
@@ -541,7 +614,7 @@ border-radius: 5px;</string>
            </layout>
           </item>
           <item>
-           <spacer name="verticalSpacer_3">
+           <spacer name="swSpacer">
             <property name="orientation">
              <enum>Qt::Vertical</enum>
             </property>

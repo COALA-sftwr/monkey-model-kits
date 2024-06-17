@@ -1,7 +1,7 @@
 /*
- *  File:       MonkeyModel.cpp
- *  Created:    Albert 01/04/2024
- *  Description: Functions for the model kits modifications
+ *  File:           MonkeyModel.cpp
+ *  Created:        Albert 01/04/2024
+ *  Description:    Functions for the model kits modifications
 */
 
 #include <iostream>
