@@ -10,6 +10,12 @@
     <height>450</height>
    </rect>
   </property>
+  <property name="maximumSize">
+   <size>
+    <width>300</width>
+    <height>450</height>
+   </size>
+  </property>
   <property name="windowTitle">
    <string>MonkeyWidgetItem</string>
   </property>
@@ -39,8 +45,8 @@ border-radius: 10px;</string>
           </property>
           <property name="maximumSize">
            <size>
-            <width>16777215</width>
-            <height>16777215</height>
+            <width>64</width>
+            <height>64</height>
            </size>
           </property>
           <property name="baseSize">
@@ -126,7 +132,7 @@ QCheckBox::indicator:checked {
            <enum>Qt::Horizontal</enum>
           </property>
           <property name="sizeType">
-           <enum>QSizePolicy::Fixed</enum>
+           <enum>QSizePolicy::Expanding</enum>
           </property>
           <property name="sizeHint" stdset="0">
            <size>

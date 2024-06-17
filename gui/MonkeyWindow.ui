@@ -135,7 +135,6 @@ max-height: 200px;</string>
          </property>
          <property name="styleSheet">
           <string notr="true">QPushButton {
-	radius: #646464;
     border-radius: 15px;
     background-color: #646464;
 }</string>
@@ -449,8 +448,23 @@ height: 40px;</string>
         </widget>
         <widget class="QWidget" name="CollectionPage">
          <layout class="QVBoxLayout" name="verticalLayout_7">
+          <item alignment="Qt::AlignLeft|Qt::AlignTop">
+           <widget class="QPushButton" name="newModelButton">
+            <property name="text">
+             <string>Nouvelle Maquette...</string>
+            </property>
+           </widget>
+          </item>
           <item>
-           <layout class="QGridLayout" name="gridLayout"/>
+           <widget class="QWidget" name="gridWidget" native="true">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <layout class="QGridLayout" name="gridLayout"/>
+           </widget>
           </item>
          </layout>
         </widget>
