@@ -6,6 +6,7 @@
 
 #include <iostream>
 #include "MonkeyModel.hpp"
+#include <iomanip>
 #include <sstream>
 
 
@@ -164,6 +165,25 @@ int MonkeyModel::getTime() {
         time += session.getDuration().count();
     }
     return time;
+}
+
+std::string MonkeyModel::getFormattedTime() {
+    // Create a string stream for formatted output
+    std::stringstream time_s;
+    int duration = getTime();
+
+    // Calculate hours, minutes, and remaining seconds
+    int hours = duration / 3600;
+    duration %= 3600;
+    int minutes = duration / 60;
+    duration %= 60;
+
+    // Format the time string with leading zeros using setw
+    time_s << std::setw(2) << std::setfill('0') << hours << ":";
+    time_s << std::setw(2) << std::setfill('0') << minutes << ":";
+    time_s << std::setw(2) << std::setfill('0') << duration;
+
+    return time_s.str();
 }
 
 template <typename Enum>

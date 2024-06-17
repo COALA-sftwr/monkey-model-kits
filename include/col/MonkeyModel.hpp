@@ -53,6 +53,7 @@ public:
     MonkeySession *getLastSessions();
     int getNSessions();
     int getTime();
+    std::string getFormattedTime();
     bool isSWOn();
     bool getFav();
 

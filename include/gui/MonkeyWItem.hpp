@@ -5,7 +5,7 @@
 #ifndef MONKEYWITEM_H
 #define MONKEYWITEM_H
 
-#include <QWidget>
+#include "MonkeyWindow.hpp"
 
 
 QT_BEGIN_NAMESPACE
@@ -16,11 +16,12 @@ class MonkeyWidgetItem : public QWidget {
 Q_OBJECT
 
 public:
-    explicit MonkeyWidgetItem(QWidget *parent = nullptr);
+    MonkeyWidgetItem(QWidget *parent = nullptr);
+    MonkeyWidgetItem(MonkeyModel& model);
     ~MonkeyWidgetItem() override;
 
 private:
-    Ui::MonkeyWidgetItem *ui;
+    Ui::MonkeyWidgetItem *_ui;
 };
 
 
