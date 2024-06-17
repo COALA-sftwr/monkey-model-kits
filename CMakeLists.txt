@@ -32,6 +32,11 @@ set(SOURCES
         src/gui/MonkeyWindow.cpp
         src/gui/MonkeyWItem.cpp
         src/gui/MonkeyWGridItem.cpp
+
+        src/gui/pages/MonkeyHPage.cpp
+        src/gui/pages/MonkeySCPage.cpp
+        src/gui/pages/MonkeyCPage.cpp
+        src/gui/pages/MonkeySWPage.cpp
 )
 
 set(HEADERS
