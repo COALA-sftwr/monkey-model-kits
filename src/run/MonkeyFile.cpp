@@ -35,6 +35,7 @@ MonkeyModel MonkeyManager::findModel(int model_number) {
     model_t.setGrade(stoe((findKey("grade", model_number)), gradeMap));
     model_t.setPrice(stod(findKey("price", model_number)));
     model_t.setStatus(stoe(findKey("status", model_number), statusMap));
+    model_t.setFavStatus(stoi(findKey("favorite", model_number)));
     model_t.setSessions(stoms_v(findKey("sessions", model_number)));
 
     return model_t;

@@ -27,6 +27,7 @@ private:
     double _price;
     Status _status;
     std::vector<MonkeySession> _sessions;
+    bool _fav;
     bool _swOn;
 
 public:
@@ -40,6 +41,7 @@ public:
     void setStatus(Status status);
     void setSessions(std::vector<MonkeySession> sessions);
     void setSWStatus(bool newState);
+    void setFavStatus(bool newState);
 
     // Getters
     std::string getName();
@@ -51,11 +53,10 @@ public:
     MonkeySession *getLastSessions();
     int getNSessions();
     int getTime();
-
     bool isSWOn();
+    bool getFav();
 
     void startSession();
-
     void stopSession();
 
     std::string saveSessions();

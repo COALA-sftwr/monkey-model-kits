@@ -70,10 +70,10 @@ std::string MonkeyCollection::save() {
         file_s << "      " << "grade: " << etos(gradeMap, model.getGrade()) << std::endl;
         file_s << "      " << "price: " << model.getPrice() << std::endl;
         file_s << "      " << "status: " << etos(statusMap, model.getStatus()) << std::endl;
+        file_s << "      " << "favorite: " << model.getFav() << std::endl;
         file_s << "      " << "sessions: " << model.saveSessions() << std::endl;
         file_s << "    " << "]" << std::endl;
     }
-    //std::cout << file_s.str() << std::endl;
     return file_s.str();
 }
 

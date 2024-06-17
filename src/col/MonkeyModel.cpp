@@ -6,11 +6,12 @@
 
 #include <iostream>
 #include "MonkeyModel.hpp"
-
 #include <sstream>
+
 
 MonkeyModel::MonkeyModel() {
     setSWStatus(false);
+    setFavStatus(false);
 }
 
 void MonkeyModel::newModel() {
@@ -49,6 +50,11 @@ void MonkeyModel::setSessions(std::vector<MonkeySession> sessions) {
 
 void MonkeyModel::setSWStatus(bool newState) {
     _swOn = newState;
+}
+
+void MonkeyModel::setFavStatus(bool newState)
+{
+    _fav = newState;
 }
 
 // Getters
@@ -91,6 +97,11 @@ int MonkeyModel::getNSessions() {
 
 bool MonkeyModel::isSWOn() {
     return _swOn;
+}
+
+bool MonkeyModel::getFav()
+{
+    return _fav;
 }
 
 // Others
