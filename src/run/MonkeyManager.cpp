@@ -87,12 +87,12 @@ void MonkeyManager::createFile(std::vector<std::string> commands)
     clearFilePath();
 }
 
-void MonkeyManager::openFile(std::filesystem::path _filePath, MonkeyCollection &collection)
+void MonkeyManager::openFile(std::filesystem::path filePath, MonkeyCollection &collection)
 {
-    _file.open(_filePath);
+    _file.open(filePath);
 
     try {
-        if (!fs::exists(_filePath))
+        if (!fs::exists(filePath))
             throw std::runtime_error("File does not exist.");
         else if (_file.is_open()) {
             if (!isFileEmpty(_file))
@@ -100,7 +100,8 @@ void MonkeyManager::openFile(std::filesystem::path _filePath, MonkeyCollection &
             else
                 std::cout << "File is empty." << std::endl;
             setIsFileOpen(true);
-            std::cout << "File opened successfully: " << _filePath << std::endl;
+            setFilePath(filePath);
+            std::cout << "File opened successfully: " << filePath << std::endl;
         }
     }
     catch (const std::exception& ex) {
