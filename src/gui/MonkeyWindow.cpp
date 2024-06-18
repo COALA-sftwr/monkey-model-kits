@@ -24,6 +24,16 @@ MonkeyWindow::~MonkeyWindow() {
     delete _ui;
 }
 
+void MonkeyWindow::openFileStart(std::string fileName)
+{
+    _manager.setFilePath(fileName);
+
+    if (!_manager.getFilePath().empty()){
+        _manager.openFile(_manager.getFilePath(), _collection);
+        loadFile();
+    }
+}
+
 void MonkeyWindow::loadButtons()
 {
     connect(_ui->HomeButton, &QPushButton::clicked, this, [=] {_ui->stackedWidget->setCurrentIndex(0); _ui->pageLabel->setText("Accueil"); _ui->pageLabel->show();});

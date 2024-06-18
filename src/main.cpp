@@ -16,6 +16,9 @@ int main(int argc, char *argv[])
     MonkeyWindow mwindow;
     // QMainWindow mwindow;
 
+    if (argc > 1) {
+        mwindow.openFileStart(argv[1]);
+        }
     for (const QString &locale : uiLanguages) {
         const QString baseName = "mmk-gui_" + QLocale(locale).name();
         if (translator.load(":/i18n/" + baseName)) {

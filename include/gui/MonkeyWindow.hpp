@@ -30,6 +30,8 @@ public:
     explicit MonkeyWindow(QWidget *parent = nullptr);
     ~MonkeyWindow() override;
 
+    void openFileStart(std::string fileName);
+
     // File handling functions.
     void openFile();
     void loadButtons();
