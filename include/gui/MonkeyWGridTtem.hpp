@@ -5,8 +5,7 @@
 #ifndef MONKEYWGRIDTTEM_H
 #define MONKEYWGRIDTTEM_H
 
-#include <QWidget>
-
+#include "MonkeyWindow.hpp"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MonkeyWGridItem; }
@@ -16,11 +15,12 @@ class MonkeyWGridItem : public QWidget {
 Q_OBJECT
 
 public:
-    explicit MonkeyWGridItem(QWidget *parent = nullptr);
+    MonkeyWGridItem(QWidget *parent = nullptr);
+    MonkeyWGridItem(MonkeyModel& model);
     ~MonkeyWGridItem() override;
 
 private:
-    Ui::MonkeyWGridItem *ui;
+    Ui::MonkeyWGridItem *_ui;
 };
 
 
