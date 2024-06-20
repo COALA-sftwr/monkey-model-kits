@@ -32,6 +32,7 @@ private:
 
 public:
     MonkeyModel();
+    MonkeyModel(std::string name, Grade grade, double price, Status status);
 
     void newModel();
     // Setters
