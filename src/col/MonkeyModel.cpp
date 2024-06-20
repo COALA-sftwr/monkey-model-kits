@@ -15,6 +15,16 @@ MonkeyModel::MonkeyModel() {
     setFavStatus(false);
 }
 
+MonkeyModel::MonkeyModel(std::string name, Grade grade, double price, Status status)
+{
+    setName(name);
+    setGrade(grade);
+    setPrice(price);
+    setStatus(status);
+    setSWStatus(false);
+    setFavStatus(false);
+}
+
 void MonkeyModel::newModel() {
     std::string input;
 
