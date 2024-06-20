@@ -35,7 +35,7 @@ public:
     // File handling functions.
     void openFile();
     void loadButtons();
-    void onSwitchWidgetButtonClicked(int buttonIndex);
+    void newFile();
     void loadFile();
     void saveFile();
 
