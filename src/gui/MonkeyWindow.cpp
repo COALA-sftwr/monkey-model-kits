@@ -7,7 +7,10 @@
 #include "MonkeyWindow.hpp"
 #include "MonkeyManager.hpp"
 #include <QFileDialog>
+#include <qinputdialog.h>
+#include <qmessagebox.h>
 #include <ui_MonkeyWindow.h>
+
 
 MonkeyWindow::MonkeyWindow(QWidget *parent) :
     QMainWindow(parent), _ui(new Ui::MonkeyWindow) {
@@ -15,7 +18,12 @@ MonkeyWindow::MonkeyWindow(QWidget *parent) :
     _ui->stackedWidget->setCurrentIndex(0);
     _ui->modelSearch->hide();
 
+    /*ResponsiveGridWidget *gridWidget = new ResponsiveGridWidget(this);
+
+    _ui->stackedWidget->addWidget(gridWidget);*/
+
     loadButtons();
+    connect(_ui->actionNouveau, &QAction::triggered, this, &MonkeyWindow::newFile);
     connect(_ui->actionOuvrir, &QAction::triggered, this, &MonkeyWindow::openFile);
     connect(_ui->actionSauvegarder, &QAction::triggered, this, &MonkeyWindow::saveFile);
 }
@@ -39,7 +47,34 @@ void MonkeyWindow::loadButtons()
     connect(_ui->HomeButton, &QPushButton::clicked, this, [=] {_ui->stackedWidget->setCurrentIndex(0); _ui->pageLabel->setText("Accueil"); _ui->pageLabel->show();});
     connect(_ui->CollectionButton, &QPushButton::clicked, this, [=] {_ui->stackedWidget->setCurrentIndex(1); _ui->pageLabel->setText("Collection"); _ui->pageLabel->show();});
     connect(_ui->StopWatchButton, &QPushButton::clicked, this, [=] {_ui->stackedWidget->setCurrentIndex(2); _ui->pageLabel->setText("Chronomètre"); _ui->pageLabel->show();});
-    connect(_ui->StatisticsButton, &QPushButton::clicked, this, [=] {_ui->stackedWidget->setCurrentIndex(3); _ui->pageLabel->setText("Statistiques"); _ui->pageLabel->show();});
+    connect(_ui->StatisticsButton, &QPushButton::clicked, this, [=] {_ui->stackedWidget->setCurrentIndex(4); _ui->pageLabel->setText("Statistiques"); _ui->pageLabel->show();});
+}
+
+void MonkeyWindow::newFile()
+{
+    bool ok;
+    QString fileName = QInputDialog::getText(this, tr("Enter File Name"),
+                                             tr("File name:"), QLineEdit::Normal,
+                                             "", &ok);
+    if (!ok || fileName.isEmpty()) {
+        return;
+    }
+
+    // Create a QFile object with the specified file name
+    std::string filePath = _manager.getDocPath().string().append("\\").append(fileName.toStdString()).append(".mkit");
+    std::fstream file(filePath);
+
+    // Open the file in WriteOnly mode
+    if (!file.is_open()) {
+        QMessageBox::warning(this, "Error", "Cannot create file");
+        return;
+    }
+
+    // Write some text to the file
+    file << "Hello, world!\n";
+    // Close the file
+    file.close();
+    QMessageBox::information(this, "Success", "File created successfully");
 }
 
 void MonkeyWindow::openFile() {

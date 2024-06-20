@@ -46,6 +46,9 @@ public:
     void updateTimeLabel(MonkeySession *session);
 
     void loadCollection();
+    void showForm();
+    void loadModelCombo();
+    void comboModelChange(int index);
     void loadStopWatch();
     void loadStatistics();
 
