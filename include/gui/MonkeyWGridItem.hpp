@@ -19,6 +19,8 @@ public:
     MonkeyWGridItem(MonkeyModel& model);
     ~MonkeyWGridItem() override;
 
+    void switchFavState(MonkeyModel& model);
+
 private:
     Ui::MonkeyWGridItem *_ui;
 };
