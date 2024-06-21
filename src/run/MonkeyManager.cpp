@@ -7,6 +7,8 @@
 #include <iostream>
 #include "MonkeyManager.hpp"
 
+#include <thread>
+
 
 // Constructor
 
@@ -87,20 +89,21 @@ void MonkeyManager::createFile(std::vector<std::string> commands)
     clearFilePath();
 }
 
-void MonkeyManager::openFile(std::filesystem::path _filePath, MonkeyCollection &collection)
+void MonkeyManager::openFile(std::filesystem::path filePath, MonkeyCollection &collection)
 {
-    _file.open(_filePath);
+    _file.open(filePath);
 
     try {
-        if (!fs::exists(_filePath))
+        if (!exists(filePath))
             throw std::runtime_error("File does not exist.");
-        else if (_file.is_open()) {
+        if (_file.is_open()) {
             if (!isFileEmpty(_file))
                 loadFile(collection);
             else
                 std::cout << "File is empty." << std::endl;
             setIsFileOpen(true);
-            std::cout << "File opened successfully: " << _filePath << std::endl;
+            setFilePath(filePath);
+            std::cout << "File opened successfully: " << filePath << std::endl;
         }
     }
     catch (const std::exception& ex) {
@@ -125,11 +128,13 @@ void MonkeyManager::clearFilePath()
 void MonkeyManager::saveFile(MonkeyCollection& collection) {
     // Clear the file content before writing
     _file.close();
+    std::this_thread::sleep_for(std::chrono::milliseconds(10));
     _file.open(_filePath, std::ios::out | std::ios::trunc); // Open in truncation mode to clear file
 
     // Check if the file opened successfully
     if (!_file.is_open()) {
         std::cerr << "Error opening file for writing: " << _filePath << std::endl;
+        std::cerr << "Error state: " << _file.rdstate() << std::endl;
         return;
     }
 

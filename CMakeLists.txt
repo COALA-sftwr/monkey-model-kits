@@ -30,6 +30,14 @@ set(SOURCES
         src/col/MonkeyCollection.cpp
 
         src/gui/MonkeyWindow.cpp
+        src/gui/MonkeyWItem.cpp
+        src/gui/MonkeyWGridItem.cpp
+        src/gui/MonkeyNewModel.cpp
+
+        src/gui/pages/MonkeyHPage.cpp
+        src/gui/pages/MonkeySCPage.cpp
+        src/gui/pages/MonkeyCPage.cpp
+        src/gui/pages/MonkeySWPage.cpp
 )
 
 set(HEADERS
@@ -44,10 +52,16 @@ set(HEADERS
         include/col/MonkeyModel.hpp
 
         include/gui/MonkeyWindow.hpp
+        include/gui/MonkeyWItem.hpp
+        include/gui/MonkeyWGridItem.hpp
+        include/gui/MonkeyNewModel.hpp
 )
 
 set(UI_FILES
         gui/MonkeyWindow.ui
+        gui/MonkeyWItem.ui
+        gui/MonkeyWGridItem.ui
+        gui/MonkeyNewModel.ui
         # Add more UI files as needed
 )
 

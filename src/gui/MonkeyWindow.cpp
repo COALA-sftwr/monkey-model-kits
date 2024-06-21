@@ -1,59 +1,78 @@
 /*
- *  File:       MonkeyWindow.cpp
- *  Created:    Albert 05/05/2024
- *  Description:
+ *  File:           MonkeyWindow.cpp
+ *  Created:        Albert 05/05/2024
+ *  Description:    File for the Window of the app
 */
-// You may need to build the project (run Qt uic code generator) to get "ui_MonkeyWindow.h" resolved
 
-#include <QFileDialog>
 #include "MonkeyWindow.hpp"
 
+#include <iostream>
+
 #include "MonkeyManager.hpp"
-#include "ui_MonkeyWindow.h"
+#include <QFileDialog>
+#include <qinputdialog.h>
+#include <qmessagebox.h>
+#include <ui_MonkeyWindow.h>
+
 
 MonkeyWindow::MonkeyWindow(QWidget *parent) :
     QMainWindow(parent), _ui(new Ui::MonkeyWindow) {
     _ui->setupUi(this);
-    _ui->tabWidget->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Preferred);
+    _ui->stackedWidget->setCurrentIndex(0);
+    _ui->modelSearch->hide();
 
+    /*ResponsiveGridWidget *gridWidget = new ResponsiveGridWidget(this);
+
+    _ui->stackedWidget->addWidget(gridWidget);*/
+
+    loadButtons();
+    connect(_ui->actionNouveau, &QAction::triggered, this, &MonkeyWindow::newFile);
     connect(_ui->actionOuvrir, &QAction::triggered, this, &MonkeyWindow::openFile);
+    connect(_ui->actionSauvegarder, &QAction::triggered, this, &MonkeyWindow::saveFile);
 }
 
 MonkeyWindow::~MonkeyWindow() {
     delete _ui;
 }
 
-void MonkeyWindow::loadFile() {
-    loadHome();
-    // loadCollection();
-    // loadChronometer();
-    // loadStatistics();
+void MonkeyWindow::openFileStart(std::string fileName)
+{
+    _manager.setFilePath(fileName);
+
+    if (!_manager.getFilePath().empty()){
+        _manager.openFile(_manager.getFilePath(), _collection);
+        loadFile();
+    }
 }
 
-void MonkeyWindow::loadHome() {
-    loadLastModel();
+void MonkeyWindow::loadButtons()
+{
+    connect(_ui->HomeButton, &QPushButton::clicked, this, [=] {_ui->stackedWidget->setCurrentIndex(0); _ui->pageLabel->setText("Accueil"); _ui->pageLabel->show();});
+    connect(_ui->CollectionButton, &QPushButton::clicked, this, [=] {_ui->stackedWidget->setCurrentIndex(1); _ui->pageLabel->setText("Collection"); _ui->pageLabel->show();});
+    connect(_ui->StopWatchButton, &QPushButton::clicked, this, [=] {_ui->stackedWidget->setCurrentIndex(2); _ui->pageLabel->setText("Chronomètre"); _ui->pageLabel->show();});
+    _ui->StatisticsButton->hide();
+    // connect(_ui->StatisticsButton, &QPushButton::clicked, this, [=] {_ui->stackedWidget->setCurrentIndex(4); _ui->pageLabel->setText("Statistiques"); _ui->pageLabel->show();});
 }
 
-void MonkeyWindow::updateTimeLabel(MonkeySession *session) {
-    auto duration = session->getDuration();
+void MonkeyWindow::newFile()
+{
+    bool ok;
+    QString fileName = QInputDialog::getText(this, tr("Enter File Name"),
+                                             tr("File name:"), QLineEdit::Normal,
+                                             "", &ok);
+    if (!ok || fileName.isEmpty()) {
+        return;
+    }
 
-    int hours = duration.count() / 3600;
-    int minutes = (duration.count() % 3600) / 60;
-    int secs = duration.count() % 60;
+    _manager.setFilePath(_manager.getDocPath().string().append("\\").append(fileName.toStdString()).append(".mkit"));
+    std::fstream file(_manager.getFilePath(), std::ios::out);
 
-    // Update the QLabel text with the formatted duration
-    _ui->lastTimeLabel->setText(QString("%1:%2:%3").arg(hours, 2, 10, QChar('0'))
-                                       .arg(minutes, 2, 10, QChar('0'))
-                                       .arg(secs, 2, 10, QChar('0')));
-}
-
-void MonkeyWindow::loadLastModel() {
-    MonkeyModel *tempModel = _collection.findLastModel();
-
-    _ui->lastNameLabel->setText(QString::fromStdString(tempModel->getName()));
-    _ui->lastGradeLabel->setText(QString::fromStdString(etos(gradeMap, tempModel->getGrade())));
-    _ui->lastSessionsLabel->setText(QString::number(tempModel->getNSessions()));
-    updateTimeLabel(tempModel->getLastSession());
+    if (!file.is_open()) {
+        QMessageBox::warning(this, "Error", "Cannot create file");
+        return;
+    }
+    QMessageBox::information(this, "Success", "File created successfully");
+    loadFile();
 }
 
 void MonkeyWindow::openFile() {
@@ -64,4 +83,25 @@ void MonkeyWindow::openFile() {
     std::filesystem::path filePath = fileName.toStdString();
     _manager.openFile(filePath, _collection);
     loadFile();
+}
+
+void MonkeyWindow::loadFile() {
+    std::cout << "test load" << std::endl;
+    loadHome();
+    std::cout << "test home" << std::endl;
+    loadCollection();
+    std::cout << "test collec" << std::endl;
+    loadStopWatch();
+    std::cout << "test chrono" << std::endl;
+    // loadStatistics();
+}
+
+void MonkeyWindow::saveFile()
+{
+    _manager.saveFile(_collection);
+}
+
+void selectButton()
+{
+    // _ui->HomeButton->setStyleSheet("QPushButton {border-color: #646464;; border-radius: 15px; background-color: #505050;}");
 }
