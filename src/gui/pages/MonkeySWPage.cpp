@@ -14,7 +14,7 @@ void MonkeyWindow::loadStopWatch()
     if (_selectedModel)
     {
         connect(_ui->startWatch, &QPushButton::clicked, this, [this] {_selectedModel->startSession();});
-        connect(_ui->stopWatch, &QPushButton::clicked, this, [this] {_selectedModel->stopSession();});
+        connect(_ui->stopWatch, &QPushButton::clicked, this, [this] {stopButton();});
     }
 }
 
@@ -31,5 +31,12 @@ void MonkeyWindow::comboModelChange(int index)
 {
     _selectedModel = &_collection.getModelsAdr().at(_ui->modelCombo->currentIndex());
     connect(_ui->startWatch, &QPushButton::clicked, this, [this] {_selectedModel->startSession();});
-    connect(_ui->stopWatch, &QPushButton::clicked, this, [this] {_selectedModel->stopSession(); loadLastModel();});
+    connect(_ui->stopWatch, &QPushButton::clicked, this, [this] {stopButton();});
+}
+
+void MonkeyWindow::stopButton()
+{
+    _selectedModel->stopSession();
+    loadLastModel();
+    loadCollection();
 }

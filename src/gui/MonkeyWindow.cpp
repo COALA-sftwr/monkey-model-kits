@@ -50,7 +50,8 @@ void MonkeyWindow::loadButtons()
     connect(_ui->HomeButton, &QPushButton::clicked, this, [=] {_ui->stackedWidget->setCurrentIndex(0); _ui->pageLabel->setText("Accueil"); _ui->pageLabel->show();});
     connect(_ui->CollectionButton, &QPushButton::clicked, this, [=] {_ui->stackedWidget->setCurrentIndex(1); _ui->pageLabel->setText("Collection"); _ui->pageLabel->show();});
     connect(_ui->StopWatchButton, &QPushButton::clicked, this, [=] {_ui->stackedWidget->setCurrentIndex(2); _ui->pageLabel->setText("Chronomètre"); _ui->pageLabel->show();});
-    connect(_ui->StatisticsButton, &QPushButton::clicked, this, [=] {_ui->stackedWidget->setCurrentIndex(4); _ui->pageLabel->setText("Statistiques"); _ui->pageLabel->show();});
+    _ui->StatisticsButton->hide();
+    // connect(_ui->StatisticsButton, &QPushButton::clicked, this, [=] {_ui->stackedWidget->setCurrentIndex(4); _ui->pageLabel->setText("Statistiques"); _ui->pageLabel->show();});
 }
 
 void MonkeyWindow::newFile()

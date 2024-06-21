@@ -51,6 +51,7 @@ public:
     void showForm();
     void loadModelCombo();
     void comboModelChange(int index);
+    void stopButton();
     void loadStopWatch();
     void loadStatistics();
 
