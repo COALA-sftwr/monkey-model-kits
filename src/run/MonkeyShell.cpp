@@ -46,6 +46,26 @@ void MonkeyShell::start() {
     }
 }
 
+void MonkeyShell::preload(char *test) {
+    std::vector<std::string> commands;
+    std::string filename;
+    std::string str(test);
+
+    commands.push_back("");
+
+    size_t pos = str.rfind('\\', str.rfind('.'));
+
+    // Check if a '\\' is found before '.'
+    if (pos != std::string::npos) {
+        // Extract the substring starting from the character after the last '\\' (excluding '\\')
+        filename = str.substr(pos + 1, str.rfind('.') - pos - 1);
+    } else {
+        std::cout << "No valid path found." << std::endl;
+    }
+    commands.insert(commands.begin() + 1, filename);
+    _manager.openFile(commands, filename, _collection);
+}
+
 void MonkeyShell::processCommand() {
     auto it = commandMap.find(_commands[0]);
     if (it != commandMap.end()) {
@@ -92,6 +112,7 @@ void MonkeyShell::helpCommand() {
 
 void MonkeyShell::quitCommand() {
     if (_manager.IsFileOpen())
+        saveCommand();
         closeCommand();
     setExit(true);
 }
