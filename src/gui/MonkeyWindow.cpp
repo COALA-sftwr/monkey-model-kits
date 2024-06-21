@@ -5,6 +5,9 @@
 */
 
 #include "MonkeyWindow.hpp"
+
+#include <iostream>
+
 #include "MonkeyManager.hpp"
 #include <QFileDialog>
 #include <qinputdialog.h>
@@ -60,21 +63,15 @@ void MonkeyWindow::newFile()
         return;
     }
 
-    // Create a QFile object with the specified file name
-    std::string filePath = _manager.getDocPath().string().append("\\").append(fileName.toStdString()).append(".mkit");
-    std::fstream file(filePath);
+    _manager.setFilePath(_manager.getDocPath().string().append("\\").append(fileName.toStdString()).append(".mkit"));
+    std::fstream file(_manager.getFilePath(), std::ios::out);
 
-    // Open the file in WriteOnly mode
     if (!file.is_open()) {
         QMessageBox::warning(this, "Error", "Cannot create file");
         return;
     }
-
-    // Write some text to the file
-    file << "Hello, world!\n";
-    // Close the file
-    file.close();
     QMessageBox::information(this, "Success", "File created successfully");
+    loadFile();
 }
 
 void MonkeyWindow::openFile() {
@@ -88,9 +85,13 @@ void MonkeyWindow::openFile() {
 }
 
 void MonkeyWindow::loadFile() {
+    std::cout << "test load" << std::endl;
     loadHome();
+    std::cout << "test home" << std::endl;
     loadCollection();
+    std::cout << "test collec" << std::endl;
     loadStopWatch();
+    std::cout << "test chrono" << std::endl;
     // loadStatistics();
 }
 

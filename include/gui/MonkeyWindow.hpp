@@ -25,6 +25,8 @@ private:
     MonkeyCollection _collection;
     MonkeyManager _manager;
     MonkeyModel* _selectedModel = nullptr;
+    int gridLins;
+    int gridCols;
 
 public:
     explicit MonkeyWindow(QWidget *parent = nullptr);
@@ -54,5 +56,13 @@ public:
 
     // Home Loading functions.
     void loadLastModel();
+
+    void adjustGridColumns();
+protected:
+
+    void resizeEvent(QResizeEvent *event) override {
+        QWidget::resizeEvent(event);
+        // adjustGridColumns();
+    }
 };
 

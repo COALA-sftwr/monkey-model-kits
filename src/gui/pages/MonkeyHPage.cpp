@@ -10,17 +10,25 @@
 
 
 void MonkeyWindow::loadHome(){
-    loadLastModel();
-    loadFavorites();
+    if (_collection.getModels().size() > 0)
+    {
+        loadLastModel();
+        loadFavorites();
+    }
 }
 
 void MonkeyWindow::loadLastModel() {
     MonkeyModel *tempModel = _collection.findLastModel();
+    int emptyT = 0;
 
     _ui->lastNameLabel->setText(QString::fromStdString(tempModel->getName()));
     _ui->lastGradeLabel->setText(QString::fromStdString(etos(gradeMap, tempModel->getGrade())));
     _ui->lastSessionsLabel->setText(QString::number(tempModel->getNSessions()));
-    updateTimeLabel(tempModel->getLastSession());
+
+    if (tempModel->getSessions().size() == 0)
+        updateTimeLabel(new MonkeySession(static_cast<std::chrono::duration<int>>(emptyT)));
+    else
+        updateTimeLabel(tempModel->getLastSession());
 }
 
 void MonkeyWindow::updateTimeLabel(MonkeySession *session) {

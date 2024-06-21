@@ -62,7 +62,7 @@ std::string MonkeyCollection::save() {
     std::stringstream file_s;
 
     file_s << "  " << count() << std::endl;
-    file_s << "  " << "time: " << _timeZone << std::endl;
+    file_s << "  " << "time: " << (_timeZone.empty() ? "0" : _timeZone) << std::endl;
 
     for (auto model : _models) {
         file_s << "    " << "[" << std::endl;

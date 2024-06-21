@@ -13,15 +13,18 @@
 
 void MonkeyWindow::loadCollection()
 {
-    int numModels = _collection.getModels().size();
-    int numRows = (numModels + 2) / 3; // Ensure at least one row
+    if (_collection.getModels().size() > 0)
+    {
+        int numModels = _collection.getModels().size();
+        int numRows = (numModels + 2) / 3; // Ensure at least one row
 
-    for (int j = 0; j < numRows; j++) {
-        for (int i = 0; i < 3; i++) {
-            int modelIndex = j * 3 + i;
-            if (modelIndex < numModels) {
-                _ui->gridLayout->addWidget(new MonkeyWGridItem(_collection.getModels().at(modelIndex)), j, i, Qt::AlignTop);
-                _ui->gridLayout->addWidget(new MonkeyWGridItem(_collection.getModels().at(modelIndex)), j, i, Qt::AlignTop);
+        for (int j = 0; j < numRows; j++) {
+            for (int i = 0; i < 3; i++) {
+                int modelIndex = j * 3 + i;
+                if (modelIndex < numModels) {
+                    _ui->gridLayout->addWidget(new MonkeyWGridItem(_collection.getModels().at(modelIndex)), j, i, Qt::AlignTop);
+                    _ui->gridLayout->addWidget(new MonkeyWGridItem(_collection.getModels().at(modelIndex)), j, i, Qt::AlignTop);
+                }
             }
         }
     }
