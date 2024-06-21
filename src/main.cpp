@@ -1,20 +1,33 @@
-﻿/*
+/*
 *	File:			main.cpp
 *	Created:		GAlbert 21.01.24
 *	Description:	File for the strategy pattern applied to recognise different commands given to the shell
 */
 
-#include <string>
-#include <iostream>
-#include "MonkeyShell.hpp"
+#include <QtWidgets>
+#include <QLocale>
+#include <MonkeyWindow.hpp>
 
-int main() {
-    MonkeyShell shell;
+int main(int argc, char *argv[])
+{
+    QApplication app(argc, argv);
+    QTranslator translator;
+    const QStringList uiLanguages = QLocale::system().uiLanguages();
+    MonkeyWindow mwindow;
 
-    if (__argc == 2) {
-        shell.preload(__argv[1]);
+    if (argc > 1) {
+        mwindow.openFileStart(argv[1]);
+        }
+    for (const QString &locale : uiLanguages) {
+        const QString baseName = "mmk-gui_" + QLocale(locale).name();
+        if (translator.load(":/i18n/" + baseName)) {
+            app.installTranslator(&translator);
+            break;
+        }
     }
-    shell.start();
 
-    return 0;
+    // window.show();
+    mwindow.setWindowTitle("Monkey ModelKits");
+    mwindow.show();
+    return app.exec();
 }

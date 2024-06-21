@@ -7,6 +7,8 @@
 #include <iostream>
 #include "MonkeyCollection.hpp"
 
+#include <sstream>
+
 void MonkeyCollection::newModel() {
     MonkeyModel model_t;
 
@@ -60,7 +62,7 @@ std::string MonkeyCollection::save() {
     std::stringstream file_s;
 
     file_s << "  " << count() << std::endl;
-    file_s << "  " << "time: " << _timeZone << std::endl;
+    file_s << "  " << "time: " << (_timeZone.empty() ? "0" : _timeZone) << std::endl;
 
     for (auto model : _models) {
         file_s << "    " << "[" << std::endl;
@@ -68,11 +70,24 @@ std::string MonkeyCollection::save() {
         file_s << "      " << "grade: " << etos(gradeMap, model.getGrade()) << std::endl;
         file_s << "      " << "price: " << model.getPrice() << std::endl;
         file_s << "      " << "status: " << etos(statusMap, model.getStatus()) << std::endl;
+        file_s << "      " << "favorite: " << model.getFav() << std::endl;
         file_s << "      " << "sessions: " << model.saveSessions() << std::endl;
         file_s << "    " << "]" << std::endl;
     }
-    //std::cout << file_s.str() << std::endl;
     return file_s.str();
+}
+
+MonkeyModel *MonkeyCollection::findLastModel() {
+    MonkeyModel *modelOutLoop = &_models.at(0);
+
+    for (auto& modelInLoop : _models) {
+        MonkeySession *modelOLSession = modelOutLoop->getLastSession();
+        MonkeySession *modelILSession = modelInLoop.getLastSession();
+        if (modelOLSession == nullptr && modelILSession != nullptr ||
+            modelOLSession != nullptr && modelILSession != nullptr && modelOLSession->getStop() < modelILSession->getStop())
+            modelOutLoop = &modelInLoop;
+    }
+    return modelOutLoop;
 }
 
 int MonkeyCollection::count() {

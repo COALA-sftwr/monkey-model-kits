@@ -6,6 +6,7 @@
 
 #pragma once
 
+#include <random>
 #include <vector>
 #include "MonkeyModel.hpp"
 
@@ -30,4 +31,8 @@ class MonkeyCollection {
         std::string save();
 
         friend std::ostream& operator<<(std::ostream& stream, const MonkeyCollection& collection);
+
+        MonkeyModel * findLastModel();
+
+        std::string getLastSession();
 };

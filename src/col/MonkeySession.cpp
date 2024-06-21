@@ -5,6 +5,10 @@
 */
 
 #include "MonkeySession.hpp"
+#include <iomanip>
+#include <iostream>
+#include <QString>
+
 #include "StringManipulation.hpp"
 
 MonkeySession::MonkeySession() {
@@ -88,12 +92,23 @@ intS MonkeySession::getDuration() {
     return _duration;
 }
 
+std::string MonkeySession::getDurationString() {
+    std::string durationString = "";
+
+    int hours = _duration.count() / 3600;
+    int minutes = (_duration.count() % 3600) / 60;
+    int seconds = _duration.count() % 60;
+
+    durationString.append(std::to_string(hours)).append("h").append(std::to_string(minutes)).append("min").append(std::to_string(seconds)).append("s");
+    return durationString;
+}
+
 std::ostream& operator<<(std::ostream& stream, const MonkeySession& session) {
     std::string unknown = "No known date.";
 
-    auto hours = std::chrono::duration_cast<std::chrono::hours>(session._duration);
-    auto minutes = std::chrono::duration_cast<std::chrono::minutes>(session._duration) - hours;
-    auto seconds = std::chrono::duration_cast<std::chrono::seconds>(session._duration) - hours - minutes;
+    auto hours = std::chrono::duration_cast<std::chrono::hours>(session._duration).count();
+    auto minutes = std::chrono::duration_cast<std::chrono::minutes>(session._duration).count() % 60;
+    auto seconds = std::chrono::duration_cast<std::chrono::seconds>(session._duration).count() % 60;
 
     stream << "\tStart date: " << (!session._startString.empty() ? session._startString : unknown) << std::endl
            << "\tStop date: " << (!session._stopString.empty() ? session._stopString : unknown) << std::endl

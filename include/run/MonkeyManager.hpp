@@ -29,7 +29,7 @@ public:
 
     // Work with files
     void createFile(std::vector<std::string> commands);
-    void openFile(std::vector<std::string> commands, std::string &level, MonkeyCollection &collection);
+    void openFile(std::filesystem::path filePath, MonkeyCollection &collection);
     void closeFile();
 
     fs::path getDocPath();

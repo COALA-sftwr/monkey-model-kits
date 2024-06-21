@@ -8,6 +8,8 @@
 
 #include <unordered_map>
 #include <chrono>
+#include <string>
+#include <vector>
 
 using TimePoint = std::chrono::system_clock::time_point;
 using intS = std::chrono::duration<int>;
@@ -45,6 +47,7 @@ public:
     TimePoint getStop();
     std::string getStopString();
     intS getDuration();
+    std::string getDurationString();
 
 
     friend std::ostream& operator<<(std::ostream& stream, const MonkeySession& session);

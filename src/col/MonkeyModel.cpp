@@ -1,14 +1,28 @@
 /*
- *  File:       MonkeyModel.cpp
- *  Created:    Albert 01/04/2024
- *  Description: Functions for the model kits modifications
+ *  File:           MonkeyModel.cpp
+ *  Created:        Albert 01/04/2024
+ *  Description:    Functions for the model kits modifications
 */
 
 #include <iostream>
 #include "MonkeyModel.hpp"
+#include <iomanip>
+#include <sstream>
+
 
 MonkeyModel::MonkeyModel() {
     setSWStatus(false);
+    setFavStatus(false);
+}
+
+MonkeyModel::MonkeyModel(std::string name, Grade grade, double price, Status status)
+{
+    setName(name);
+    setGrade(grade);
+    setPrice(price);
+    setStatus(status);
+    setSWStatus(false);
+    setFavStatus(false);
 }
 
 void MonkeyModel::newModel() {
@@ -49,6 +63,11 @@ void MonkeyModel::setSWStatus(bool newState) {
     _swOn = newState;
 }
 
+void MonkeyModel::setFavStatus(bool newState)
+{
+    _fav = newState;
+}
+
 // Getters
 std::string MonkeyModel::getName() {
     return _name;
@@ -70,8 +89,30 @@ std::vector<MonkeySession> MonkeyModel::getSessions() {
     return _sessions;
 }
 
+MonkeySession *MonkeyModel::getLastSession() {
+    MonkeySession *tempSession = nullptr;
+
+    if (_sessions.size() > 0)
+        tempSession = &_sessions.back();
+    return tempSession;
+}
+
+int MonkeyModel::getNSessions() {
+    int sessionNumber = 0;
+
+    for (auto session : _sessions) {
+        sessionNumber ++;
+    }
+    return sessionNumber;
+}
+
 bool MonkeyModel::isSWOn() {
     return _swOn;
+}
+
+bool MonkeyModel::getFav()
+{
+    return _fav;
 }
 
 // Others
@@ -125,6 +166,34 @@ std::string MonkeyModel::saveSessions() {
     value_ss << " }";
 
     return value_ss.str();
+}
+
+int MonkeyModel::getTime() {
+    int time = 0;
+
+    for (auto session : _sessions) {
+        time += session.getDuration().count();
+    }
+    return time;
+}
+
+std::string MonkeyModel::getFormattedTime() {
+    // Create a string stream for formatted output
+    std::stringstream time_s;
+    int duration = getTime();
+
+    // Calculate hours, minutes, and remaining seconds
+    int hours = duration / 3600;
+    duration %= 3600;
+    int minutes = duration / 60;
+    duration %= 60;
+
+    // Format the time string with leading zeros using setw
+    time_s << std::setw(2) << std::setfill('0') << hours << ":";
+    time_s << std::setw(2) << std::setfill('0') << minutes << ":";
+    time_s << std::setw(2) << std::setfill('0') << duration;
+
+    return time_s.str();
 }
 
 template <typename Enum>
