@@ -13,7 +13,8 @@ void MonkeyWindow::loadStopWatch()
     loadModelCombo();
     if (_selectedModel)
     {
-        connect(_ui->startWatch, &QPushButton::clicked, this, [this] {_selectedModel->startSession();});
+        connect(&_timer, &QTimer::timeout, this, &MonkeyWindow::updateStopWatch);
+        connect(_ui->startWatch, &QPushButton::clicked, this, [this] {startButton();});
         connect(_ui->stopWatch, &QPushButton::clicked, this, [this] {stopButton();});
     }
 }
@@ -30,13 +31,41 @@ void MonkeyWindow::loadModelCombo()
 void MonkeyWindow::comboModelChange(int index)
 {
     _selectedModel = &_collection.getModelsAdr().at(_ui->modelCombo->currentIndex());
-    connect(_ui->startWatch, &QPushButton::clicked, this, [this] {_selectedModel->startSession();});
+    connect(&_timer, &QTimer::timeout, this, &MonkeyWindow::updateStopWatch);
+    connect(_ui->startWatch, &QPushButton::clicked, this, [this] {startButton();});
     connect(_ui->stopWatch, &QPushButton::clicked, this, [this] {stopButton();});
+}
+
+void MonkeyWindow::updateStopWatch()
+{
+    if (_selectedModel->isSWOn())
+    {
+        auto elapsedTime = std::chrono::duration_cast<std::chrono::seconds>(std::chrono::system_clock::now() - _selectedModel->getLastSession()->getStart());
+        auto hours = std::chrono::duration_cast<std::chrono::hours>(elapsedTime);
+        elapsedTime -= std::chrono::duration_cast<std::chrono::seconds>(hours);
+        auto minutes = std::chrono::duration_cast<std::chrono::minutes>(elapsedTime);
+        elapsedTime -= std::chrono::duration_cast<std::chrono::seconds>(minutes);
+        auto seconds = std::chrono::duration_cast<std::chrono::seconds>(elapsedTime);
+        _ui->hoursLCD->display(static_cast<int>(hours.count()));
+        _ui->minutesLCD->display(static_cast<int>(minutes.count()));
+        _ui->secondsLCD->display(static_cast<int>(seconds.count()));
+    }
+}
+
+void MonkeyWindow::startButton()
+{
+    if (!_selectedModel->isSWOn())
+    {
+        _selectedModel->startSession();
+        _timer.start(1);
+        updateStopWatch();
+    }
 }
 
 void MonkeyWindow::stopButton()
 {
     _selectedModel->stopSession();
-    loadLastModel();
+    updateStopWatch();
+    loadHome();
     loadCollection();
 }

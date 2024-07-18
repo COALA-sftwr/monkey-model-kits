@@ -9,6 +9,7 @@
 #include <QMainWindow>
 #include <QAction>
 #include <QMenu>
+#include <qtimer.h>
 
 #include "MonkeyCollection.hpp"
 #include "MonkeyManager.hpp"
@@ -25,6 +26,7 @@ private:
     MonkeyCollection _collection;
     MonkeyManager _manager;
     MonkeyModel* _selectedModel = nullptr;
+    QTimer _timer;
     int gridLins;
     int gridCols;
 
@@ -51,6 +53,8 @@ public:
     void showForm();
     void loadModelCombo();
     void comboModelChange(int index);
+    void updateStopWatch();
+    void startButton();
     void stopButton();
     void loadStopWatch();
     void loadStatistics();
