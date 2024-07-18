@@ -20,6 +20,7 @@ private:
     fs::path _filePath;
     std::fstream _file;
     bool _fileOpen;
+    std::vector<std::vector<std::string>> _stringVectors;
 
 public:
     MonkeyManager();
@@ -47,6 +48,8 @@ public:
     MonkeyModel findModel(int model_number);
 
     void loadFile(MonkeyCollection& collection);
+    bool validLine(std::string);
+    void loadContent();
 
     void setTimeZones(MonkeyCollection& collection);
 

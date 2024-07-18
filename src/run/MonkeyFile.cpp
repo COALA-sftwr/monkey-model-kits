@@ -4,27 +4,25 @@
  *  Description:    Functions for Mkit parsing
 */
 
+#include <string>
+
 #include "MonkeyManager.hpp"
 #include "StringManipulation.hpp"
 
-std::string MonkeyManager::findKey(const std::string &key, int iteration) {
-    std::string line;
-    std::string value;
-    int foundCount = 0;
 
-    _file.seekg(0);
+std::string MonkeyManager::findKey(const std::string &key, int iteration)
+{
+    std::string rValue;
 
-    while (std::getline(_file, line)) {
-        size_t pos = line.find(key);
-        if (pos != std::string::npos) {
-            if (foundCount == iteration) {
-                value = line.substr(pos + key.length() + 2);
-                return cleanString(value);
-            }
-            foundCount++;
+    for (auto value : _stringVectors.at(iteration))
+    {
+        if (value.find(key) != std::string::npos)
+        {
+            size_t pos = value.find(key);
+            rValue = value.substr(pos + key.length() + 2);
+            return cleanString(rValue);
         }
     }
-
     return "";
 }
 
@@ -32,10 +30,10 @@ MonkeyModel MonkeyManager::findModel(int model_number) {
     MonkeyModel model_t;
 
     model_t.setName(findKey("name", model_number));
-    model_t.setGrade(stoe((findKey("grade", model_number)), gradeMap));
+    model_t.setGrade(stoe(findKey("grade", model_number), gradeMap));
     model_t.setPrice(stod(findKey("price", model_number)));
     model_t.setStatus(stoe(findKey("status", model_number), statusMap));
-    model_t.setFavStatus(stoi(findKey("favorite", model_number)));
+    model_t.setFavStatus(findKey("favorite", model_number) != "" ? stoi(findKey("favorite", model_number)) : false);
     model_t.setSessions(stoms_v(findKey("sessions", model_number)));
 
     return model_t;
@@ -64,8 +62,37 @@ void MonkeyManager::loadFile(MonkeyCollection& collection) {
         }
     }
 
+    loadContent();
+
     for (int modelsAdded = 0; modelsAdded != modelCount; modelsAdded++) {
         collection.addModel(findModel(modelsAdded));
     }
     setTimeZones(collection);
+}
+
+bool MonkeyManager::validLine(std::string str)
+{
+    return std::all_of(str.begin(), str.end(), [](char c) {
+      return c == ' ' || c == '[' || c == ']';
+    });
+}
+
+void MonkeyManager::loadContent()
+{
+    std::string line;
+
+    while (!_file.eof())
+    {
+        std::getline(_file, line);
+        if (line.find('[') != std::string::npos)
+        {
+            _stringVectors.push_back({});
+            while (std::getline(_file, line))
+            {
+                if (line.find(']') != std::string::npos && validLine(line))
+                    break;
+                _stringVectors.back().push_back(cleanString(line));
+            }
+        }
+    }
 }
