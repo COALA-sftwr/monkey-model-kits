@@ -34,7 +34,8 @@ MonkeyModel MonkeyManager::findModel(int model_number) {
     model_t.setPrice(stod(findKey("price", model_number)));
     model_t.setStatus(stoe(findKey("status", model_number), statusMap));
     model_t.setFavStatus(findKey("favorite", model_number) != "" ? stoi(findKey("favorite", model_number)) : false);
-    model_t.setSessions(stoms_v(findKey("sessions", model_number)));
+    if (model_t.getStatus() != BCK)
+        model_t.setSessions(stoms_v(findKey("sessions", model_number)));
 
     return model_t;
 }
