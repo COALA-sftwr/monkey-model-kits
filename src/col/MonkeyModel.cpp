@@ -140,7 +140,7 @@ std::ostream &operator<<(std::ostream &stream, const MonkeyModel &model) {
     else {
         stream << std::endl;
         for (const auto &session: model._sessions) {
-            stream << session << std::endl;
+            stream << &session << std::endl;
         }
     }
     return stream;
@@ -148,50 +148,49 @@ std::ostream &operator<<(std::ostream &stream, const MonkeyModel &model) {
 
 std::string MonkeyModel::saveSessions() {
     std::stringstream value_ss;
-    std::vector<MonkeySession> vsess = getSessions();
+    std::vector<MonkeySession> sessionV = getSessions();
 
-    value_ss << "{ ";
-    for (auto session = vsess.begin() ; session != vsess.end(); session++) {
-        if (session->getStartString().empty() || session->getStopString().empty()) {
-            auto hours = std::chrono::duration_cast<std::chrono::hours>(session->getDuration());
-            auto minutes = std::chrono::duration_cast<std::chrono::minutes>(session->getDuration()) - hours;
-            auto seconds = std::chrono::duration_cast<std::chrono::seconds>(session->getDuration()) - hours - minutes;
-            value_ss << "_" << hours.count() << ":" << minutes.count() << ":" << seconds.count();
-        } else {
-            value_ss << session->getStartString() << " > " << session->getStopString();
-        }
-        if (std::next(session) != vsess.end())
-            value_ss << " | ";
+    value_ss << "{";
+    for (auto session = sessionV.begin() ; session != sessionV.end(); session++) {
+        value_ss << " " << *session << " ";
+        if (std::next(session) != sessionV.end()) // next loop != end of sessionV
+            value_ss << "|";
     }
-    value_ss << " }";
+    value_ss << "}";
 
     return value_ss.str();
 }
 
-int MonkeyModel::getTime() {
+/*int MonkeyModel::getTime() {
     int time = 0;
 
     for (auto session : _sessions) {
         time += session.getDuration().count();
     }
     return time;
+}*/
+
+std::tm MonkeyModel::getTime()
+{
+    std::tm sum;
+
+    for (auto session : _sessions) {
+        sum = add(sum, session.getDuration());
+    }
+    return sum;
 }
 
-std::string MonkeyModel::getFormattedTime() {
+std::string MonkeyModel::getFormattedTime()
+{
     // Create a string stream for formatted output
     std::stringstream time_s;
-    int duration = getTime();
+    std::tm duration = getTime();
 
-    // Calculate hours, minutes, and remaining seconds
-    int hours = duration / 3600;
-    duration %= 3600;
-    int minutes = duration / 60;
-    duration %= 60;
 
     // Format the time string with leading zeros using setw
-    time_s << std::setw(2) << std::setfill('0') << hours << ":";
-    time_s << std::setw(2) << std::setfill('0') << minutes << ":";
-    time_s << std::setw(2) << std::setfill('0') << duration;
+    time_s << std::setw(2) << std::setfill('0') << duration.tm_hour << ":";
+    time_s << std::setw(2) << std::setfill('0') << duration.tm_min<< ":";
+    time_s << std::setw(2) << std::setfill('0') << duration.tm_sec;
 
     return time_s.str();
 }

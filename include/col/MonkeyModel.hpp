@@ -11,7 +11,7 @@
 #include <unordered_map>
 #include <string>
 #include <vector>
-#include "MonkeySession.hpp"
+#include "col/MonkeyTime.hpp"
 
 enum Grade { EG, SD, HG, RG, MG, PG, MS, OG, ST }; // [Entry, Super Deformed, High, Real, Master, Perfect, Mega Size, Other, Stand] Grade
 enum Status { BCK, WIP, BLT };                     // Backlogged, Work In Progress, Built
@@ -53,7 +53,8 @@ public:
     MonkeySession *getLastSession();
     MonkeySession *getLastSessions();
     int getNSessions();
-    int getTime();
+    // int getTime();
+    std::tm getTime();
     std::string getFormattedTime();
     bool isSWOn();
     bool getFav();

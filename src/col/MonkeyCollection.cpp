@@ -77,14 +77,14 @@ std::string MonkeyCollection::save() {
     return file_s.str();
 }
 
-MonkeyModel *MonkeyCollection::findLastModel() {
+MonkeyModel *MonkeyCollection::findLastModel() { // Todo: fix the last session loading.
     MonkeyModel *modelOutLoop = &_models.at(0);
 
     for (auto& modelInLoop : _models) {
         MonkeySession *modelOLSession = modelOutLoop->getLastSession();
         MonkeySession *modelILSession = modelInLoop.getLastSession();
         if (modelOLSession == nullptr && modelILSession != nullptr ||
-            modelOLSession != nullptr && modelILSession != nullptr && modelOLSession->getStop() < modelILSession->getStop())
+            modelOLSession != nullptr && modelILSession != nullptr && modelOLSession->getStop().isOlder(modelILSession->getStop()))//modelOLSession->getStop().getUtc() < modelILSession->getStop().getUtc())
             modelOutLoop = &modelInLoop;
     }
     return modelOutLoop;

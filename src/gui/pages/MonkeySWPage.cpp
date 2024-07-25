@@ -40,7 +40,7 @@ void MonkeyWindow::updateStopWatch()
 {
     if (_selectedModel->isSWOn())
     {
-        auto elapsedTime = std::chrono::duration_cast<std::chrono::seconds>(std::chrono::system_clock::now() - _selectedModel->getLastSession()->getStart());
+        auto elapsedTime = std::chrono::duration_cast<std::chrono::seconds>(std::chrono::system_clock::now() - _selectedModel->getLastSession()->getStart().getC());
         auto hours = std::chrono::duration_cast<std::chrono::hours>(elapsedTime);
         elapsedTime -= std::chrono::duration_cast<std::chrono::seconds>(hours);
         auto minutes = std::chrono::duration_cast<std::chrono::minutes>(elapsedTime);

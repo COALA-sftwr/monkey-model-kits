@@ -8,7 +8,7 @@
 
 #include "MonkeyManager.hpp"
 #include "StringManipulation.hpp"
-
+#include "MonkeyTime.hpp"
 
 std::string MonkeyManager::findKey(const std::string &key, int iteration)
 {
@@ -40,11 +40,11 @@ MonkeyModel MonkeyManager::findModel(int model_number) {
     return model_t;
 }
 
-void MonkeyManager::setTimeZones(MonkeyCollection& collection) {
+/*void MonkeyManager::setTimeZones(MonkeyCollection& collection) {
     for (auto model : collection.getModels())
         for (auto session : model.getSessions())
             session.setTimeZone(collection.getTimeZone());
-}
+}*/
 
 void MonkeyManager::loadFile(MonkeyCollection& collection) {
     std::string line;
@@ -55,12 +55,12 @@ void MonkeyManager::loadFile(MonkeyCollection& collection) {
         std::getline(_file, line);
         if (i == 1) {
             modelCount = stoi(line);
-        } else if (i == 2) {
+        } /*else if (i == 2) {
             size_t pos = line.find("UTC");
             if (pos != std::string::npos) {
                 collection.setTimezone(line.substr(pos));
             }
-        }
+        }*/
     }
 
     loadContent();
@@ -68,7 +68,7 @@ void MonkeyManager::loadFile(MonkeyCollection& collection) {
     for (int modelsAdded = 0; modelsAdded != modelCount; modelsAdded++) {
         collection.addModel(findModel(modelsAdded));
     }
-    setTimeZones(collection);
+    // setTimeZones(collection);
 }
 
 bool MonkeyManager::validLine(std::string str)

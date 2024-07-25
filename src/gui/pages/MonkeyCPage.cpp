@@ -23,7 +23,7 @@ void MonkeyWindow::loadCollection()
                 int modelIndex = j * 3 + i;
                 if (modelIndex < numModels) {
                     _ui->gridLayout->addWidget(new MonkeyWGridItem(_collection.getModels().at(modelIndex)), j, i, Qt::AlignTop);
-                    _ui->gridLayout->addWidget(new MonkeyWGridItem(_collection.getModels().at(modelIndex)), j, i, Qt::AlignTop);
+                    // _ui->gridLayout->addWidget(new MonkeyWGridItem(_collection.getModels().at(modelIndex)), j, i, Qt::AlignTop);
                 }
             }
         }

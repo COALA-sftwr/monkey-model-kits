@@ -26,7 +26,7 @@ void MonkeyWindow::loadLastModel() {
     _ui->lastSessionsLabel->setText(QString::number(tempModel->getNSessions()));
 
     if (tempModel->getSessions().size() == 0)
-        updateTimeLabel(new MonkeySession(static_cast<std::chrono::duration<int>>(emptyT)));
+        updateTimeLabel(new MonkeySession(/*static_cast<std::chrono::duration<int>>(emptyT)*/));
     else
         updateTimeLabel(tempModel->getLastSession());
 }
@@ -34,14 +34,14 @@ void MonkeyWindow::loadLastModel() {
 void MonkeyWindow::updateTimeLabel(MonkeySession *session) {
     auto duration = session->getDuration();
 
-    int hours = duration.count() / 3600;
+    /*int hours = duration.count() / 3600;
     int minutes = (duration.count() % 3600) / 60;
-    int secs = duration.count() % 60;
+    int secs = duration.count() % 60;*/
 
     // Update the QLabel text with the formatted duration
-    _ui->lastTimeLabel->setText(QString("%1:%2:%3").arg(hours, 2, 10, QChar('0'))
-                                       .arg(minutes, 2, 10, QChar('0'))
-                                       .arg(secs, 2, 10, QChar('0')));
+    _ui->lastTimeLabel->setText(QString("%1:%2:%3").arg(duration.tm_hour, 2, 10, QChar('0'))
+                                       .arg(duration.tm_min, 2, 10, QChar('0'))
+                                       .arg(duration.tm_sec, 2, 10, QChar('0')));
 }
 
 void MonkeyWindow::loadFavorites()
