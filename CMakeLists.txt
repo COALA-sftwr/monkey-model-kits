@@ -25,9 +25,10 @@ set(SOURCES
         src/run/MonkeyManager.cpp
         src/run/MonkeyFile.cpp
 
-        src/col/MonkeySession.cpp
         src/col/MonkeyModel.cpp
         src/col/MonkeyCollection.cpp
+        src/col/time/MonkeyDate.cpp
+        src/col/time/MonkeySession.cpp
 
         src/gui/MonkeyWindow.cpp
         src/gui/MonkeyWItem.cpp
@@ -48,8 +49,8 @@ set(HEADERS
         include/run/MonkeyFile.hpp
 
         include/col/MonkeyCollection.hpp
-        include/col/MonkeySession.hpp
         include/col/MonkeyModel.hpp
+        include/col/MonkeyTime.hpp
 
         include/gui/MonkeyWindow.hpp
         include/gui/MonkeyWItem.hpp
