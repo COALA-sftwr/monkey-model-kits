@@ -37,10 +37,10 @@ public:
     std::string getUtcS();
     std::string getOffsetS();
 
-    int toInt();
+    int64_t toInt();
 
     friend std::ostream& operator<<(std::ostream& stream, MonkeyDate& date);
-    bool isOlder(const MonkeyDate& monkey_date);
+    bool isOlder(MonkeyDate monkey_date);
 };
 
 class MonkeySession

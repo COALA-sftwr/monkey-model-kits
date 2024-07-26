@@ -4,6 +4,7 @@
 
 #include <iomanip>
 #include <iostream>
+#include <qmargins.h>
 #include <string>
 #include <vector>
 
@@ -155,37 +156,24 @@ std::string MonkeyDate::getOffsetS()
     return result.str();
 }
 
-int MonkeyDate::toInt() {
-    int sum;
+int64_t MonkeyDate::toInt() {
+    int64_t sum = 0;
 
     sum += getUtc().tm_sec;
     sum += getUtc().tm_min * 60;
-    sum += getUtc().tm_hour * 3600;
+    sum += getUtc().tm_hour * (60 * 60);
 
-    sum += getUtc().tm_mday * 86400;
-    sum += getUtc().tm_mon * 2628000;
-    sum += getUtc().tm_year * 31536000;
+    sum += getUtc().tm_mday * (24 * 60 * 60);
+    sum += getUtc().tm_mon * (30.4368 * 24 * 60 * 60);
+    sum += static_cast<int64_t>(getUtc().tm_year) * 31536000;
 
     return sum;
 }
 
-bool MonkeyDate::isOlder(const MonkeyDate& monkey_date) {
+bool MonkeyDate::isOlder(MonkeyDate monkey_date) {
     bool result = true;
-    MonkeyDate temp = monkey_date;
 
-    /*if (monkey_date._utcDate.tm_year > getUtc().tm_year)
-        result = false;
-    if (monkey_date._utcDate.tm_mon > getUtc().tm_mon)
-        result = false;
-    if (monkey_date._utcDate.tm_mday > getUtc().tm_yday)
-        result = false;
-    if (monkey_date._utcDate.tm_hour > getUtc().tm_hour)
-        result = false;
-    if (monkey_date._utcDate.tm_min > getUtc().tm_min)
-        result = false;
-    if (monkey_date._utcDate.tm_sec > getUtc().tm_sec)
-        result = false;*/
-    if (this->toInt() > temp.toInt())
+    if (this->toInt() < monkey_date.toInt())
         result = false;
 
     return result;

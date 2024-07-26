@@ -84,7 +84,7 @@ MonkeyModel *MonkeyCollection::findLastModel() { // Todo: fix the last session l
         MonkeySession *modelOLSession = modelOutLoop->getLastSession();
         MonkeySession *modelILSession = modelInLoop.getLastSession();
         if (modelOLSession == nullptr && modelILSession != nullptr ||
-            modelOLSession != nullptr && modelILSession != nullptr && modelOLSession->getStop().isOlder(modelILSession->getStop()))//modelOLSession->getStop().getUtc() < modelILSession->getStop().getUtc())
+            modelOLSession != nullptr && modelILSession != nullptr && modelILSession->getStop().isOlder(modelOLSession->getStop()))//modelOLSession->getStop().getUtc() < modelILSession->getStop().getUtc())
             modelOutLoop = &modelInLoop;
     }
     return modelOutLoop;
