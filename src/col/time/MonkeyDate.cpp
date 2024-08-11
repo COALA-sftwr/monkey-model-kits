@@ -121,7 +121,7 @@ std::string MonkeyDate::getLocS()
     string << std::setfill('0')
     << std::setw(4) << _locDate.tm_year << "."
     << std::setw(2) << _locDate.tm_mon << "."
-    << std::setw(2) << _locDate.tm_mday << "-"
+    << std::setw(2) << _locDate.tm_mday << "_"
     << std::setw(2) << _locDate.tm_hour << ":"
     << std::setw(2) << _locDate.tm_min << ":"
     << std::setw(2) << _locDate.tm_sec;
@@ -135,7 +135,7 @@ std::string MonkeyDate::getUtcS()
     string << std::setfill('0')
     << std::setw(4) << _utcDate.tm_year << "."
     << std::setw(2) << _utcDate.tm_mon << "."
-    << std::setw(2) << _utcDate.tm_mday << "-"
+    << std::setw(2) << _utcDate.tm_mday << "_"
     << std::setw(2) << _utcDate.tm_hour << ":"
     << std::setw(2) << _utcDate.tm_min << ":"
     << std::setw(2) << _utcDate.tm_sec;
